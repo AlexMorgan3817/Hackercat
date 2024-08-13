@@ -1,0 +1,41 @@
+[gd_scene load_steps=9 format=3 uid="uid://dwp2xenq0pl5c"]
+
+[ext_resource type="PackedScene" uid="uid://bfiy8buyjrdlb" path="res://Mainframe/Programs/Program.tscn" id="1_jcu0o"]
+[ext_resource type="Texture2D" uid="uid://clg34lje236ie" path="res://Textures/ProgramIcons.png" id="1_tbx8n"]
+[ext_resource type="Script" path="res://Mainframe/Programs/Effects/TrapPlacer.gd" id="2_iiaa4"]
+[ext_resource type="Script" path="res://Mainframe/Programs/Trapper.gd" id="2_jl4dx"]
+[ext_resource type="PackedScene" uid="uid://c70anyi2sx7t5" path="res://Mainframe/Objects/Trap.tscn" id="3_3s0kw"]
+[ext_resource type="Script" path="res://OnTrigger/PlaysoundOnTrigger.gd" id="6_8ge4h"]
+[ext_resource type="AudioStream" uid="uid://c4vfn0r41ew3b" path="res://Sound/Trapper.mp3" id="7_as3yf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2s2vk"]
+atlas = ExtResource("1_tbx8n")
+region = Rect2(64, 0, 64, 64)
+
+[node name="Trapper" instance=ExtResource("1_jcu0o")]
+script = ExtResource("2_jl4dx")
+TrapScene = ExtResource("3_3s0kw")
+Name = "Trapper"
+Description = "Do you ever catch a mouse in a trap?"
+requiredPWR = 3
+
+[node name="Sprite2D" parent="." index="0"]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_2s2vk")
+
+[node name="Success" type="Node" parent="." index="2"]
+
+[node name="Trapper" type="Node" parent="Success" index="0"]
+script = ExtResource("2_iiaa4")
+TrapScene = ExtResource("3_3s0kw")
+
+[node name="Playsound" type="Node" parent="Success" index="1" node_paths=PackedStringArray("Host")]
+script = ExtResource("6_8ge4h")
+sound = ExtResource("7_as3yf")
+Host = NodePath("../..")
+
+[node name="Fail" type="Node" parent="." index="3"]
+
+[connection signal="ProgramUsed" from="." to="Success/Trapper" method="_on_program_program_used"]
+[connection signal="ProgramUsed" from="." to="Success/Playsound" method="_on_trapper_program_used"]

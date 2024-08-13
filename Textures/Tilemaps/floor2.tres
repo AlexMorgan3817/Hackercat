@@ -1,0 +1,41 @@
+[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://bt4xt8h2f55yp"]
+
+[ext_resource type="Texture2D" uid="uid://birb35mhivx7d" path="res://Textures/floor.png" id="1_8o8mv"]
+[ext_resource type="Texture2D" uid="uid://bocm4ao03u5b6" path="res://Textures/MainframeObj.png" id="2_gw7au"]
+[ext_resource type="PackedScene" uid="uid://dq7tkqffimn35" path="res://Mainframe/Objects/Outlet.tscn" id="3_01ryd"]
+[ext_resource type="PackedScene" uid="uid://d2vq8ry3bdi4v" path="res://Mainframe/Objects/SwitchMM.tscn" id="4_towa1"]
+[ext_resource type="PackedScene" uid="uid://py24vj81mf1n" path="res://Mainframe/Objects/Door.tscn" id="5_rg6mf"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iw2a8"]
+texture = ExtResource("1_8o8mv")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+2:0/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+3:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xdig0"]
+texture = ExtResource("2_gw7au")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_hv70c"]
+scenes/1/scene = ExtResource("3_01ryd")
+scenes/2/scene = ExtResource("4_towa1")
+scenes/3/scene = ExtResource("5_rg6mf")
+
+[resource]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_iw2a8")
+sources/1 = SubResource("TileSetAtlasSource_xdig0")
+sources/2 = SubResource("TileSetScenesCollectionSource_hv70c")

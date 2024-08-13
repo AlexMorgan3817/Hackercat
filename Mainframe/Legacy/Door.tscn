@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5obulitwv8u6"]
+
+[ext_resource type="PackedScene" uid="uid://yqn0u225ls76" path="res://Mainframe/MNode.tscn" id="1_0uvqk"]
+[ext_resource type="Texture2D" uid="uid://bocm4ao03u5b6" path="res://Textures/MainframeObj.png" id="2_5pwce"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_07bj1"]
+atlas = ExtResource("2_5pwce")
+region = Rect2(96, 0, 32, 32)
+
+[node name="Door" instance=ExtResource("1_0uvqk")]
+modulate = Color(1, 0, 0, 1)
+Passable = false
+
+[node name="Sprite2D" parent="." index="0"]
+texture = SubResource("AtlasTexture_07bj1")

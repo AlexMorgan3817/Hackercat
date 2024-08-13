@@ -1,0 +1,84 @@
+[gd_scene load_steps=14 format=3 uid="uid://c70anyi2sx7t5"]
+
+[ext_resource type="Script" path="res://Mainframe/Objects/Trap.gd" id="1_7gjvn"]
+[ext_resource type="Script" path="res://Mainframe/MainframeMover.gd" id="2_exyee"]
+[ext_resource type="Texture2D" uid="uid://bht2r2u1bkmrn" path="res://Textures/Spikes.png" id="3_0a0ab"]
+[ext_resource type="Script" path="res://OnTrigger/DeleteSelf.gd" id="4_7es8u"]
+[ext_resource type="Script" path="res://OnTrigger/PlaysoundOnTrigger.gd" id="5_2ftcj"]
+[ext_resource type="Script" path="res://OnTrigger/StartTimer.gd" id="5_6yjde"]
+[ext_resource type="AudioStream" uid="uid://c6qg3a2owkeme" path="res://Sound/Switch 2.mp3" id="6_p7ch4"]
+[ext_resource type="Script" path="res://OnTrigger/DealDamage.gd" id="7_hqsmc"]
+[ext_resource type="Script" path="res://OnTrigger/PlayAnimatedSpriteOnTrigger.gd" id="8_crklt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gs1op"]
+atlas = ExtResource("3_0a0ab")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nnp6o"]
+atlas = ExtResource("3_0a0ab")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_55jo8"]
+atlas = ExtResource("3_0a0ab")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qs23a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gs1op")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nnp6o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_55jo8")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Trap" type="Node2D" node_paths=PackedStringArray("myMM")]
+script = ExtResource("1_7gjvn")
+myMM = NodePath("MM")
+
+[node name="MM" type="Node" parent="." node_paths=PackedStringArray("Host")]
+script = ExtResource("2_exyee")
+Host = NodePath("..")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(0.85098, 0.12549, 0, 1)
+z_index = 3
+z_as_relative = false
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_qs23a")
+frame_progress = 0.525759
+
+[node name="PlayAnimation" type="Node" parent="Sprite2D" node_paths=PackedStringArray("SpriteObj")]
+script = ExtResource("8_crklt")
+SpriteObj = NodePath("..")
+
+[node name="DeleteAfter" type="Timer" parent="." node_paths=PackedStringArray("Target")]
+wait_time = 0.5
+one_shot = true
+script = ExtResource("5_6yjde")
+Target = NodePath(".")
+
+[node name="DeleteTarget" type="Node" parent="DeleteAfter" node_paths=PackedStringArray("target")]
+script = ExtResource("4_7es8u")
+target = NodePath("../..")
+
+[node name="PlaysoundOnTrigger" type="Node2D" parent="." node_paths=PackedStringArray("Host")]
+script = ExtResource("5_2ftcj")
+sound = ExtResource("6_p7ch4")
+Host = NodePath("..")
+
+[node name="DealDamage" type="Node" parent="."]
+script = ExtResource("7_hqsmc")
+
+[connection signal="Triggered" from="." to="Sprite2D/PlayAnimation" method="_on_trap_triggered"]
+[connection signal="Triggered" from="." to="DeleteAfter" method="_on_trap_triggered"]
+[connection signal="Triggered" from="." to="PlaysoundOnTrigger" method="_on_trap_triggered"]
+[connection signal="Triggered" from="." to="DealDamage" method="_on_trap_triggered"]
+[connection signal="timeout" from="DeleteAfter" to="DeleteAfter/DeleteTarget" method="_on_delete_after_timeout"]

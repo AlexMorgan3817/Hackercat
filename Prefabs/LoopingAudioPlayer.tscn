@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3jj6ge1rgqai"]
+
+[ext_resource type="Script" path="res://Scripts/AudioStreamLooping.gd" id="2_pvcpc"]
+
+[node name="LoopingAudioPlayer" type="AudioStreamPlayer2D" node_paths=PackedStringArray("RepeatTimer")]
+script = ExtResource("2_pvcpc")
+RepeatTimer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="."]

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://yqn0u225ls76"]
+
+[ext_resource type="Script" path="res://Mainframe/MNode.gd" id="1_stv3e"]
+[ext_resource type="Texture2D" uid="uid://bocm4ao03u5b6" path="res://Textures/MainframeObj.png" id="2_4moox"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4m4f0"]
+atlas = ExtResource("2_4moox")
+region = Rect2(32, 0, 32, 32)
+
+[node name="MNode" type="Node2D"]
+z_index = -5
+z_as_relative = false
+script = ExtResource("1_stv3e")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("AtlasTexture_4m4f0")
+
+[connection signal="Interacted" from="." to="." method="_on_interacted"]

@@ -1,0 +1,113 @@
+[gd_scene load_steps=6 format=3 uid="uid://ufmp4ffewdl1"]
+
+[ext_resource type="PackedScene" uid="uid://rhokd7vudeyc" path="res://UI/ProgramFrame.tscn" id="1_3v4p6"]
+[ext_resource type="Theme" uid="uid://d2owybboqt1c3" path="res://Themes/Menu.tres" id="2_f7g5a"]
+[ext_resource type="Script" path="res://UI/ProgBar.gd" id="3_h2rqf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7f6xe"]
+bg_color = Color(1, 0, 0, 0.623529)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ulkkx"]
+bg_color = Color(0, 0.709804, 1, 0.501961)
+
+[node name="UI" type="CanvasLayer"]
+layer = 10
+
+[node name="Control" type="Control" parent="."]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Frame 1" parent="Control" instance=ExtResource("1_3v4p6")]
+position = Vector2(-128, 156)
+
+[node name="Frame 2" parent="Control" instance=ExtResource("1_3v4p6")]
+position = Vector2(-128, 28)
+
+[node name="Frame 3" parent="Control" instance=ExtResource("1_3v4p6")]
+position = Vector2(-128, -100)
+
+[node name="Frame 4" parent="Control" instance=ExtResource("1_3v4p6")]
+position = Vector2(-128, -228)
+
+[node name="HP" type="ProgressBar" parent="." node_paths=PackedStringArray("label")]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = -104.0
+offset_right = 288.0
+offset_bottom = -59.0
+grow_vertical = 0
+theme = ExtResource("2_f7g5a")
+theme_override_styles/background = SubResource("StyleBoxFlat_7f6xe")
+max_value = 4.0
+step = 1.0
+value = 4.0
+show_percentage = false
+script = ExtResource("3_h2rqf")
+label = NodePath("RichTextLabel3")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HP"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 243.0
+offset_bottom = 36.0
+theme = ExtResource("2_f7g5a")
+theme_override_font_sizes/normal_font_size = 32
+text = "HP
+"
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="HP"]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 45.0
+theme = ExtResource("2_f7g5a")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]4/4"
+
+[node name="PWR" type="ProgressBar" parent="." node_paths=PackedStringArray("label")]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = -168.0
+offset_right = 288.0
+offset_bottom = -123.0
+grow_vertical = 0
+theme = ExtResource("2_f7g5a")
+theme_override_styles/background = SubResource("StyleBoxFlat_ulkkx")
+max_value = 20.0
+step = 1.0
+value = 20.0
+show_percentage = false
+script = ExtResource("3_h2rqf")
+label = NodePath("RichTextLabel4")
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="PWR"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 7.0
+offset_right = 243.0
+offset_bottom = 39.0
+theme = ExtResource("2_f7g5a")
+theme_override_font_sizes/normal_font_size = 32
+text = "PWR
+"
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="PWR"]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 46.0
+theme = ExtResource("2_f7g5a")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]20/20"

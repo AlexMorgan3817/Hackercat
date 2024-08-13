@@ -1,0 +1,72 @@
+[gd_scene load_steps=5 format=3 uid="uid://bif3eu86jmjmx"]
+
+[ext_resource type="Theme" uid="uid://d2owybboqt1c3" path="res://Themes/Menu.tres" id="1_37rve"]
+[ext_resource type="Script" path="res://OnTrigger/UnloadScene.gd" id="2_y5oxw"]
+[ext_resource type="PackedScene" uid="uid://c3jj6ge1rgqai" path="res://Prefabs/LoopingAudioPlayer.tscn" id="3_mrixp"]
+[ext_resource type="AudioStream" uid="uid://ckmk2ypgww7g2" path="res://Sound/music/Menu.mp3" id="4_ja15a"]
+
+[node name="TheEndOfDemo" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 134.0
+grow_horizontal = 2
+size_flags_vertical = 4
+theme = ExtResource("1_37rve")
+bbcode_enabled = true
+text = "[center]Thank you for playing this prototype.[/center]"
+
+[node name="TextEdit" type="TextEdit" parent="CanvasLayer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 128.0
+offset_top = 76.0
+offset_right = -96.0
+offset_bottom = 191.0
+grow_horizontal = 2
+theme = ExtResource("1_37rve")
+text = "https://alexmorgan3817.itch.io/hackercat
+"
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -136.0
+offset_top = -132.0
+offset_right = 128.0
+offset_bottom = -87.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("1_37rve")
+text = "Quit"
+script = ExtResource("2_y5oxw")
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 58.0
+offset_top = -99.0
+offset_right = -37.0
+offset_bottom = 127.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+theme = ExtResource("1_37rve")
+bbcode_enabled = true
+text = "Sound design & Music: _Elar_
+soundcloud: @AlexMorgan3817
+Programming: _Elar_
+Pixelart   : _Elar_"
+
+[node name="LoopingAudioPlayer" parent="." instance=ExtResource("3_mrixp")]
+stream = ExtResource("4_ja15a")
+
+[connection signal="pressed" from="CanvasLayer/Button" to="CanvasLayer/Button" method="_on_pressed"]

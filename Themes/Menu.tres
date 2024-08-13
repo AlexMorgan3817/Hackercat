@@ -1,0 +1,37 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://d2owybboqt1c3"]
+
+[ext_resource type="FontFile" uid="uid://bpbokby2oerfj" path="res://Textures/FSEX300.ttf" id="1_eq8aj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0gs88"]
+bg_color = Color(0.196078, 0, 0.0588235, 1)
+corner_radius_top_left = 10
+corner_radius_bottom_right = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yv3ai"]
+bg_color = Color(0, 0.694118, 0.635294, 0.662745)
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_44ks4"]
+bg_color = Color(0, 0.592157, 0.592157, 1)
+corner_radius_top_left = 10
+corner_radius_bottom_right = 10
+
+[resource]
+default_font_size = 44
+/font_sizes/Title = 16
+Button/fonts/font = ExtResource("1_eq8aj")
+Button/styles/disabled = SubResource("StyleBoxFlat_0gs88")
+Button/styles/normal = SubResource("StyleBoxFlat_yv3ai")
+Button/styles/pressed = SubResource("StyleBoxFlat_44ks4")
+LinkButton/fonts/font = ExtResource("1_eq8aj")
+ProgressBar/fonts/font = ExtResource("1_eq8aj")
+RichTextLabel/fonts/bold_font = ExtResource("1_eq8aj")
+RichTextLabel/fonts/bold_italics_font = ExtResource("1_eq8aj")
+RichTextLabel/fonts/italics_font = ExtResource("1_eq8aj")
+RichTextLabel/fonts/mono_font = ExtResource("1_eq8aj")
+RichTextLabel/fonts/normal_font = ExtResource("1_eq8aj")
+TabBar/fonts/font = ExtResource("1_eq8aj")
+TabContainer/fonts/font = ExtResource("1_eq8aj")
+TextEdit/fonts/font = ExtResource("1_eq8aj")
+Tree/fonts/font = ExtResource("1_eq8aj")
+Tree/fonts/title_button_font = ExtResource("1_eq8aj")

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bb0je45hl3d2v"]
+
+[ext_resource type="Texture2D" uid="uid://vkraj5ihpgqn" path="res://Textures/UI_Frame.png" id="1_0tn0o"]
+
+[node name="Selected" type="Sprite2D"]
+modulate = Color(0.321569, 1, 0.294118, 1)
+texture_filter = 1
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_0tn0o")
