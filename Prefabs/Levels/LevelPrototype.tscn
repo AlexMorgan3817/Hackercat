@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://d3c7dkq8468ca"]
+[gd_scene load_steps=19 format=3 uid="uid://d3c7dkq8468ca"]
 
 [ext_resource type="Script" path="res://Scripts/SceneSystem/Level.gd" id="1_2rn07"]
 [ext_resource type="TileSet" uid="uid://bt4xt8h2f55yp" path="res://Textures/Tilemaps/floor2.tres" id="1_gvh1x"]
@@ -7,28 +7,17 @@
 [ext_resource type="PackedScene" uid="uid://dq7tkqffimn35" path="res://Mainframe/Objects/Outlet.tscn" id="3_kmrep"]
 [ext_resource type="PackedScene" uid="uid://ydl0vw3rio2e" path="res://Prefabs/Player.tscn" id="4_6yauk"]
 [ext_resource type="PackedScene" uid="uid://yqn0u225ls76" path="res://Mainframe/MNode.tscn" id="5_a0niy"]
-[ext_resource type="Script" path="res://OnTrigger/ToogleDoorOpen.gd" id="5_u46ub"]
 [ext_resource type="PackedScene" uid="uid://bif3eu86jmjmx" path="res://Prefabs/Levels/TheEndOfDemo.tscn" id="5_uhmya"]
 [ext_resource type="PackedScene" uid="uid://dl67f2m5y88in" path="res://Mainframe/Programs/Lance.tscn" id="8_q18t1"]
 [ext_resource type="PackedScene" uid="uid://b6mnny4h5lmn2" path="res://Mainframe/Objects/Collectable.tscn" id="8_vc7v3"]
 [ext_resource type="PackedScene" uid="uid://py24vj81mf1n" path="res://Mainframe/Objects/Door.tscn" id="8_wj5rw"]
-[ext_resource type="Shader" path="res://Shaders/Glitch.gdshader" id="9_2kefr"]
 [ext_resource type="PackedScene" uid="uid://d2vq8ry3bdi4v" path="res://Mainframe/Objects/SwitchMM.tscn" id="9_7mjwn"]
 [ext_resource type="PackedScene" uid="uid://dwp2xenq0pl5c" path="res://Mainframe/Programs/Trapper.tscn" id="9_ekter"]
-[ext_resource type="PackedScene" uid="uid://ycfpkflpescd" path="res://Mainframe/Legacy/Collectable.tscn" id="9_ht2uo"]
-[ext_resource type="PackedScene" uid="uid://bqsk8vwk6ggf3" path="res://Mainframe/Programs/Floppa.tscn" id="9_tgqqj"]
 [ext_resource type="PackedScene" uid="uid://c3jj6ge1rgqai" path="res://Prefabs/LoopingAudioPlayer.tscn" id="10_ga0pm"]
 [ext_resource type="AudioStream" uid="uid://ceeeshjqibyim" path="res://Sound/music/Mainframe.mp3" id="10_gqjl4"]
 [ext_resource type="PackedScene" uid="uid://cmyvivj502j4w" path="res://Prefabs/DebugPolygon.tscn" id="11_8nx2c"]
 [ext_resource type="FontFile" uid="uid://bpbokby2oerfj" path="res://Textures/FSEX300.ttf" id="14_qjchp"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_anq2l"]
-shader = ExtResource("9_2kefr")
-shader_parameter/MIX = 1.0
-shader_parameter/displaysmentAmount = 0.324
-shader_parameter/colorChange = Vector4(0, -1, 0, 0)
-shader_parameter/AbberationMix = 0.0
-shader_parameter/AbbreationAmt = 0.1
+[ext_resource type="PackedScene" uid="uid://d2qeutpdl6hjr" path="res://Mainframe/Programs/RawData.tscn" id="16_xrrmx"]
 
 [node name="LevelPrototype" type="Node2D"]
 script = ExtResource("1_2rn07")
@@ -58,9 +47,6 @@ Links = [null, null, null, NodePath("../RootNode")]
 [node name="Outlet" parent="Mainframe" instance=ExtResource("3_kmrep")]
 position = Vector2(96, 256)
 
-[node name="MainframeMover" parent="Mainframe/Outlet" index="0" node_paths=PackedStringArray("CurrentNode")]
-CurrentNode = NodePath("../../MNode")
-
 [node name="IfRequiredAmount" parent="Mainframe/Outlet" index="2"]
 RequiredAmount = 3
 
@@ -70,6 +56,10 @@ scene = ExtResource("5_uhmya")
 [node name="RootNode" parent="Mainframe" node_paths=PackedStringArray("Links") instance=ExtResource("5_a0niy")]
 position = Vector2(192, 256)
 Links = [NodePath("../Fork"), null, NodePath("../MNode"), null]
+
+[node name="Player" parent="Mainframe" node_paths=PackedStringArray("StartingPrograms") instance=ExtResource("4_6yauk")]
+position = Vector2(192, 256)
+StartingPrograms = [NodePath("../../Lance"), NodePath("../../Trapper")]
 
 [node name="Fork" parent="Mainframe" node_paths=PackedStringArray("Links") instance=ExtResource("5_a0niy")]
 position = Vector2(256, 192)
@@ -82,9 +72,6 @@ Links = [NodePath("../Fork"), null, null, NodePath("../Right/Left2/LeftLockedBra
 [node name="Door3" parent="Mainframe" instance=ExtResource("8_wj5rw")]
 position = Vector2(224, 320)
 
-[node name="MainframeMover" parent="Mainframe/Door3" index="0" node_paths=PackedStringArray("CurrentNode")]
-CurrentNode = NodePath("../../NodeDoor")
-
 [node name="Left" type="Node" parent="Mainframe"]
 
 [node name="DebugPolygon" parent="Mainframe/Left" instance=ExtResource("11_8nx2c")]
@@ -92,39 +79,35 @@ polygon = PackedVector2Array(256, 32, 256, 160, 192, 160, 160, 224, 32, 224, 32,
 
 [node name="Left" parent="Mainframe/Left" node_paths=PackedStringArray("Links") instance=ExtResource("5_a0niy")]
 position = Vector2(192, 128)
-Links = [NodePath("../MNode5"), null, NodePath("../Node/MNode"), NodePath("../../Fork")]
+Links = [NodePath("../MNode5"), null, NodePath("../cage/MNode"), NodePath("../../Fork")]
 
 [node name="MNode5" parent="Mainframe/Left" node_paths=PackedStringArray("Links") instance=ExtResource("5_a0niy")]
 position = Vector2(192, 64)
 Links = [null, NodePath("../Left"), null, null]
 
-[node name="SwitchMM" parent="Mainframe/Left" instance=ExtResource("9_7mjwn")]
+[node name="SwitchMM" parent="Mainframe/Left" node_paths=PackedStringArray("target", "StartingNode") instance=ExtResource("9_7mjwn")]
 position = Vector2(192, 64)
+target = [NodePath("../cage/Door")]
+StartingNode = NodePath("../MNode5")
 
-[node name="MainframeMover" parent="Mainframe/Left/SwitchMM" index="0" node_paths=PackedStringArray("CurrentNode")]
-CurrentNode = NodePath("../../MNode5")
+[node name="cage" type="Node" parent="Mainframe/Left"]
 
-[node name="ToogleDoor" parent="Mainframe/Left/SwitchMM" index="1" node_paths=PackedStringArray("target")]
-target = NodePath("../../Node/Door/Door")
-
-[node name="Node" type="Node" parent="Mainframe/Left"]
-
-[node name="DebugPolygon" parent="Mainframe/Left/Node" instance=ExtResource("11_8nx2c")]
+[node name="DebugPolygon" parent="Mainframe/Left/cage" instance=ExtResource("11_8nx2c")]
 polygon = PackedVector2Array(160, 64, 160, 224, 32, 224, 32, 64)
 
-[node name="MNode" parent="Mainframe/Left/Node" node_paths=PackedStringArray("Links") instance=ExtResource("5_a0niy")]
+[node name="MNode" parent="Mainframe/Left/cage" node_paths=PackedStringArray("Links") instance=ExtResource("5_a0niy")]
 position = Vector2(128, 128)
 Links = [NodePath("../MNode3"), NodePath("../MNode3"), null, NodePath("../../Left")]
 
-[node name="Door" parent="Mainframe/Left/Node" instance=ExtResource("8_wj5rw")]
+[node name="Door" parent="Mainframe/Left/cage" instance=ExtResource("8_wj5rw")]
 position = Vector2(128, 128)
 
-[node name="MainframeMover" parent="Mainframe/Left/Node/Door" index="0" node_paths=PackedStringArray("CurrentNode")]
-CurrentNode = NodePath("../../MNode")
-
-[node name="MNode3" parent="Mainframe/Left/Node" node_paths=PackedStringArray("Links") instance=ExtResource("5_a0niy")]
+[node name="MNode3" parent="Mainframe/Left/cage" node_paths=PackedStringArray("Links") instance=ExtResource("5_a0niy")]
 position = Vector2(64, 192)
 Links = [NodePath("../MNode"), null, null, NodePath("../MNode")]
+
+[node name="Sentry2" parent="Mainframe/Left/cage" instance=ExtResource("2_mb5kn")]
+position = Vector2(64, 192)
 
 [node name="Right" type="Node" parent="Mainframe"]
 
@@ -139,31 +122,19 @@ Links = [NodePath("../MNode7"), NodePath("../../Fork"), NodePath("../MNode6"), N
 position = Vector2(288, 64)
 Links = [null, NodePath("../Right"), null, null]
 
-[node name="SwitchMM2" parent="Mainframe/Right" instance=ExtResource("9_7mjwn")]
+[node name="SwitchMM2" parent="Mainframe/Right" node_paths=PackedStringArray("target", "StartingNode") instance=ExtResource("9_7mjwn")]
 position = Vector2(288, 64)
-
-[node name="MainframeMover" parent="Mainframe/Right/SwitchMM2" index="0" node_paths=PackedStringArray("CurrentNode")]
-CurrentNode = NodePath("../../MNode6")
-
-[node name="ToogleDoor" parent="Mainframe/Right/SwitchMM2" index="1" node_paths=PackedStringArray("target")]
-target = NodePath("../../../Door3/Door")
+target = [NodePath("../../Door3")]
+StartingNode = NodePath("../MNode6")
 
 [node name="MNode7" parent="Mainframe/Right" node_paths=PackedStringArray("Links") instance=ExtResource("5_a0niy")]
 position = Vector2(352, 64)
 Links = [null, NodePath("../Right"), null, null]
 
-[node name="SwitchMM3" parent="Mainframe/Right" instance=ExtResource("9_7mjwn")]
+[node name="SwitchMM3" parent="Mainframe/Right" node_paths=PackedStringArray("target", "StartingNode") instance=ExtResource("9_7mjwn")]
 position = Vector2(352, 64)
-
-[node name="MainframeMover" parent="Mainframe/Right/SwitchMM3" index="0" node_paths=PackedStringArray("CurrentNode")]
-CurrentNode = NodePath("../../MNode7")
-
-[node name="ToogleDoor" parent="Mainframe/Right/SwitchMM3" index="1" node_paths=PackedStringArray("target")]
-target = NodePath("../../Airlock2/Door/Door")
-
-[node name="ToogleDoor2" type="Node" parent="Mainframe/Right/SwitchMM3" node_paths=PackedStringArray("target")]
-script = ExtResource("5_u46ub")
-target = NodePath("../../Airlock2/Door2/Door")
+target = [NodePath("../Airlock2/Door"), NodePath("../Airlock2/Door2")]
+StartingNode = NodePath("../MNode7")
 
 [node name="Airlock2" type="Node" parent="Mainframe/Right"]
 
@@ -176,12 +147,7 @@ Links = [null, null, NodePath("../../Right"), NodePath("../AirlockNode")]
 
 [node name="Door" parent="Mainframe/Right/Airlock2" instance=ExtResource("8_wj5rw")]
 position = Vector2(416, 128)
-
-[node name="MainframeMover" parent="Mainframe/Right/Airlock2/Door" index="0" node_paths=PackedStringArray("CurrentNode")]
-CurrentNode = NodePath("../../Entrace")
-
-[node name="Door" parent="Mainframe/Right/Airlock2/Door" index="1"]
-open = true
+InitialState = true
 
 [node name="AirlockNode" parent="Mainframe/Right/Airlock2" node_paths=PackedStringArray("Links") instance=ExtResource("5_a0niy")]
 position = Vector2(480, 128)
@@ -193,9 +159,6 @@ Links = [NodePath("../AirlockNode"), null, NodePath("../../Left2/LeftLockedBranc
 
 [node name="Door2" parent="Mainframe/Right/Airlock2" instance=ExtResource("8_wj5rw")]
 position = Vector2(416, 224)
-
-[node name="MainframeMover" parent="Mainframe/Right/Airlock2/Door2" index="0" node_paths=PackedStringArray("CurrentNode")]
-CurrentNode = NodePath("../../Out")
 
 [node name="Left2" type="Node" parent="Mainframe/Right"]
 
@@ -211,11 +174,16 @@ Links = [NodePath("../../Airlock2/Out"), NodePath("../MNode5"), NodePath("../../
 position = Vector2(352, 320)
 Links = [null, null, NodePath("../LeftLockedBranch"), null]
 
+[node name="Sentry" parent="Mainframe/Right/Left2" instance=ExtResource("2_mb5kn")]
+position = Vector2(352, 320)
+
 [node name="MNode5" parent="Mainframe/Right/Left2" node_paths=PackedStringArray("Links") instance=ExtResource("5_a0niy")]
 position = Vector2(352, 384)
 Links = [null, null, NodePath("../LeftLockedBranch"), null]
 
-[node name="Collectable" parent="Mainframe/Right/Left2/MNode5" instance=ExtResource("9_ht2uo")]
+[node name="Collectable2" parent="Mainframe/Right/Left2" instance=ExtResource("8_vc7v3")]
+position = Vector2(352, 416)
+ProgramInside = ExtResource("16_xrrmx")
 
 [node name="Right2" type="Node" parent="Mainframe/Right"]
 
@@ -238,40 +206,9 @@ Links = [NodePath("../MNode6"), null, null, null]
 [node name="Collectable" parent="Mainframe/Right/Right2" instance=ExtResource("8_vc7v3")]
 position = Vector2(416, 384)
 
-[node name="MainframeMover" parent="Mainframe/Right/Right2/Collectable" index="0" node_paths=PackedStringArray("CurrentNode")]
-CurrentNode = NodePath("../../MNode8")
-
-[node name="CopyOnInteract" parent="Mainframe/Right/Right2/Collectable" index="1"]
-Prog = ExtResource("9_tgqqj")
-
-[node name="Sprite2D" parent="Mainframe/Right/Right2/Collectable" index="2"]
-material = SubResource("ShaderMaterial_anq2l")
-
 [node name="MNode7" parent="Mainframe/Right/Right2" node_paths=PackedStringArray("Links") instance=ExtResource("5_a0niy")]
 position = Vector2(416, 416)
 Links = [null, null, null, NodePath("../RightLockedBranch")]
-
-[node name="Player" parent="." node_paths=PackedStringArray("StartingPrograms") instance=ExtResource("4_6yauk")]
-position = Vector2(192, 256)
-StartingPrograms = [NodePath("../Lance"), NodePath("../Trapper")]
-
-[node name="Mover" parent="Player" index="0" node_paths=PackedStringArray("CurrentNode")]
-CurrentNode = NodePath("../../Mainframe/RootNode")
-
-[node name="PlayerController" parent="Player/Mover" index="1"]
-PWR = 14
-
-[node name="Sentry" parent="." instance=ExtResource("2_mb5kn")]
-position = Vector2(352, 320)
-
-[node name="Mover" parent="Sentry" index="0" node_paths=PackedStringArray("CurrentNode")]
-CurrentNode = NodePath("../../Mainframe/Right/Left2/MNode4")
-
-[node name="Sentry2" parent="." instance=ExtResource("2_mb5kn")]
-position = Vector2(64, 192)
-
-[node name="Mover" parent="Sentry2" index="0" node_paths=PackedStringArray("CurrentNode")]
-CurrentNode = NodePath("../../Mainframe/Left/Node/MNode3")
 
 [node name="RichTextLabel4" type="RichTextLabel" parent="."]
 texture_filter = 1
@@ -289,19 +226,5 @@ text = "Do not lose your starting programs and acquire 1 more
 [node name="Trapper" parent="." instance=ExtResource("9_ekter")]
 
 [connection signal="ready" from="." to="Mainframe" method="_on_level_prototype_ready"]
-[connection signal="Interacted" from="Mainframe/Right/SwitchMM3/MainframeMover" to="Mainframe/Right/SwitchMM3/ToogleDoor2" method="_on_mainframe_mover_interacted"]
-[connection signal="Interacted" from="Mainframe/Right/Left2/MNode5" to="Mainframe/Right/Left2/MNode5/Collectable" method="_on_node_interacted"]
 
 [editable path="Mainframe/Outlet"]
-[editable path="Mainframe/Door3"]
-[editable path="Mainframe/Left/SwitchMM"]
-[editable path="Mainframe/Left/Node/Door"]
-[editable path="Mainframe/Right/SwitchMM2"]
-[editable path="Mainframe/Right/SwitchMM3"]
-[editable path="Mainframe/Right/Airlock2/Door"]
-[editable path="Mainframe/Right/Airlock2/Door2"]
-[editable path="Mainframe/Right/Right2/Collectable"]
-[editable path="Player"]
-[editable path="Player/UI"]
-[editable path="Sentry"]
-[editable path="Sentry2"]

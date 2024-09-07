@@ -1,9 +1,10 @@
 extends Node
 
-@export var target:Door
+@export var targets:Array[DoorEntity]
 
 func trigger(MM):
-	target.toogle(MM)
+	for target in targets:
+		target.MyDoor.toogle(MM)
 
 func _on_switch_interacted(MM):
 	trigger(MM)

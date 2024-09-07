@@ -14,12 +14,11 @@ signal Moved(N:MNode)
 signal Bumped(MMCollided:MainframeMover)
 signal Interacted(MM:MainframeMover)
 
-func _awake():
+func _ready():
 	if !Host:
 		Host = get_parent()
-func _ready():
-	assert(CurrentNode, "Mainframe mover can't work without initial CurrentNode value")
-	MoveToNode(CurrentNode)
+	#assert(CurrentNode, "Mainframe mover can't work without initial CurrentNode value")
+	#MoveToNode(CurrentNode)
 
 func CanMoveTo(n:MNode):
 	return n.ArePassing(self)
@@ -27,8 +26,9 @@ func CanMoveTo(n:MNode):
 func MoveToNode(n:MNode):
 	assert(n is MNode)
 	Host.set_global_position(n.get_global_position())
-	CurrentNode.MovedOut.emit(self)
-	CurrentNode.Content.erase(self)
+	if CurrentNode:
+		CurrentNode.MovedOut.emit(self)
+		CurrentNode.Content.erase(self)
 
 	CurrentNode = n
 	n.Content.append(self)

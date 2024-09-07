@@ -15,5 +15,3 @@ script = ExtResource("1_stv3e")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = SubResource("AtlasTexture_4m4f0")
-
-[connection signal="Interacted" from="." to="." method="_on_interacted"]

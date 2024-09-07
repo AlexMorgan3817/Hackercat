@@ -15,4 +15,4 @@ func _on_lance_program_used(MM:MainframeMover):
 			if target:
 				break
 	if target:
-		target.forceopen()
+		target.set_open(true)

@@ -21,7 +21,7 @@ func select_next_move() -> MNode:
 	return null
 
 func _on_timer_timeout():
-	if not Enabled:
+	if not Enabled or not MM.CurrentNode:
 		return
 	var dot = false
 	for i in MM.CurrentNode.Links:

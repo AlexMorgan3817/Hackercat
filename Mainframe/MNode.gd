@@ -30,6 +30,7 @@ func _ready():
 		if i == null:
 			continue
 		UndirrectedLinks.append(i)
+	Interacted.connect(_on_interacted)
 
 func _on_interacted(MM):
 	for i in Content:

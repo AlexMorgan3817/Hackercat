@@ -1,13 +1,13 @@
-@icon("res://floppa.png")
-extends Node2D
+@icon("res://Ico/floppa.png")
+extends NetAtom
 
 class_name Player
 
 @export var StartingPrograms:Array[Program]
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
+	#$Mover.CurrentNode = StartingNode
+	super()
 	var progholder:Control
 	for i in $UI.get_children():
 		if i is Control and i.name == "Programs":
@@ -31,3 +31,4 @@ func _ready():
 					break
 	$Mover/EntityStatus.HealthChanged.connect($UI/HP._on_entity_status_health_changed)
 	$Mover/PlayerController.PWRChanged.connect($UI/PWR._on_player_controller_pwr_changed)
+	$Mover/PlayerController.set_process_mode(PROCESS_MODE_PAUSABLE)

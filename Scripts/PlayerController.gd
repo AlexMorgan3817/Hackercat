@@ -38,12 +38,9 @@ func create_default_timer(timeoutcallback, time:float = 0.5):
 	return t
 
 func _ready():
-	if !MoveDelay       :
-		MoveDelay        = create_default_timer(_on_move_delay_timeout, 0.5)
-	if !InteractionDelay:
-		InteractionDelay = create_default_timer(_on_interaction_delay_timeout, 0.5)
-	if !ProgramUseDelay :
-		ProgramUseDelay  = create_default_timer(_on_program_use_delay_timeout, 0.5)
+	if !MoveDelay       : MoveDelay        = create_default_timer(_on_move_delay_timeout, 0.5)
+	if !InteractionDelay: InteractionDelay = create_default_timer(_on_interaction_delay_timeout, 0.5)
+	if !ProgramUseDelay : ProgramUseDelay  = create_default_timer(_on_program_use_delay_timeout, 0.5)
 	var frames
 	for i in MM.Host.get_children():
 		if i.name == "UI" and i is CanvasLayer:
@@ -107,6 +104,8 @@ func UseItem(s):
 	ProgramUseDelay.start()
 
 func _process(_delta):
+	if !MM.CurrentNode:
+		return
 	if CanUsePrograms:
 		if Input.is_action_just_pressed("Use Item 1"):
 			UseItem("Item1Used")
@@ -116,10 +115,6 @@ func _process(_delta):
 			UseItem("Item3Used")
 		elif Input.is_action_just_pressed("Use Item 4"):
 			UseItem("Item4Used")
-	if CanInteract and Input.is_action_just_pressed("Interact"):
-		CanInteract = false
-		MM.CurrentNode.emit_signal("Interacted", MM)
-		InteractionDelay.start()
 	if CanMove:
 		var X = sign(Input.get_axis("Left", "Right"))
 		var Y = sign(Input.get_axis("Down", "Up"))
@@ -143,6 +138,16 @@ func _process(_delta):
 				else:
 					UnableToMove.emit()
 	
+
+	if CanInteract:
+		if Input.is_action_just_pressed("Interact"):
+			cooldown_interaction()
+			MM.CurrentNode.emit_signal("Interacted", MM)
+			return
+		if SelectedNode and Input.is_action_just_pressed("InteractRemote"):
+			cooldown_interaction()
+			SelectedNode.emit_signal("Interacted", MM)
+ 
 	var d:Vector2i = get_discret_direction()
 	SelectedNode = null
 	if d.x == 1:
@@ -156,12 +161,13 @@ func _process(_delta):
 	
 	if SelectedNode:
 		SelectedIdicator.visible = true
-		SelectedIdicator.set_global_position(
-			SelectedNode.get_global_position())
-		if Input.is_action_just_pressed("InteractRemote"):
-			SelectedNode.emit_signal("Interacted", MM)
+		SelectedIdicator.set_global_position(SelectedNode.get_global_position())
 	else:
 		SelectedIdicator.visible = false
+
+func cooldown_interaction():
+	InteractionDelay.start()
+	CanInteract = false
 
 func get_mouse_direction():
 	var m:Vector2 = PlaySound.get_global_node(MM.Host).get_global_mouse_position()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dv7u3ocmhicp1"]
+[gd_scene load_steps=18 format=3 uid="uid://dv7u3ocmhicp1"]
 
 [ext_resource type="PackedScene" uid="uid://ydl0vw3rio2e" path="res://Prefabs/Player.tscn" id="1_2ib3b"]
 [ext_resource type="Script" path="res://Scripts/SceneSystem/Level.gd" id="1_3tr42"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://c3jj6ge1rgqai" path="res://Prefabs/LoopingAudioPlayer.tscn" id="6_1y1i8"]
 [ext_resource type="PackedScene" uid="uid://xwwpba04pbj4" path="res://Mainframe/Ice/Sentry.tscn" id="7_2d1gq"]
 [ext_resource type="PackedScene" uid="uid://py24vj81mf1n" path="res://Mainframe/Objects/Door.tscn" id="7_lpj1f"]
-[ext_resource type="Script" path="res://OnTrigger/ToogleDoorOpen.gd" id="8_ynth3"]
 [ext_resource type="PackedScene" uid="uid://b6mnny4h5lmn2" path="res://Mainframe/Objects/Collectable.tscn" id="9_8exj0"]
 [ext_resource type="FontFile" uid="uid://bpbokby2oerfj" path="res://Textures/FSEX300.ttf" id="9_fcnlw"]
 [ext_resource type="PackedScene" uid="uid://dwp2xenq0pl5c" path="res://Mainframe/Programs/Trapper.tscn" id="10_hmr12"]
@@ -18,11 +17,6 @@
 [ext_resource type="PackedScene" uid="uid://dq7tkqffimn35" path="res://Mainframe/Objects/Outlet.tscn" id="11_aggyy"]
 [ext_resource type="PackedScene" uid="uid://dl67f2m5y88in" path="res://Mainframe/Programs/Lance.tscn" id="11_ap7iq"]
 [ext_resource type="PackedScene" uid="uid://d3c7dkq8468ca" path="res://Prefabs/Levels/LevelPrototype.tscn" id="16_7ypnn"]
-[ext_resource type="Texture2D" uid="uid://cww12h8bl2yxn" path="res://Textures/player.png" id="16_k3njp"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3d4qr"]
-atlas = ExtResource("16_k3njp")
-region = Rect2(0, 0, 32, 32)
 
 [node name="1level" type="Node2D"]
 script = ExtResource("1_3tr42")
@@ -51,22 +45,9 @@ position = Vector2(0, -128)
 [node name="Fork" parent="KeysAndSentry/Center" node_paths=PackedStringArray("Links") instance=ExtResource("3_ukpx1")]
 Links = [null, NodePath("../../Airlock/Airlock"), null, NodePath("../MNode6")]
 
-[node name="SwitchMM2" parent="KeysAndSentry/Center" instance=ExtResource("5_qf6ln")]
+[node name="SwitchMM2" parent="KeysAndSentry/Center" node_paths=PackedStringArray("target") instance=ExtResource("5_qf6ln")]
 position = Vector2(0, -32)
-
-[node name="MainframeMover" parent="KeysAndSentry/Center/SwitchMM2" index="0" node_paths=PackedStringArray("CurrentNode")]
-CurrentNode = NodePath("../../Fork")
-
-[node name="ToogleDoor" parent="KeysAndSentry/Center/SwitchMM2" index="1" node_paths=PackedStringArray("target")]
-target = NodePath("../../Door2/Door")
-
-[node name="ToogleDoor2" type="Node" parent="KeysAndSentry/Center/SwitchMM2" node_paths=PackedStringArray("target")]
-script = ExtResource("8_ynth3")
-target = NodePath("../../Door/Door")
-
-[node name="ToogleDoor3" type="Node" parent="KeysAndSentry/Center/SwitchMM2" node_paths=PackedStringArray("target")]
-script = ExtResource("8_ynth3")
-target = NodePath("../../Door3/Door")
+target = [NodePath("../Door"), NodePath("../Door2"), NodePath("../Door3")]
 
 [node name="MNode6" parent="KeysAndSentry/Center" node_paths=PackedStringArray("Links") instance=ExtResource("3_ukpx1")]
 position = Vector2(64, -128)
@@ -74,9 +55,6 @@ Links = [null, NodePath("../Fork"), NodePath("../Center"), null]
 
 [node name="Door" parent="KeysAndSentry/Center" instance=ExtResource("7_lpj1f")]
 position = Vector2(96, -128)
-
-[node name="MainframeMover" parent="KeysAndSentry/Center/Door" index="0" node_paths=PackedStringArray("CurrentNode")]
-CurrentNode = NodePath("../../MNode6")
 
 [node name="Center" parent="KeysAndSentry/Center" node_paths=PackedStringArray("Links") instance=ExtResource("3_ukpx1")]
 position = Vector2(0, -128)
@@ -88,12 +66,7 @@ Links = [null, NodePath("../Center"), NodePath("../Jail"), null]
 
 [node name="Door2" parent="KeysAndSentry/Center" instance=ExtResource("7_lpj1f")]
 position = Vector2(32, -192)
-
-[node name="MainframeMover" parent="KeysAndSentry/Center/Door2" index="0" node_paths=PackedStringArray("CurrentNode")]
-CurrentNode = NodePath("../../JailDoor")
-
-[node name="Door" parent="KeysAndSentry/Center/Door2" index="1"]
-open = true
+InitialState = true
 
 [node name="Jail" parent="KeysAndSentry/Center" node_paths=PackedStringArray("Links") instance=ExtResource("3_ukpx1")]
 position = Vector2(-64, -192)
@@ -106,9 +79,6 @@ Links = [null, NodePath("../MNode2"), null, NodePath("../Center")]
 [node name="Sentry" parent="KeysAndSentry/Center" instance=ExtResource("7_2d1gq")]
 position = Vector2(-64, -128)
 
-[node name="Mover" parent="KeysAndSentry/Center/Sentry" index="0" node_paths=PackedStringArray("CurrentNode")]
-CurrentNode = NodePath("../../MNode4")
-
 [node name="MNode2" parent="KeysAndSentry/Center" node_paths=PackedStringArray("Links") instance=ExtResource("3_ukpx1")]
 position = Vector2(-64, 0)
 Links = [NodePath("../MNode4"), NodePath("../END"), NodePath("../MNode3"), null]
@@ -116,21 +86,13 @@ Links = [NodePath("../MNode4"), NodePath("../END"), NodePath("../MNode3"), null]
 [node name="Door3" parent="KeysAndSentry/Center" instance=ExtResource("7_lpj1f")]
 position = Vector2(-32, 0)
 
-[node name="MainframeMover" parent="KeysAndSentry/Center/Door3" index="0" node_paths=PackedStringArray("CurrentNode")]
-CurrentNode = NodePath("../../MNode2")
-
 [node name="MNode3" parent="KeysAndSentry/Center" node_paths=PackedStringArray("Links") instance=ExtResource("3_ukpx1")]
 position = Vector2(-128, 0)
 Links = [null, null, NodePath("../MNode"), NodePath("../MNode2")]
 
 [node name="Collectable" parent="KeysAndSentry/Center" instance=ExtResource("9_8exj0")]
 position = Vector2(-128, -33)
-
-[node name="MainframeMover" parent="KeysAndSentry/Center/Collectable" index="0" node_paths=PackedStringArray("CurrentNode")]
-CurrentNode = NodePath("../../MNode3")
-
-[node name="CopyOnInteract" parent="KeysAndSentry/Center/Collectable" index="1"]
-Prog = ExtResource("10_hmr12")
+ProgramInside = ExtResource("11_ap7iq")
 
 [node name="MNode" parent="KeysAndSentry/Center" node_paths=PackedStringArray("Links") instance=ExtResource("3_ukpx1")]
 position = Vector2(-192, 0)
@@ -138,12 +100,7 @@ Links = [null, null, null, NodePath("../MNode3")]
 
 [node name="Collectable2" parent="KeysAndSentry/Center" instance=ExtResource("9_8exj0")]
 position = Vector2(-192, 0)
-
-[node name="MainframeMover" parent="KeysAndSentry/Center/Collectable2" index="0" node_paths=PackedStringArray("CurrentNode")]
-CurrentNode = NodePath("../../MNode")
-
-[node name="CopyOnInteract" parent="KeysAndSentry/Center/Collectable2" index="1"]
-Prog = ExtResource("11_ap7iq")
+ProgramInside = ExtResource("10_hmr12")
 
 [node name="END" parent="KeysAndSentry/Center" node_paths=PackedStringArray("Links") instance=ExtResource("3_ukpx1")]
 position = Vector2(-64, 64)
@@ -154,13 +111,8 @@ Links = [NodePath("../MNode2"), null, NodePath("../../../MovementSegment/Root1")
 [node name="Root3" parent="KeysAndSentry/Airlock" node_paths=PackedStringArray("Links") instance=ExtResource("3_ukpx1")]
 Links = [NodePath("../Airlock"), null, null, null]
 
-[node name="SwitchMM" parent="KeysAndSentry/Airlock" instance=ExtResource("5_qf6ln")]
-
-[node name="MainframeMover" parent="KeysAndSentry/Airlock/SwitchMM" index="0" node_paths=PackedStringArray("CurrentNode")]
-CurrentNode = NodePath("../../Root3")
-
-[node name="ToogleDoor" parent="KeysAndSentry/Airlock/SwitchMM" index="1" node_paths=PackedStringArray("target")]
-target = NodePath("../../Door/Door")
+[node name="SwitchMM" parent="KeysAndSentry/Airlock" node_paths=PackedStringArray("target") instance=ExtResource("5_qf6ln")]
+target = [NodePath("../Door")]
 
 [node name="Airlock" parent="KeysAndSentry/Airlock" node_paths=PackedStringArray("Links") instance=ExtResource("3_ukpx1")]
 position = Vector2(0, -64)
@@ -168,9 +120,6 @@ Links = [NodePath("../../Center/Fork"), NodePath("../Root3"), null, null]
 
 [node name="Door" parent="KeysAndSentry/Airlock" instance=ExtResource("7_lpj1f")]
 position = Vector2(0, -64)
-
-[node name="MainframeMover" parent="KeysAndSentry/Airlock/Door" index="0" node_paths=PackedStringArray("CurrentNode")]
-CurrentNode = NodePath("../../Airlock")
 
 [node name="RichTextLabel3" type="RichTextLabel" parent="KeysAndSentry"]
 texture_filter = 1
@@ -224,14 +173,9 @@ Links = [NodePath("../DoorNode2"), NodePath("../Root2"), NodePath("../Node/DoorN
 position = Vector2(64, -128)
 Links = [null, null, NodePath("../Fork"), null]
 
-[node name="SwitchMM" parent="DoorsAndSwitches" instance=ExtResource("5_qf6ln")]
+[node name="SwitchMM" parent="DoorsAndSwitches" node_paths=PackedStringArray("target") instance=ExtResource("5_qf6ln")]
 position = Vector2(64, -96)
-
-[node name="MainframeMover" parent="DoorsAndSwitches/SwitchMM" index="0" node_paths=PackedStringArray("CurrentNode")]
-CurrentNode = NodePath("../../SwitchNode")
-
-[node name="ToogleDoor" parent="DoorsAndSwitches/SwitchMM" index="1" node_paths=PackedStringArray("target")]
-target = NodePath("../../Node/Door2/Door")
+target = [NodePath("../Node/Door2")]
 
 [node name="Node" type="Node" parent="DoorsAndSwitches"]
 
@@ -242,21 +186,13 @@ Links = [null, null, NodePath("../SwitchNode2"), NodePath("../../Fork")]
 [node name="Door2" parent="DoorsAndSwitches/Node" instance=ExtResource("7_lpj1f")]
 position = Vector2(-64, -96)
 
-[node name="MainframeMover" parent="DoorsAndSwitches/Node/Door2" index="0" node_paths=PackedStringArray("CurrentNode")]
-CurrentNode = NodePath("../../DoorNode")
-
 [node name="SwitchNode2" parent="DoorsAndSwitches/Node" node_paths=PackedStringArray("Links") instance=ExtResource("3_ukpx1")]
 position = Vector2(-192, -128)
 Links = [null, null, null, NodePath("../DoorNode")]
 
-[node name="SwitchMM" parent="DoorsAndSwitches/Node" instance=ExtResource("5_qf6ln")]
+[node name="SwitchMM" parent="DoorsAndSwitches/Node" node_paths=PackedStringArray("target") instance=ExtResource("5_qf6ln")]
 position = Vector2(-192, -96)
-
-[node name="MainframeMover" parent="DoorsAndSwitches/Node/SwitchMM" index="0" node_paths=PackedStringArray("CurrentNode")]
-CurrentNode = NodePath("../../SwitchNode2")
-
-[node name="ToogleDoor" parent="DoorsAndSwitches/Node/SwitchMM" index="1" node_paths=PackedStringArray("target")]
-target = NodePath("../../../Door3/Door")
+target = [NodePath("../../Door3")]
 
 [node name="DoorNode2" parent="DoorsAndSwitches" node_paths=PackedStringArray("Links") instance=ExtResource("3_ukpx1")]
 position = Vector2(0, -192)
@@ -264,9 +200,6 @@ Links = [NodePath("../End"), NodePath("../Fork"), null, null]
 
 [node name="Door3" parent="DoorsAndSwitches" instance=ExtResource("7_lpj1f")]
 position = Vector2(32, -192)
-
-[node name="MainframeMover" parent="DoorsAndSwitches/Door3" index="0" node_paths=PackedStringArray("CurrentNode")]
-CurrentNode = NodePath("../../DoorNode2")
 
 [node name="End" parent="DoorsAndSwitches" node_paths=PackedStringArray("Links") instance=ExtResource("3_ukpx1")]
 position = Vector2(0, -256)
@@ -320,11 +253,10 @@ layer_0/tile_data = PackedInt32Array(-65537, 65536, 0, -131073, 65536, 0, -19660
 position = Vector2(0, 96)
 Links = [NodePath("../Root1"), null, null, null]
 
+[node name="Player" parent="MovementSegment" instance=ExtResource("1_2ib3b")]
+
 [node name="Outlet" parent="MovementSegment" instance=ExtResource("11_aggyy")]
 position = Vector2(35, 98)
-
-[node name="MainframeMover" parent="MovementSegment/Outlet" index="0" node_paths=PackedStringArray("CurrentNode")]
-CurrentNode = NodePath("../../GetOut")
 
 [node name="IfRequiredAmount" parent="MovementSegment/Outlet" index="2"]
 RequiredAmount = 2
@@ -409,31 +341,4 @@ theme_override_fonts/normal_font = ExtResource("9_fcnlw")
 text = "=>
 "
 
-[node name="Player" parent="." instance=ExtResource("1_2ib3b")]
-position = Vector2(-384, 608)
-
-[node name="Mover" parent="Player" index="0" node_paths=PackedStringArray("CurrentNode")]
-CurrentNode = NodePath("../../MovementSegment/Root1")
-
-[node name="Sprite2D" parent="Player" index="1"]
-texture = SubResource("AtlasTexture_3d4qr")
-
-[connection signal="Interacted" from="KeysAndSentry/Center/SwitchMM2/MainframeMover" to="KeysAndSentry/Center/SwitchMM2/ToogleDoor2" method="_on_mainframe_mover_interacted"]
-[connection signal="Interacted" from="KeysAndSentry/Center/SwitchMM2/MainframeMover" to="KeysAndSentry/Center/SwitchMM2/ToogleDoor3" method="_on_mainframe_mover_interacted"]
-
-[editable path="KeysAndSentry/Center/SwitchMM2"]
-[editable path="KeysAndSentry/Center/Door"]
-[editable path="KeysAndSentry/Center/Door2"]
-[editable path="KeysAndSentry/Center/Sentry"]
-[editable path="KeysAndSentry/Center/Door3"]
-[editable path="KeysAndSentry/Center/Collectable"]
-[editable path="KeysAndSentry/Center/Collectable2"]
-[editable path="KeysAndSentry/Airlock/SwitchMM"]
-[editable path="KeysAndSentry/Airlock/Door"]
-[editable path="DoorsAndSwitches/SwitchMM"]
-[editable path="DoorsAndSwitches/Node/Door2"]
-[editable path="DoorsAndSwitches/Node/SwitchMM"]
-[editable path="DoorsAndSwitches/Door3"]
 [editable path="MovementSegment/Outlet"]
-[editable path="Player"]
-[editable path="Player/CanvasLayer"]

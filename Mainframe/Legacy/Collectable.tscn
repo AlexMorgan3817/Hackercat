@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://ycfpkflpescd"]
 
-[ext_resource type="Script" path="res://Mainframe/Objects/Collectable.gd" id="1_ptbsc"]
+[ext_resource type="Script" path="res://Mainframe/Objects/CopyOnInteract.gd" id="1_ptbsc"]
 [ext_resource type="PackedScene" uid="uid://d2qeutpdl6hjr" path="res://Mainframe/Programs/RawData.tscn" id="2_07lv3"]
 [ext_resource type="Texture2D" uid="uid://bocm4ao03u5b6" path="res://Textures/MainframeObj.png" id="3_gqqmj"]
 [ext_resource type="AudioStream" uid="uid://b6riawobx2355" path="res://Sound/Pickup.mp3" id="4_3qdqj"]

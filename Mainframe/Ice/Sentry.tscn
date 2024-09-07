@@ -1,6 +1,7 @@
-[gd_scene load_steps=33 format=3 uid="uid://xwwpba04pbj4"]
+[gd_scene load_steps=34 format=3 uid="uid://xwwpba04pbj4"]
 
 [ext_resource type="Script" path="res://Mainframe/MainframeMover.gd" id="1_jco4c"]
+[ext_resource type="Script" path="res://Mainframe/Ice/Sentry.gd" id="1_s8n8a"]
 [ext_resource type="PackedScene" uid="uid://dfqylyvtdl3do" path="res://Prefabs/EntityStatus.tscn" id="2_2r0uj"]
 [ext_resource type="Script" path="res://Mainframe/Ice/SentryMind.gd" id="2_cc7e5"]
 [ext_resource type="Texture2D" uid="uid://cywifay0lfcmq" path="res://Textures/Skull.png" id="3_eo0qx"]
@@ -159,6 +160,7 @@ animations = [{
 [node name="Sentry" type="Node2D"]
 z_index = 5
 z_as_relative = false
+script = ExtResource("1_s8n8a")
 
 [node name="Mover" type="Node" parent="." node_paths=PackedStringArray("Host", "ES")]
 script = ExtResource("1_jco4c")

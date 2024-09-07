@@ -12,7 +12,7 @@ func _ready():
 func process_circuit():
 	var rect:Rect2i = circuit.get_used_rect()
 	if GLOB.DEBUG:
-		print("Begin")
+		#print("Begin")
 		var P:Polygon2D = Polygon2D.new()
 		P.color = Color(1, 0.7, 0.7, 0.3)
 		var begin = tilesize * (Vector2(rect.position) + Vector2(1,1)) + tileoffset
@@ -24,4 +24,4 @@ func process_circuit():
 		p.append(Vector2(begin.x, end.y))
 		P.set_polygon(p)
 		add_child(P)
-		print(P.polygon)
+		#print(P.polygon)

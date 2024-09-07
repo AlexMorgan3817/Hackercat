@@ -11,4 +11,3 @@ func IsUsable(MM:MainframeMover):
 		if is_instance_valid(i) and i.Host is Trap:
 			return false
 	return true
-

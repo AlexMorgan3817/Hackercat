@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://dq7tkqffimn35"]
+[gd_scene load_steps=14 format=3 uid="uid://dq7tkqffimn35"]
 
 [ext_resource type="Texture2D" uid="uid://b4kf6laypme35" path="res://Textures/EnterPoint.png" id="1_2pt4l"]
 [ext_resource type="Script" path="res://Scripts/AnimatedSprite2D.gd" id="1_78qia"]
+[ext_resource type="Script" path="res://Mainframe/Objects/Outlet.gd" id="1_eo6em"]
 [ext_resource type="Script" path="res://Mainframe/MainframeMover.gd" id="1_xdb5q"]
 [ext_resource type="Script" path="res://UI/StartButton.gd" id="4_h8ahm"]
 [ext_resource type="Script" path="res://Mainframe/Objects/OutletConditions/IfRequiredAmount.gd" id="4_nur3h"]
@@ -57,8 +58,9 @@ animations = [{
 }]
 
 [node name="Outlet" type="Node2D"]
+script = ExtResource("1_eo6em")
 
-[node name="MainframeMover" type="Node" parent="." node_paths=PackedStringArray("Host")]
+[node name="Mover" type="Node" parent="." node_paths=PackedStringArray("Host")]
 script = ExtResource("1_xdb5q")
 Host = NodePath("..")
 
@@ -74,5 +76,5 @@ script = ExtResource("4_nur3h")
 [node name="ChangeScene" type="Node" parent="IfRequiredAmount"]
 script = ExtResource("4_h8ahm")
 
-[connection signal="Interacted" from="MainframeMover" to="IfRequiredAmount" method="_on_mainframe_mover_interacted"]
+[connection signal="Interacted" from="Mover" to="IfRequiredAmount" method="_on_mainframe_mover_interacted"]
 [connection signal="CheckPassed" from="IfRequiredAmount" to="IfRequiredAmount/ChangeScene" method="_on_if_required_amount_check_passed"]

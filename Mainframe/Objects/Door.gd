@@ -8,8 +8,6 @@ class_name Door
 @export var colorClosed:Color = Color.RED
 @export var open:bool = false
 
-@export var password:String = "password"
-
 signal opened(By:MainframeMover)
 signal closed(By:MainframeMover)
 
@@ -24,17 +22,14 @@ func update_state():
 		MM.Dense = true
 		sprite.modulate = colorClosed
 
-func forceopen():
-	open = true
-	update_state()
-func forceclose():
-	open = false
-	update_state()
-func toogle(user:MainframeMover):
-	open = !open
+func set_open(v:bool, user:MainframeMover = null):
+	open = v
 	update_state()
 	if open:
 		opened.emit(user)
 	else:
 		closed.emit(user)
+
+func toogle(user:MainframeMover):
+	set_open(!open, user)
 		

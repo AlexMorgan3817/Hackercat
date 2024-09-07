@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://b6mnny4h5lmn2"]
+[gd_scene load_steps=8 format=3 uid="uid://b6mnny4h5lmn2"]
 
 [ext_resource type="Script" path="res://Mainframe/MainframeMover.gd" id="1_lmdtj"]
 [ext_resource type="Script" path="res://Mainframe/Objects/Collectable.gd" id="2_bt8xk"]
 [ext_resource type="Texture2D" uid="uid://bocm4ao03u5b6" path="res://Textures/MainframeObj.png" id="3_ay6xb"]
+[ext_resource type="Script" path="res://Mainframe/Objects/CopyOnInteract.gd" id="3_bf2h6"]
 [ext_resource type="Script" path="res://OnTrigger/PlaysoundOnTrigger.gd" id="4_88ack"]
 [ext_resource type="AudioStream" uid="uid://b6riawobx2355" path="res://Sound/Pickup.mp3" id="5_sgqid"]
 
@@ -11,23 +12,24 @@ atlas = ExtResource("3_ay6xb")
 region = Rect2(224, 0, 32, 32)
 
 [node name="Collectable" type="Node2D"]
+script = ExtResource("2_bt8xk")
 
-[node name="MainframeMover" type="Node" parent="." node_paths=PackedStringArray("Host")]
+[node name="Mover" type="Node" parent="." node_paths=PackedStringArray("Host")]
 script = ExtResource("1_lmdtj")
 Host = NodePath("..")
 
 [node name="CopyOnInteract" type="Node" parent="."]
-script = ExtResource("2_bt8xk")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0, 1, 1, 1)
-texture_filter = 1
-texture = SubResource("AtlasTexture_gvlwu")
+script = ExtResource("3_bf2h6")
 
 [node name="Playsound" type="Node" parent="." node_paths=PackedStringArray("Host")]
 script = ExtResource("4_88ack")
 sound = ExtResource("5_sgqid")
 Host = NodePath("..")
 
-[connection signal="Interacted" from="MainframeMover" to="CopyOnInteract" method="_on_mainframe_mover_interacted"]
-[connection signal="Interacted" from="MainframeMover" to="Playsound" method="_on_mainframe_mover_interacted"]
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 1, 1, 1)
+texture_filter = 1
+texture = SubResource("AtlasTexture_gvlwu")
+
+[connection signal="Interacted" from="Mover" to="CopyOnInteract" method="_on_mainframe_mover_interacted"]
+[connection signal="Interacted" from="Mover" to="Playsound" method="_on_mainframe_mover_interacted"]

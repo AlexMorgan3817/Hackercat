@@ -1,19 +1,11 @@
-extends Node
+@icon("res://Ico/Cube_ico.png")
+extends NetAtom
 
-@export var Prog:PackedScene
+class_name Collectable
 
-signal PickedUp
+@export var ProgramInside:PackedScene
 
-func trigger(MM:MainframeMover):
-	var player:PlayerController = MM.PC
-	if not player:
-		return
-	if player.AddProgram(Prog):
-		PickedUp.emit()
-		#emit_signal("PickedUp")
-
-func _on_node_interacted(MM:MainframeMover):
-	trigger(MM)
-
-func _on_mainframe_mover_interacted(MM):
-	trigger(MM)
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	super()
+	$CopyOnInteract.Prog = ProgramInside
