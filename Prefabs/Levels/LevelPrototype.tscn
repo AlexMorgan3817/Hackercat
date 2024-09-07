@@ -1,8 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://d3c7dkq8468ca"]
+[gd_scene load_steps=23 format=3 uid="uid://d3c7dkq8468ca"]
 
 [ext_resource type="Script" path="res://Scripts/SceneSystem/Level.gd" id="1_2rn07"]
 [ext_resource type="TileSet" uid="uid://bt4xt8h2f55yp" path="res://Textures/Tilemaps/floor2.tres" id="1_gvh1x"]
-[ext_resource type="Script" path="res://Prefabs/Levels/MainframeMap.gd" id="2_1onhu"]
+[ext_resource type="Script" path="res://Scripts/MainframeMap.gd" id="2_1onhu"]
 [ext_resource type="PackedScene" uid="uid://xwwpba04pbj4" path="res://Mainframe/Ice/Sentry.tscn" id="2_mb5kn"]
 [ext_resource type="PackedScene" uid="uid://dq7tkqffimn35" path="res://Mainframe/Objects/Outlet.tscn" id="3_kmrep"]
 [ext_resource type="PackedScene" uid="uid://ydl0vw3rio2e" path="res://Prefabs/Player.tscn" id="4_6yauk"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://bqsk8vwk6ggf3" path="res://Mainframe/Programs/Floppa.tscn" id="9_tgqqj"]
 [ext_resource type="PackedScene" uid="uid://c3jj6ge1rgqai" path="res://Prefabs/LoopingAudioPlayer.tscn" id="10_ga0pm"]
 [ext_resource type="AudioStream" uid="uid://ceeeshjqibyim" path="res://Sound/music/Mainframe.mp3" id="10_gqjl4"]
+[ext_resource type="PackedScene" uid="uid://cmyvivj502j4w" path="res://Prefabs/DebugPolygon.tscn" id="11_8nx2c"]
 [ext_resource type="FontFile" uid="uid://bpbokby2oerfj" path="res://Textures/FSEX300.ttf" id="14_qjchp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_anq2l"]
@@ -32,18 +33,23 @@ shader_parameter/AbbreationAmt = 0.1
 [node name="LevelPrototype" type="Node2D"]
 script = ExtResource("1_2rn07")
 
-[node name="Mainframe" type="Node" parent="."]
-script = ExtResource("2_1onhu")
+[node name="LoopingAudioPlayer" parent="." instance=ExtResource("10_ga0pm")]
+stream = ExtResource("10_gqjl4")
+volume_db = -15.0
 
-[node name="MainframeVisuals" type="TileMap" parent="Mainframe"]
+[node name="Mainframe" type="Node2D" parent="." node_paths=PackedStringArray("circuit")]
+script = ExtResource("2_1onhu")
+circuit = NodePath("Circuit")
+
+[node name="Circuit" type="TileMap" parent="Mainframe"]
 texture_filter = 1
 position = Vector2(16, 16)
 tile_set = ExtResource("1_gvh1x")
 rendering_quadrant_size = 32
 format = 2
 layer_0/tile_data = PackedInt32Array(65537, 131072, 0, 131073, 65536, 0, 196609, 65536, 0, 262145, 65536, 0, 65538, 0, 1, 327682, 0, 1, 65539, 196608, 0, 131075, 65536, 0, 262147, 65536, 0, 327683, 196608, 1, 196612, 0, 1, 131077, 65536, 0, 327685, 131072, 0, 393221, 65536, 0, 196614, 0, 1, 327686, 0, 1, 458758, 131072, 0, 524294, 65536, 0, 196615, 196608, 0, 262151, 65536, 0, 393223, 65536, 0, 458759, 196608, 1, 589831, 0, 1, 131080, 65536, 0, 196616, 131072, 1, 327688, 0, 1, 458760, 131072, 0, 524296, 65536, 0, 655368, 65536, 0, 720904, 131072, 1, 196617, 0, 1, 327689, 0, 1, 393225, 131072, 0, 458761, 196608, 1, 589833, 0, 1, 720905, 0, 1, 131082, 65536, 0, 262154, 65536, 0, 327690, 196608, 1, 393226, 0, 1, 196619, 0, 1, 393227, 0, 1, 262156, 131072, 0, 327692, 65536, 0, 589836, 65536, 0, 196621, 0, 1, 262157, 0, 1, 393229, 0, 1, 524301, 0, 1, 786445, 0, 1, 262158, 0, 1, 393230, 196608, 0, 458766, 65536, 0, 589838, 65536, 0, 655374, 65536, 0, 720910, 65536, 0, 786446, 196608, 1, 196623, 0, 1, 262159, 196608, 0, 327695, 65536, 0, 393231, 131072, 1, 196624, 0, 1, 393232, 0, 1, 196625, 196608, 0, 262161, 65536, 0, 327697, 65536, 0, 393233, 196608, 1, 458756, 0, 1, 458755, 0, 1, 458754, 0, 1)
-layer_1/tile_data = PackedInt32Array()
-layer_2/tile_data = PackedInt32Array()
+layer_1/name = "Layer1"
+layer_2/name = "Layer2"
 
 [node name="MNode" parent="Mainframe" node_paths=PackedStringArray("Links") instance=ExtResource("5_a0niy")]
 position = Vector2(64, 256)
@@ -81,6 +87,9 @@ CurrentNode = NodePath("../../NodeDoor")
 
 [node name="Left" type="Node" parent="Mainframe"]
 
+[node name="DebugPolygon" parent="Mainframe/Left" instance=ExtResource("11_8nx2c")]
+polygon = PackedVector2Array(256, 32, 256, 160, 192, 160, 160, 224, 32, 224, 32, 32)
+
 [node name="Left" parent="Mainframe/Left" node_paths=PackedStringArray("Links") instance=ExtResource("5_a0niy")]
 position = Vector2(192, 128)
 Links = [NodePath("../MNode5"), null, NodePath("../Node/MNode"), NodePath("../../Fork")]
@@ -100,6 +109,9 @@ target = NodePath("../../Node/Door/Door")
 
 [node name="Node" type="Node" parent="Mainframe/Left"]
 
+[node name="DebugPolygon" parent="Mainframe/Left/Node" instance=ExtResource("11_8nx2c")]
+polygon = PackedVector2Array(160, 64, 160, 224, 32, 224, 32, 64)
+
 [node name="MNode" parent="Mainframe/Left/Node" node_paths=PackedStringArray("Links") instance=ExtResource("5_a0niy")]
 position = Vector2(128, 128)
 Links = [NodePath("../MNode3"), NodePath("../MNode3"), null, NodePath("../../Left")]
@@ -115,6 +127,9 @@ position = Vector2(64, 192)
 Links = [NodePath("../MNode"), null, null, NodePath("../MNode")]
 
 [node name="Right" type="Node" parent="Mainframe"]
+
+[node name="DebugPolygon" parent="Mainframe/Right" instance=ExtResource("11_8nx2c")]
+polygon = PackedVector2Array(512, 128, 576, 128, 576, 352, 480, 448, 352, 448, 256, 384, 256, 288, 320, 224, 320, 160, 288, 128, 288, 96, 256, 64, 288, 32, 384, 32, 448, 96, 480, 96)
 
 [node name="Right" parent="Mainframe/Right" node_paths=PackedStringArray("Links") instance=ExtResource("5_a0niy")]
 position = Vector2(352, 128)
@@ -152,6 +167,9 @@ target = NodePath("../../Airlock2/Door2/Door")
 
 [node name="Airlock2" type="Node" parent="Mainframe/Right"]
 
+[node name="DebugPolygon" parent="Mainframe/Right/Airlock2" instance=ExtResource("11_8nx2c")]
+polygon = PackedVector2Array(416, 96, 480, 96, 512, 128, 576, 128, 576, 224, 544, 256, 416, 256, 384, 224, 384, 128)
+
 [node name="Entrace" parent="Mainframe/Right/Airlock2" node_paths=PackedStringArray("Links") instance=ExtResource("5_a0niy")]
 position = Vector2(416, 128)
 Links = [null, null, NodePath("../../Right"), NodePath("../AirlockNode")]
@@ -181,6 +199,10 @@ CurrentNode = NodePath("../../Out")
 
 [node name="Left2" type="Node" parent="Mainframe/Right"]
 
+[node name="DebugPolygon" parent="Mainframe/Right/Left2" instance=ExtResource("11_8nx2c")]
+color = Color(0.980392, 0.568627, 0.823529, 0.290196)
+polygon = PackedVector2Array(256, 384, 352, 448, 384, 448, 384, 256, 288, 256, 256, 287.922)
+
 [node name="LeftLockedBranch" parent="Mainframe/Right/Left2" node_paths=PackedStringArray("Links") instance=ExtResource("5_a0niy")]
 position = Vector2(288, 320)
 Links = [NodePath("../../Airlock2/Out"), NodePath("../MNode5"), NodePath("../../../NodeDoor"), NodePath("../MNode4")]
@@ -196,6 +218,10 @@ Links = [null, null, NodePath("../LeftLockedBranch"), null]
 [node name="Collectable" parent="Mainframe/Right/Left2/MNode5" instance=ExtResource("9_ht2uo")]
 
 [node name="Right2" type="Node" parent="Mainframe/Right"]
+
+[node name="DebugPolygon" parent="Mainframe/Right/Right2" instance=ExtResource("11_8nx2c")]
+color = Color(0, 0.843137, 0.752941, 0.215686)
+polygon = PackedVector2Array(576, 352, 576, 256, 384, 256, 384, 448, 480, 448)
 
 [node name="RightLockedBranch" parent="Mainframe/Right/Right2" node_paths=PackedStringArray("Links") instance=ExtResource("5_a0niy")]
 position = Vector2(480, 288)
@@ -225,24 +251,15 @@ material = SubResource("ShaderMaterial_anq2l")
 position = Vector2(416, 416)
 Links = [null, null, null, NodePath("../RightLockedBranch")]
 
-[node name="Player" parent="." instance=ExtResource("4_6yauk")]
+[node name="Player" parent="." node_paths=PackedStringArray("StartingPrograms") instance=ExtResource("4_6yauk")]
 position = Vector2(192, 256)
+StartingPrograms = [NodePath("../Lance"), NodePath("../Trapper")]
 
 [node name="Mover" parent="Player" index="0" node_paths=PackedStringArray("CurrentNode")]
 CurrentNode = NodePath("../../Mainframe/RootNode")
 
 [node name="PlayerController" parent="Player/Mover" index="1"]
-InitialPrograms = Array[PackedScene]([ExtResource("8_q18t1"), ExtResource("9_ekter")])
 PWR = 14
-
-[node name="TileMap" parent="Player/Background/Control2" index="0"]
-rendering_quadrant_size = 32
-
-[node name="RichTextLabel3" parent="Player/CanvasLayer/Node2D/HP" index="0"]
-layout_mode = 0
-
-[node name="RichTextLabel4" parent="Player/CanvasLayer/Node2D/PWR" index="0"]
-layout_mode = 0
 
 [node name="Sentry" parent="." instance=ExtResource("2_mb5kn")]
 position = Vector2(352, 320)
@@ -256,10 +273,6 @@ position = Vector2(64, 192)
 [node name="Mover" parent="Sentry2" index="0" node_paths=PackedStringArray("CurrentNode")]
 CurrentNode = NodePath("../../Mainframe/Left/Node/MNode3")
 
-[node name="LoopingAudioPlayer" parent="." instance=ExtResource("10_ga0pm")]
-stream = ExtResource("10_gqjl4")
-volume_db = -15.0
-
 [node name="RichTextLabel4" type="RichTextLabel" parent="."]
 texture_filter = 1
 offset_left = -32.0
@@ -271,6 +284,11 @@ bbcode_enabled = true
 text = "Do not lose your starting programs and acquire 1 more
 (3 programs required)"
 
+[node name="Lance" parent="." instance=ExtResource("8_q18t1")]
+
+[node name="Trapper" parent="." instance=ExtResource("9_ekter")]
+
+[connection signal="ready" from="." to="Mainframe" method="_on_level_prototype_ready"]
 [connection signal="Interacted" from="Mainframe/Right/SwitchMM3/MainframeMover" to="Mainframe/Right/SwitchMM3/ToogleDoor2" method="_on_mainframe_mover_interacted"]
 [connection signal="Interacted" from="Mainframe/Right/Left2/MNode5" to="Mainframe/Right/Left2/MNode5/Collectable" method="_on_node_interacted"]
 
@@ -284,6 +302,6 @@ text = "Do not lose your starting programs and acquire 1 more
 [editable path="Mainframe/Right/Airlock2/Door2"]
 [editable path="Mainframe/Right/Right2/Collectable"]
 [editable path="Player"]
-[editable path="Player/CanvasLayer"]
+[editable path="Player/UI"]
 [editable path="Sentry"]
 [editable path="Sentry2"]

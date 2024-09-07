@@ -30,11 +30,11 @@ func forceopen():
 func forceclose():
 	open = false
 	update_state()
-func toogle(MM:MainframeMover):
+func toogle(user:MainframeMover):
 	open = !open
 	update_state()
 	if open:
-		emit_signal("opened", MM)
+		opened.emit(user)
 	else:
-		emit_signal("closed", MM)
+		closed.emit(user)
 		

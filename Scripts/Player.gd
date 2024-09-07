@@ -1,0 +1,33 @@
+@icon("res://floppa.png")
+extends Node2D
+
+class_name Player
+
+@export var StartingPrograms:Array[Program]
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	var progholder:Control
+	for i in $UI.get_children():
+		if i is Control and i.name == "Programs":
+			progholder = i
+			break
+	var count = 0
+	var l = len(StartingPrograms)
+	if l > 0:
+		for i in progholder.get_children():
+			if count > l-1:
+				break
+			if i is ProgramFrame:
+				var prog:Program = StartingPrograms[count]
+				i.MyProgram = prog
+				var par = prog.get_parent()
+				if par:
+					par.remove_child.call_deferred(prog)
+				i.add_child.call_deferred(prog)
+				count += 1
+				if(count > l):
+					break
+	$Mover/EntityStatus.HealthChanged.connect($UI/HP._on_entity_status_health_changed)
+	$Mover/PlayerController.PWRChanged.connect($UI/PWR._on_player_controller_pwr_changed)

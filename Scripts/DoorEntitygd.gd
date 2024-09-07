@@ -1,4 +1,5 @@
-extends Node
+@icon("res://Textures/door.png")
+extends Node2D
 
 
 # Called when the node enters the scene tree for the first time.

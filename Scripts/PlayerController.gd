@@ -5,14 +5,20 @@ class_name PlayerController
 @export var MM:MainframeMover
 @export var Enabled = true
 
-@export var ProgramFrames:Array[ProgramFrame]
-@export var InitialPrograms:Array[PackedScene]
 @export var MaxPWR:int = 20
 @export var PWR:int = 20
+var ProgramFrames:Array[ProgramFrame]
 
 @export var SelectedIdicator:Node2D
 @export var EpsilonForSelection:float = 0.3
 var SelectedNode:MNode
+
+@export var MoveDelay:Timer
+@export var InteractionDelay:Timer
+@export var ProgramUseDelay:Timer
+var CanMove       :bool = true
+var CanInteract   :bool = true
+var CanUsePrograms:bool = true
 
 signal UnableToMove
 signal Moved
@@ -23,11 +29,48 @@ signal Item2Used
 signal Item3Used
 signal Item4Used
 
+func create_default_timer(timeoutcallback, time:float = 0.5):
+	var t = Timer.new()
+	t.one_shot = true
+	t.wait_time =time
+	t.timeout.connect(timeoutcallback)
+	add_child(t)
+	return t
+
+func _ready():
+	if !MoveDelay       :
+		MoveDelay        = create_default_timer(_on_move_delay_timeout, 0.5)
+	if !InteractionDelay:
+		InteractionDelay = create_default_timer(_on_interaction_delay_timeout, 0.5)
+	if !ProgramUseDelay :
+		ProgramUseDelay  = create_default_timer(_on_program_use_delay_timeout, 0.5)
+	var frames
+	for i in MM.Host.get_children():
+		if i.name == "UI" and i is CanvasLayer:
+			for j in i.get_children():
+				if j is Control and j.name == "Programs":
+					frames = j
+					break
+			break
+	for i in frames.get_children():
+		if i is ProgramFrame:
+			ProgramFrames.append(i)
+			i.MM = MM
+	for i in range(1, len(ProgramFrames) + 1):
+		var pf = ProgramFrames[i-1]
+		if(pf):
+			connect("Item" + str(i) + "Used", pf.ActivateProgram)
+	#if(ProgramFrames[0]): Item1Used.connect(ProgramFrames[0].ActivateProgram)
+	#if(ProgramFrames[1]): Item1Used.connect(ProgramFrames[1].ActivateProgram)
+	#if(ProgramFrames[2]): Item1Used.connect(ProgramFrames[2].ActivateProgram)
+	#if(ProgramFrames[3]): Item1Used.connect(ProgramFrames[3].ActivateProgram)
+	emit_signal("PWRChanged", self, PWR)
+
 func CostPWR(i:int):
 	if PWR < i:
 		return false
 	PWR -= i
-	emit_signal("PWRChanged", self, PWR)
+	PWRChanged.emit(self, PWR)
 	return true
 
 func DeleteProgram(index:int):
@@ -63,12 +106,6 @@ func UseItem(s):
 	emit_signal(s)
 	ProgramUseDelay.start()
 
-func _ready():
-	for i in InitialPrograms:
-		AddProgram(i)
-	emit_signal("PWRChanged", self, PWR)
-
-
 func _process(_delta):
 	if CanUsePrograms:
 		if Input.is_action_just_pressed("Use Item 1"):
@@ -101,10 +138,10 @@ func _process(_delta):
 				CanMove = false
 				MoveDelay.start()
 				if MM.CanMoveTo(nextNode):
-					emit_signal("Moved", MM.CurrentNode, nextNode)
+					Moved.emit(MM.CurrentNode, nextNode)
 					MM.MoveToNode(nextNode)
 				else:
-					emit_signal("UnableToMove")
+					UnableToMove.emit()
 	
 	var d:Vector2i = get_discret_direction()
 	SelectedNode = null
@@ -148,13 +185,7 @@ func get_discret_direction(epsilon:float = EpsilonForSelection):
 		m.y = -1
 	return m
 
-@export var MoveDelay:Timer
-@export var InteractionDelay:Timer
-@export var ProgramUseDelay:Timer
-var CanMove       :bool = true
-var CanInteract   :bool = true
-var CanUsePrograms:bool = true
-func _on_timer_timeout():
+func _on_move_delay_timeout():
 	CanMove        = true
 
 func _on_interaction_delay_timeout():

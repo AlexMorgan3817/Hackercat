@@ -16,7 +16,7 @@ void fragment()
 	vec4 disp = texture(displace, SCREEN_UV);
 	vec2 newUV = (SCREEN_UV + disp.x * displaysmentAmount * COLOR.b);
 	COLOR = COLOR + (colorChange + texture(TEXTURE, newUV))* MIX;
-	
+
 	COLOR.r = COLOR.r + texture(TEXTURE, newUV - AbbreationAmt).r * AbberationMix;
 	COLOR.g = COLOR.g + texture(TEXTURE, newUV).g * AbberationMix;
 	COLOR.b = COLOR.b + texture(TEXTURE, newUV - AbbreationAmt).b * AbberationMix;

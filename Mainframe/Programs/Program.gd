@@ -22,8 +22,7 @@ func IsUsable(MM:MainframeMover):
 	return true
 
 func Inusable(MM:MainframeMover):
-	emit_signal("ProgramFailedUse", MM)
+	ProgramFailedUse.emit(MM)
 
 func UseProgram(MM:MainframeMover):
-	emit_signal("ProgramUsed", MM)
-
+	ProgramUsed.emit(MM)

@@ -9,7 +9,8 @@ func trigger(MM:MainframeMover):
 	if not player:
 		return
 	if player.AddProgram(Prog):
-		emit_signal("PickedUp")
+		PickedUp.emit()
+		#emit_signal("PickedUp")
 
 func _on_node_interacted(MM:MainframeMover):
 	trigger(MM)

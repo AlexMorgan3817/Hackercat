@@ -8,7 +8,7 @@ func UseProgram(MM:MainframeMover):
 	k.myMM.CurrentNode = MM.CurrentNode
 	PlaySound.get_global_node(MM.CurrentNode).add_child(k)
 	k.myMM.MoveToNode(MM.CurrentNode)
-	MM.CurrentNode.connect("MovedIn", k.trigger)
+	MM.CurrentNode.MovedIn.connect(k.trigger)
 
 func _on_program_program_used(MM:MainframeMover):
 	UseProgram(MM)

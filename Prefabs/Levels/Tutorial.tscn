@@ -1,10 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://dv7u3ocmhicp1"]
+[gd_scene load_steps=21 format=3 uid="uid://dv7u3ocmhicp1"]
 
 [ext_resource type="PackedScene" uid="uid://ydl0vw3rio2e" path="res://Prefabs/Player.tscn" id="1_2ib3b"]
 [ext_resource type="Script" path="res://Scripts/SceneSystem/Level.gd" id="1_3tr42"]
 [ext_resource type="AudioStream" uid="uid://bn5xy04ewh1a5" path="res://Sound/music/Tutorial.mp3" id="2_mbsm2"]
 [ext_resource type="TileSet" uid="uid://bt4xt8h2f55yp" path="res://Textures/Tilemaps/floor2.tres" id="3_e0jby"]
 [ext_resource type="PackedScene" uid="uid://yqn0u225ls76" path="res://Mainframe/MNode.tscn" id="3_ukpx1"]
+[ext_resource type="Script" path="res://Scripts/MainframeMap.gd" id="4_656qg"]
 [ext_resource type="PackedScene" uid="uid://d2vq8ry3bdi4v" path="res://Mainframe/Objects/SwitchMM.tscn" id="5_qf6ln"]
 [ext_resource type="PackedScene" uid="uid://c3jj6ge1rgqai" path="res://Prefabs/LoopingAudioPlayer.tscn" id="6_1y1i8"]
 [ext_resource type="PackedScene" uid="uid://xwwpba04pbj4" path="res://Mainframe/Ice/Sentry.tscn" id="7_2d1gq"]
@@ -31,8 +32,10 @@ stream = ExtResource("2_mbsm2")
 volume_db = -10.0
 timeoffset = 7
 
-[node name="KeysAndSentry" type="Node2D" parent="."]
+[node name="KeysAndSentry" type="Node2D" parent="." node_paths=PackedStringArray("circuit")]
 position = Vector2(288, -352)
+script = ExtResource("4_656qg")
+circuit = NodePath("TileMap")
 
 [node name="TileMap" type="TileMap" parent="KeysAndSentry"]
 texture_filter = 1
@@ -198,7 +201,9 @@ theme_override_fonts/normal_font = ExtResource("9_fcnlw")
 text = "This is a sentry, it want to hunt you down and in a common case it wants you dead
 "
 
-[node name="DoorsAndSwitches" type="Node2D" parent="."]
+[node name="DoorsAndSwitches" type="Node2D" parent="." node_paths=PackedStringArray("circuit")]
+script = ExtResource("4_656qg")
+circuit = NodePath("TileMap")
 
 [node name="TileMap" type="TileMap" parent="DoorsAndSwitches"]
 texture_filter = 1
@@ -298,8 +303,10 @@ text = "=>"
 [node name="Selected" parent="DoorsAndSwitches" instance=ExtResource("10_s4clc")]
 position = Vector2(-109, -182)
 
-[node name="MovementSegment" type="Node2D" parent="."]
+[node name="MovementSegment" type="Node2D" parent="." node_paths=PackedStringArray("circuit")]
 position = Vector2(-384, 608)
+script = ExtResource("4_656qg")
+circuit = NodePath("TileMap")
 
 [node name="TileMap" type="TileMap" parent="MovementSegment"]
 texture_filter = 1
@@ -410,15 +417,6 @@ CurrentNode = NodePath("../../MovementSegment/Root1")
 
 [node name="Sprite2D" parent="Player" index="1"]
 texture = SubResource("AtlasTexture_3d4qr")
-
-[node name="TileMap" parent="Player/Background/Control2" index="0"]
-rendering_quadrant_size = 32
-
-[node name="RichTextLabel3" parent="Player/CanvasLayer/Node2D/HP" index="0"]
-layout_mode = 0
-
-[node name="RichTextLabel4" parent="Player/CanvasLayer/Node2D/PWR" index="0"]
-layout_mode = 0
 
 [connection signal="Interacted" from="KeysAndSentry/Center/SwitchMM2/MainframeMover" to="KeysAndSentry/Center/SwitchMM2/ToogleDoor2" method="_on_mainframe_mover_interacted"]
 [connection signal="Interacted" from="KeysAndSentry/Center/SwitchMM2/MainframeMover" to="KeysAndSentry/Center/SwitchMM2/ToogleDoor3" method="_on_mainframe_mover_interacted"]

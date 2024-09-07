@@ -1,3 +1,4 @@
+@icon("res://Textures/UI_Frame.png")
 extends Node2D
 
 class_name MNode#, "res://Textures/UI_Frame.png"
@@ -19,8 +20,8 @@ func ArePassing(MM:MainframeMover):
 	for i in Content:
 		if is_instance_valid(i) and i.Dense:
 			dot = false
-			i.emit_signal("Bumped", MM)
-			MM.emit_signal("Bumped", i)
+			i.Bumped.emit(MM)
+			MM.Bumped.emit(i)
 	return dot
 
 func _ready():
@@ -30,8 +31,7 @@ func _ready():
 			continue
 		UndirrectedLinks.append(i)
 
-
 func _on_interacted(MM):
 	for i in Content:
 		if is_instance_valid(i):
-			i.emit_signal("Interacted", MM)
+			i.Interacted.emit(MM)

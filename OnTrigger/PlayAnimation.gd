@@ -18,4 +18,4 @@ func _on_simple_mind_attack(MM, target):
 
 func _on_animated_sprite_2d_animation_finished():
 	playing = false
-	emit_signal("AnimationEnded", animation)
+	AnimationEnded.emit(animation)

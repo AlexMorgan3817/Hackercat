@@ -9,4 +9,4 @@ signal Triggered(Target:MainframeMover)
 func trigger(MM:MainframeMover):
 	if not MM.ES:
 		return
-	emit_signal("Triggered", MM)
+	Triggered.emit(MM)

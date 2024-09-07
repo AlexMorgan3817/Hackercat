@@ -25,15 +25,15 @@ func AmIAlive():
 
 func _setHealth(value:int):
 	if CurrentHits - value < 0:
-		emit_signal("Healed", self, value)
+		Healed.emit(self, value)
 	elif CurrentHits - value > 0:
-		emit_signal("TookDamage", self, value)
+		TookDamage.emit(self, value)
 	else:
 		return
 	CurrentHits = value
-	emit_signal("HealthChanged", self, CurrentHits)
+	HealthChanged.emit(self, CurrentHits)
 	if not AmIAlive():
-		emit_signal("Death", self)
+		Death.emit(self)
 
 func TakeDamage(value:int):
 	if not IsTakingDamage:

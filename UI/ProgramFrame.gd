@@ -23,14 +23,14 @@ func SetProgram(p:Program):
 
 func ActivateProgram():
 	if not MyProgram:
-		emit_signal("EmptyUse")
+		EmptyUse.emit()
 		return
 	if not MyProgram.IsUsable(MM):
 		MyProgram.Inusable(MM)
-		emit_signal("ProgramFailedUse")
+		ProgramFailedUse.emit()
 		return
 	MyProgram.UseProgram(MM)
-	emit_signal("ProgramUsed")
+	ProgramUsed.emit()
 
 func _on_player_controller_item_used():
 	ActivateProgram()
@@ -39,4 +39,3 @@ func _on_player_controller_item_used():
 func _on_texture_button_pressed():
 	if MyProgram:
 		RemoveProgram()
-
