@@ -41,9 +41,9 @@ animations = [{
 
 [node name="Trap" type="Node2D" node_paths=PackedStringArray("myMM")]
 script = ExtResource("1_7gjvn")
-myMM = NodePath("MM")
+myMM = NodePath("Mover")
 
-[node name="MM" type="Node" parent="." node_paths=PackedStringArray("Host")]
+[node name="Mover" type="Node" parent="." node_paths=PackedStringArray("Host")]
 script = ExtResource("2_exyee")
 Host = NodePath("..")
 

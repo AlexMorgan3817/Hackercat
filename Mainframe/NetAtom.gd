@@ -18,4 +18,5 @@ func findNode():
 func _ready():
 	if !StartingNode:
 		findNode()
-	$Mover.MoveToNode(StartingNode)
+	if StartingNode:
+		$Mover.MoveToNode(StartingNode)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://d3c7dkq8468ca"]
+[gd_scene load_steps=20 format=3 uid="uid://d3c7dkq8468ca"]
 
 [ext_resource type="Script" path="res://Scripts/SceneSystem/Level.gd" id="1_2rn07"]
 [ext_resource type="TileSet" uid="uid://bt4xt8h2f55yp" path="res://Textures/Tilemaps/floor2.tres" id="1_gvh1x"]
@@ -17,6 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://ceeeshjqibyim" path="res://Sound/music/Mainframe.mp3" id="10_gqjl4"]
 [ext_resource type="PackedScene" uid="uid://cmyvivj502j4w" path="res://Prefabs/DebugPolygon.tscn" id="11_8nx2c"]
 [ext_resource type="FontFile" uid="uid://bpbokby2oerfj" path="res://Textures/FSEX300.ttf" id="14_qjchp"]
+[ext_resource type="PackedScene" uid="uid://bqsk8vwk6ggf3" path="res://Mainframe/Programs/Floppa.tscn" id="16_lpb0f"]
 [ext_resource type="PackedScene" uid="uid://d2qeutpdl6hjr" path="res://Mainframe/Programs/RawData.tscn" id="16_xrrmx"]
 
 [node name="LevelPrototype" type="Node2D"]
@@ -205,6 +206,7 @@ Links = [NodePath("../MNode6"), null, null, null]
 
 [node name="Collectable" parent="Mainframe/Right/Right2" instance=ExtResource("8_vc7v3")]
 position = Vector2(416, 384)
+ProgramInside = ExtResource("16_lpb0f")
 
 [node name="MNode7" parent="Mainframe/Right/Right2" node_paths=PackedStringArray("Links") instance=ExtResource("5_a0niy")]
 position = Vector2(416, 416)

@@ -4,16 +4,9 @@ class_name PlaySound
 var Player:AudioStreamPlayer2D
 var DeathTimer:Timer
 
-static func get_global_node(node:Node):
-	var d = node
-	while d and not (d is Scene):
-		d = d.get_parent()
-	return d
-	#return node.get_tree().root.get_child(0)
-
 static func playsound(loc:Node2D, v:AudioStream, volume:float = 0):
 	var p = PlaySound.new()
-	get_global_node(loc).add_child(p)
+	GLOB.get_global_node(loc).add_child(p)
 	p.set_global_position(loc.get_global_position())
 	p.setup(v)
 	p.Player.volume_db = volume

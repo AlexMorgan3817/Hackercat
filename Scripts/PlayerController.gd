@@ -170,7 +170,7 @@ func cooldown_interaction():
 	CanInteract = false
 
 func get_mouse_direction():
-	var m:Vector2 = PlaySound.get_global_node(MM.Host).get_global_mouse_position()
+	var m:Vector2 = GLOB.get_global_node(MM.Host).get_global_mouse_position()
 	m -= MM.Host.get_global_position()
 	m = m.normalized()
 	return m

@@ -1,12 +1,14 @@
-extends Node2D
+extends NetAtom
 
 class_name Trap
 
 @export var myMM:MainframeMover
+var enabled:bool = true
 
 signal Triggered(Target:MainframeMover)
 
 func trigger(MM:MainframeMover):
-	if not MM.ES:
+	if not enabled or not MM.ES:
 		return
+	enabled = false
 	Triggered.emit(MM)
