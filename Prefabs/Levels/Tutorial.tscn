@@ -257,11 +257,7 @@ Links = [NodePath("../Root1"), null, null, null]
 
 [node name="Outlet" parent="MovementSegment" instance=ExtResource("11_aggyy")]
 position = Vector2(35, 98)
-
-[node name="IfRequiredAmount" parent="MovementSegment/Outlet" index="2"]
-RequiredAmount = 2
-
-[node name="ChangeScene" parent="MovementSegment/Outlet/IfRequiredAmount" index="0"]
+RequiredAmountOfProgs = 2
 scene = ExtResource("16_7ypnn")
 
 [node name="Root1" parent="MovementSegment" node_paths=PackedStringArray("Links") instance=ExtResource("3_ukpx1")]
@@ -340,5 +336,3 @@ offset_bottom = 120.0
 theme_override_fonts/normal_font = ExtResource("9_fcnlw")
 text = "=>
 "
-
-[editable path="MovementSegment/Outlet"]

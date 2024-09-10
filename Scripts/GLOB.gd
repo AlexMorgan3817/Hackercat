@@ -13,8 +13,6 @@ static func addtimer(source:Node, proc, time):
 	t.start()
 
 static func get_global_node(node:Node):
-	if glob_node:
-		return glob_node
 	var d = node
 	while d and not (d is Scene):
 		d = d.get_parent()

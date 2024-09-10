@@ -47,11 +47,7 @@ Links = [null, null, null, NodePath("../RootNode")]
 
 [node name="Outlet" parent="Mainframe" instance=ExtResource("3_kmrep")]
 position = Vector2(96, 256)
-
-[node name="IfRequiredAmount" parent="Mainframe/Outlet" index="2"]
-RequiredAmount = 3
-
-[node name="ChangeScene" parent="Mainframe/Outlet/IfRequiredAmount" index="0"]
+RequiredAmountOfProgs = 3
 scene = ExtResource("5_uhmya")
 
 [node name="RootNode" parent="Mainframe" node_paths=PackedStringArray("Links") instance=ExtResource("5_a0niy")]
@@ -228,5 +224,3 @@ text = "Do not lose your starting programs and acquire 1 more
 [node name="Trapper" parent="." instance=ExtResource("9_ekter")]
 
 [connection signal="ready" from="." to="Mainframe" method="_on_level_prototype_ready"]
-
-[editable path="Mainframe/Outlet"]
