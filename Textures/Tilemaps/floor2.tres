@@ -2,9 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://birb35mhivx7d" path="res://Textures/floor.png" id="1_8o8mv"]
 [ext_resource type="Texture2D" uid="uid://bocm4ao03u5b6" path="res://Textures/MainframeObj.png" id="2_gw7au"]
-[ext_resource type="PackedScene" uid="uid://dq7tkqffimn35" path="res://Mainframe/Objects/Outlet.tscn" id="3_01ryd"]
-[ext_resource type="PackedScene" uid="uid://d2vq8ry3bdi4v" path="res://Mainframe/Objects/SwitchMM.tscn" id="4_towa1"]
-[ext_resource type="PackedScene" uid="uid://py24vj81mf1n" path="res://Mainframe/Objects/Door.tscn" id="5_rg6mf"]
+[ext_resource type="PackedScene" uid="uid://dq7tkqffimn35" path="res://Game/Objects/Outlet.tscn" id="3_01ryd"]
+[ext_resource type="PackedScene" uid="uid://d2vq8ry3bdi4v" path="res://Game/Objects/SwitchMM.tscn" id="4_towa1"]
+[ext_resource type="PackedScene" uid="uid://py24vj81mf1n" path="res://Game/Objects/Door.tscn" id="5_rg6mf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iw2a8"]
 texture = ExtResource("1_8o8mv")

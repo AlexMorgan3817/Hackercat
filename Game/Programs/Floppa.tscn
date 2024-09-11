@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqsk8vwk6ggf3"]
+
+[ext_resource type="PackedScene" uid="uid://bfiy8buyjrdlb" path="res://Game/Programs/Program.tscn" id="1_4c7us"]
+[ext_resource type="Texture2D" uid="uid://cww12h8bl2yxn" path="res://Textures/player.png" id="2_26ske"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6on4h"]
+atlas = ExtResource("2_26ske")
+region = Rect2(0, 0, 32, 32)
+
+[node name="Program" instance=ExtResource("1_4c7us")]
+Name = "???"
+Description = "The what?"
+requiredPWR = 0
+
+[node name="Sprite2D" parent="." index="0"]
+texture_filter = 1
+scale = Vector2(4, 4)
+texture = SubResource("AtlasTexture_6on4h")

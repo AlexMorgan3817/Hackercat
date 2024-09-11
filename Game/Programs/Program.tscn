@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfiy8buyjrdlb"]
+
+[ext_resource type="Script" path="res://Game/Programs/Program.gd" id="1_2vihv"]
+[ext_resource type="Script" path="res://Game/Programs/Effects/DrainRequiredPower.gd" id="2_ct4qc"]
+
+[node name="Program" type="Node2D"]
+script = ExtResource("1_2vihv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="DrainRequiredPower" type="Node" parent="." node_paths=PackedStringArray("Prog")]
+script = ExtResource("2_ct4qc")
+Prog = NodePath("..")
+
+[connection signal="ProgramUsed" from="." to="DrainRequiredPower" method="_on_program_program_used"]

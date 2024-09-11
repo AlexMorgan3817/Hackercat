@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://py24vj81mf1n"]
+
+[ext_resource type="Script" path="res://Scripts/DoorEntity.gd" id="1_4ohx3"]
+[ext_resource type="Script" path="res://Game/MainframeMover.gd" id="1_tpovo"]
+[ext_resource type="Texture2D" uid="uid://bocm4ao03u5b6" path="res://Textures/MainframeObj.png" id="2_ub7ai"]
+[ext_resource type="Script" path="res://Game/Objects/Door.gd" id="3_djv5f"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nrwfi"]
+atlas = ExtResource("2_ub7ai")
+region = Rect2(96, 0, 32, 32)
+
+[node name="Door" type="Node2D" node_paths=PackedStringArray("MyDoor")]
+script = ExtResource("1_4ohx3")
+MyDoor = NodePath("Door")
+
+[node name="Mover" type="Node" parent="." node_paths=PackedStringArray("Host")]
+script = ExtResource("1_tpovo")
+Host = NodePath("..")
+Dense = true
+
+[node name="Door" type="Node" parent="." node_paths=PackedStringArray("MM", "sprite")]
+script = ExtResource("3_djv5f")
+MM = NodePath("../Mover")
+sprite = NodePath("../Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+z_as_relative = false
+texture_filter = 1
+texture = SubResource("AtlasTexture_nrwfi")

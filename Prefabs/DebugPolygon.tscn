@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cmyvivj502j4w"]
-
-[ext_resource type="Script" path="res://Prefabs/DebugObject.gd" id="1_wqejk"]
-
-[node name="DebugPolygon" type="Polygon2D"]
-color = Color(1, 0.635294, 0, 0.223529)
-script = ExtResource("1_wqejk")
