@@ -68,5 +68,3 @@ Pixelart   : _Elar_"
 
 [node name="LoopingAudioPlayer" parent="." instance=ExtResource("3_mrixp")]
 stream = ExtResource("4_ja15a")
-
-[connection signal="pressed" from="CanvasLayer/Button" to="CanvasLayer/Button" method="_on_pressed"]

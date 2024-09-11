@@ -1,29 +1,29 @@
 [gd_scene load_steps=12 format=3 uid="uid://5cedf0n7tbl4"]
 
-[ext_resource type="Script" path="res://Scripts/SceneSystem/Scene.gd" id="1_gaw6e"]
-[ext_resource type="PackedScene" uid="uid://c3jj6ge1rgqai" path="res://GenericPrefabs/LoopingAudioPlayer.tscn" id="2_na0pc"]
-[ext_resource type="AudioStream" uid="uid://ckmk2ypgww7g2" path="res://Sounds/music/Menu.mp3" id="3_c0cu0"]
-[ext_resource type="Texture2D" uid="uid://1smr58nq6src" path="res://Textures/background.png" id="4_2dkmo"]
-[ext_resource type="Theme" uid="uid://d2owybboqt1c3" path="res://Game/UI/GenericTheme.tres" id="5_1fprc"]
-[ext_resource type="FontFile" uid="uid://bpbokby2oerfj" path="res://Textures/FSEX300.ttf" id="6_qch5y"]
-[ext_resource type="Texture2D" uid="uid://cww12h8bl2yxn" path="res://Textures/player.png" id="7_ysmiv"]
-[ext_resource type="Script" path="res://Game/UI/StartButton.gd" id="8_ceqxg"]
-[ext_resource type="PackedScene" uid="uid://dv7u3ocmhicp1" path="res://Levels/Tutorial.tscn" id="9_4ypmn"]
-[ext_resource type="Script" path="res://Game/UI/Logout.gd" id="10_bwdy2"]
+[ext_resource type="Script" path="res://Scripts/SceneSystem/Scene.gd" id="1_7xrby"]
+[ext_resource type="PackedScene" uid="uid://c3jj6ge1rgqai" path="res://GenericPrefabs/LoopingAudioPlayer.tscn" id="2_4w3hu"]
+[ext_resource type="AudioStream" uid="uid://ckmk2ypgww7g2" path="res://Sounds/music/Menu.mp3" id="3_t33wa"]
+[ext_resource type="Texture2D" uid="uid://1smr58nq6src" path="res://Textures/background.png" id="4_axuwc"]
+[ext_resource type="Theme" uid="uid://d2owybboqt1c3" path="res://Game/UI/GenericTheme.tres" id="5_w1qbn"]
+[ext_resource type="FontFile" uid="uid://bpbokby2oerfj" path="res://Textures/FSEX300.ttf" id="6_sp5ef"]
+[ext_resource type="Texture2D" uid="uid://cww12h8bl2yxn" path="res://Textures/player.png" id="7_0t6iv"]
+[ext_resource type="Script" path="res://Game/UI/StartButton.gd" id="8_er5bv"]
+[ext_resource type="PackedScene" uid="uid://dv7u3ocmhicp1" path="res://Levels/Tutorial.tscn" id="9_hxr7w"]
+[ext_resource type="Script" path="res://Scripts/OnTrigger/UnloadScene.gd" id="10_ocrb3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hn2uv"]
-atlas = ExtResource("7_ysmiv")
+atlas = ExtResource("7_0t6iv")
 region = Rect2(0, 32, 32, 32)
 
 [node name="Menu" type="Node2D"]
-script = ExtResource("1_gaw6e")
+script = ExtResource("1_7xrby")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(576, 320)
 
-[node name="LoopingAudioPlayer" parent="Camera2D" instance=ExtResource("2_na0pc")]
+[node name="LoopingAudioPlayer" parent="Camera2D" instance=ExtResource("2_4w3hu")]
 position = Vector2(-576, -320)
-stream = ExtResource("3_c0cu0")
+stream = ExtResource("3_t33wa")
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = -1
@@ -36,7 +36,7 @@ offset_right = 32.0
 offset_bottom = 32.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("4_2dkmo")
+texture = ExtResource("4_axuwc")
 stretch_mode = 1
 
 [node name="Title" type="CanvasLayer" parent="."]
@@ -48,8 +48,8 @@ anchor_right = 1.0
 offset_top = 32.0
 offset_bottom = 128.0
 grow_horizontal = 2
-theme = ExtResource("5_1fprc")
-theme_override_fonts/normal_font = ExtResource("6_qch5y")
+theme = ExtResource("5_w1qbn")
+theme_override_fonts/normal_font = ExtResource("6_sp5ef")
 theme_override_font_sizes/normal_font_size = 96
 bbcode_enabled = true
 text = "[center]Hackercat[/center]"
@@ -65,8 +65,8 @@ offset_left = 800.0
 offset_right = -256.0
 offset_bottom = 32.0
 grow_horizontal = 2
-theme = ExtResource("5_1fprc")
-theme_override_fonts/normal_font = ExtResource("6_qch5y")
+theme = ExtResource("5_w1qbn")
+theme_override_fonts/normal_font = ExtResource("6_sp5ef")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[center]Ver 0[/center]"
@@ -99,33 +99,33 @@ offset_right = 116.0
 offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 0
-theme = ExtResource("5_1fprc")
+theme = ExtResource("5_w1qbn")
 
 [node name="Start" type="Button" parent="Title/Buttons"]
 layout_mode = 2
-theme = ExtResource("5_1fprc")
-theme_override_fonts/font = ExtResource("6_qch5y")
+theme = ExtResource("5_w1qbn")
+theme_override_fonts/font = ExtResource("6_sp5ef")
 theme_override_font_sizes/font_size = 64
 text = "START"
-script = ExtResource("8_ceqxg")
-scene = ExtResource("9_4ypmn")
+script = ExtResource("8_er5bv")
+scene = ExtResource("9_hxr7w")
 
 [node name="Options" type="Button" parent="Title/Buttons"]
 layout_mode = 2
-theme = ExtResource("5_1fprc")
-theme_override_fonts/font = ExtResource("6_qch5y")
+theme = ExtResource("5_w1qbn")
+theme_override_fonts/font = ExtResource("6_sp5ef")
 theme_override_font_sizes/font_size = 64
 disabled = true
 text = "OPTIONS"
 
 [node name="Quit" type="Button" parent="Title/Buttons"]
 layout_mode = 2
-theme = ExtResource("5_1fprc")
-theme_override_fonts/font = ExtResource("6_qch5y")
+theme = ExtResource("5_w1qbn")
+theme_override_fonts/font = ExtResource("6_sp5ef")
 theme_override_font_sizes/font_size = 64
 text = "QUIT
 "
-script = ExtResource("10_bwdy2")
+script = ExtResource("10_ocrb3")
 
 [node name="Levels" type="CanvasLayer" parent="."]
 visible = false
