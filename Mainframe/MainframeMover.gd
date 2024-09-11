@@ -9,6 +9,7 @@ class_name MainframeMover
 @export var PC:PlayerController = null
 @export var ES:EntityStatus = null
 
+@export var enabled:bool = true
 
 signal Moved(N:MNode)
 signal Bumped(MMCollided:MainframeMover)
@@ -21,7 +22,7 @@ func _ready():
 	#MoveToNode(CurrentNode)
 
 func CanMoveTo(n:MNode):
-	return n.ArePassing(self)
+	return enabled && n.ArePassing(self)
 
 func MoveToNode(n:MNode):
 	assert(n is MNode)

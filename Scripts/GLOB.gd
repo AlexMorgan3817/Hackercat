@@ -1,14 +1,15 @@
 class_name GLOB
 
-static var DEBUG:bool = true
+static var DEBUG:bool = false
 static var glob_node:Node
 
-static func addtimer(source:Node, proc, time):
+static func addtimer(source:Node, proc, time, loop = false):
 	var t = Timer.new()
-	t.one_shot = true
+	t.one_shot = !loop
 	t.wait_time = time
 	t.timeout.connect(proc)
-	t.timeout.connect(func del(): t.queue_free())
+	if not loop:
+		t.timeout.connect(func del(): t.queue_free())
 	source.add_child(t)
 	t.start()
 

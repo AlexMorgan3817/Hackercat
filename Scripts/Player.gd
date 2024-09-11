@@ -4,10 +4,15 @@ extends NetAtom
 class_name Player
 
 @export var StartingPrograms:Array[Program]
-
+@export var UI:CanvasLayer
+@export var DamageOverlay:CanvasLayer
 func _ready():
 	#$Mover.CurrentNode = StartingNode
 	super()
+	if not UI:
+		UI = $UI
+	if not DamageOverlay:
+		DamageOverlay = $DamageOverlay
 	var progholder:Control
 	for i in $UI.get_children():
 		if i is Control and i.name == "Programs":

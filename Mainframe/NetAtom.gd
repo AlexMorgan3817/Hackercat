@@ -3,6 +3,7 @@ extends Node2D
 class_name NetAtom
 
 @export var StartingNode:MNode
+@export var Mover:MainframeMover
 
 func findNode():
 	var p = get_parent()
@@ -16,7 +17,9 @@ func findNode():
 		if i is MNode:
 			prev = i
 func _ready():
+	if !Mover:
+		Mover = $Mover
 	if !StartingNode:
 		findNode()
 	if StartingNode:
-		$Mover.MoveToNode(StartingNode)
+		Mover.MoveToNode(StartingNode)

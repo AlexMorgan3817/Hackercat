@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://ydl0vw3rio2e"]
+[gd_scene load_steps=36 format=3 uid="uid://ydl0vw3rio2e"]
 
 [ext_resource type="Script" path="res://Mainframe/MainframeMover.gd" id="1_01thn"]
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_4s5h1"]
@@ -11,13 +11,14 @@
 [ext_resource type="PackedScene" uid="uid://ckbium6b60knt" path="res://UI/GameOver.tscn" id="4_q13fx"]
 [ext_resource type="PackedScene" uid="uid://dfqylyvtdl3do" path="res://Prefabs/EntityStatus.tscn" id="5_04e6d"]
 [ext_resource type="AudioStream" uid="uid://83edsse3qbpn" path="res://Sound/TookDamage.mp3" id="5_o4v8h"]
-[ext_resource type="Script" path="res://OnTrigger/DeleteSelf.gd" id="6_mkwes"]
 [ext_resource type="AudioStream" uid="uid://bqg2rysk6copf" path="res://Sound/Mortis.wav" id="7_qm4xg"]
+[ext_resource type="Script" path="res://Scripts/PlayerDeath.gd" id="8_3fpi5"]
 [ext_resource type="Shader" path="res://Shaders/Glitch.gdshader" id="8_8uemn"]
 [ext_resource type="PackedScene" uid="uid://ufmp4ffewdl1" path="res://UI/UI.tscn" id="9_5p52i"]
 [ext_resource type="PackedScene" uid="uid://bb0je45hl3d2v" path="res://UI/PlayersNodeSelector.tscn" id="9_46t8f"]
 [ext_resource type="TileSet" uid="uid://bt4xt8h2f55yp" path="res://Textures/Tilemaps/floor2.tres" id="9_hsqwn"]
 [ext_resource type="Script" path="res://Scripts/AnimationPlayer.gd" id="10_j3mcr"]
+[ext_resource type="Shader" path="res://Shaders/Crash.gdshader" id="19_agu0g"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0rm4v"]
 width = 32
@@ -97,6 +98,94 @@ _data = {
 "TookDamage": SubResource("Animation_upyae")
 }
 
+[sub_resource type="Animation" id="Animation_brs72"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/amt")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:material:shader_parameter/MIX")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_3c8h1"]
+resource_name = "TookDamage"
+step = 0.01
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/amt")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0.1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0.9, -0.25, 0, 0.25, 0, 0.1, -0.5, 0, 0.5, 0),
+"times": PackedFloat32Array(0, 0.25, 0.55, 1)
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:material:shader_parameter/MIX")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wwfet"]
+_data = {
+"RESET": SubResource("Animation_brs72"),
+"TookDamage": SubResource("Animation_3c8h1")
+}
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0yf8c"]
+noise_type = 5
+frequency = 0.4307
+fractal_type = 3
+fractal_weighted_strength = 0.6
+fractal_ping_pong_strength = 10.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fmsta"]
+noise = SubResource("FastNoiseLite_0yf8c")
+
+[sub_resource type="Gradient" id="Gradient_wovj2"]
+offsets = PackedFloat32Array(0, 0.03125, 0.598214)
+colors = PackedColorArray(1, 1, 1, 1, 0.825893, 0.825893, 0.825893, 0.825893, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ettut"]
+gradient = SubResource("Gradient_wovj2")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+metadata/_snap_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0rmhj"]
+shader = ExtResource("19_agu0g")
+shader_parameter/MIX = 0.0
+shader_parameter/amt = 0.0
+shader_parameter/direction = 1.0
+shader_parameter/ScreenOffset = Vector2(0, 0)
+shader_parameter/displace = SubResource("NoiseTexture2D_fmsta")
+shader_parameter/subtractdisplace = SubResource("GradientTexture2D_ettut")
+
 [sub_resource type="Gradient" id="Gradient_0jyce"]
 offsets = PackedFloat32Array(0.1875, 0.378906, 0.566406, 0.738281, 1)
 colors = PackedColorArray(0, 0, 0, 1, 0.144978, 0.144978, 0.144978, 1, 0.220366, 0.220366, 0.220366, 1, 0.389314, 0.389314, 0.389314, 1, 1, 1, 1, 1)
@@ -129,14 +218,15 @@ script = ExtResource("3_vscif")
 Host = NodePath("../../..")
 scene = ExtResource("4_q13fx")
 
-[node name="DeleteTarget" type="Node" parent="Mover/EntityStatus/DeathCamera" node_paths=PackedStringArray("target")]
-script = ExtResource("6_mkwes")
-target = NodePath("../../../..")
-
 [node name="Playsound" type="Node" parent="Mover/EntityStatus/DeathCamera" node_paths=PackedStringArray("Host")]
 script = ExtResource("4_84emm")
 sound = ExtResource("7_qm4xg")
 Host = NodePath("../../../..")
+
+[node name="PlayerDeath" type="Node" parent="Mover/EntityStatus/DeathCamera" node_paths=PackedStringArray("player", "ES")]
+script = ExtResource("8_3fpi5")
+player = NodePath("../../../..")
+ES = NodePath("../..")
 
 [node name="PlaysoundOnDamage" type="Node" parent="Mover/EntityStatus" node_paths=PackedStringArray("Host")]
 script = ExtResource("4_84emm")
@@ -197,15 +287,27 @@ layer_0/tile_data = PackedInt32Array(-3211314, 1, 0, -3145778, 1, 0, -3080242, 1
 
 [node name="UI" parent="." instance=ExtResource("9_5p52i")]
 
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-offset_left = -290.0
-offset_top = -141.0
-offset_right = 260.0
-offset_bottom = 167.0
-color = Color(0.118581, 0.118581, 0.118581, 1)
+[node name="DamageOverlay" type="CanvasLayer" parent="."]
+layer = 20
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DamageOverlay"]
+libraries = {
+"": SubResource("AnimationLibrary_wwfet")
+}
+script = ExtResource("10_j3mcr")
+autostart = true
+animation = "new_animation"
+
+[node name="ColorRect" type="ColorRect" parent="DamageOverlay"]
+material = SubResource("ShaderMaterial_0rmhj")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
 light_mask = 2
 visibility_layer = 2
 energy = 12.38
@@ -213,10 +315,8 @@ blend_mode = 1
 texture = SubResource("GradientTexture2D_iy1w3")
 
 [connection signal="Death" from="Mover/EntityStatus" to="Mover/EntityStatus/DeathCamera" method="_on_entity_status_death"]
-[connection signal="Death" from="Mover/EntityStatus" to="Mover/EntityStatus/DeathCamera/DeleteTarget" method="_on_entity_status_death"]
 [connection signal="Death" from="Mover/EntityStatus" to="Mover/EntityStatus/DeathCamera/Playsound" method="_on_entity_status_death"]
 [connection signal="TookDamage" from="Mover/EntityStatus" to="Mover/EntityStatus/PlaysoundOnDamage" method="_on_entity_status_took_damage"]
 [connection signal="TookDamage" from="Mover/EntityStatus" to="Sprite2D/AnimationPlayer" method="_on_entity_status_took_damage"]
+[connection signal="TookDamage" from="Mover/EntityStatus" to="DamageOverlay/AnimationPlayer" method="_on_entity_status_took_damage"]
 [connection signal="UnableToMove" from="Mover/PlayerController" to="Mover/PlayerController/AudioStreamPlayer2D" method="_on_player_controller_unable_to_move"]
-
-[editable path="UI"]
