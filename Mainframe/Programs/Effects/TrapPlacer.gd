@@ -2,7 +2,7 @@ extends Node
 
 @export var TrapScene:PackedScene
 
-func UseProgram(MM:MainframeMover):
+func trigger(MM:MainframeMover):
 	assert(TrapScene)
 	var k:Trap = TrapScene.instantiate()
 	k.myMM.CurrentNode = MM.CurrentNode
@@ -11,4 +11,4 @@ func UseProgram(MM:MainframeMover):
 	MM.CurrentNode.MovedIn.connect(k.trigger)
 
 func _on_program_program_used(MM:MainframeMover):
-	UseProgram(MM)
+	trigger(MM)
