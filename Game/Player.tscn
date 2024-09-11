@@ -19,6 +19,8 @@
 [ext_resource type="TileSet" uid="uid://bt4xt8h2f55yp" path="res://Textures/Tilemaps/floor2.tres" id="9_hsqwn"]
 [ext_resource type="Script" path="res://Scripts/AnimationPlayer.gd" id="10_j3mcr"]
 [ext_resource type="Shader" path="res://Shaders/Crash.gdshader" id="19_agu0g"]
+[ext_resource type="Texture2D" uid="uid://1vseclfqtktx" path="res://Textures/TookDamageDisplay2.png" id="20_blgso"]
+[ext_resource type="Texture2D" uid="uid://b4810la5lo62n" path="res://Textures/TookDamageDisplay.png" id="20_x650g"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0rm4v"]
 width = 32
@@ -123,10 +125,22 @@ tracks/1/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect:material:shader_parameter/ColorOffset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector4(0, 0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_3c8h1"]
 resource_name = "TookDamage"
-step = 0.01
+step = 0.05
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -150,6 +164,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [0.0, 1.0, 0.0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect:material:shader_parameter/ColorOffset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25, 1),
+"transitions": PackedFloat32Array(1, 2.21914, 1),
+"update": 0,
+"values": [Vector4(0, 0, 0, 0), Vector4(-0.5, -1, -1, 0), Vector4(0, 0, 0, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wwfet"]
 _data = {
@@ -157,22 +183,14 @@ _data = {
 "TookDamage": SubResource("Animation_3c8h1")
 }
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_0yf8c"]
-noise_type = 5
-frequency = 0.4307
-fractal_type = 3
-fractal_weighted_strength = 0.6
-fractal_ping_pong_strength = 10.0
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fmsta"]
-noise = SubResource("FastNoiseLite_0yf8c")
-
 [sub_resource type="Gradient" id="Gradient_wovj2"]
-offsets = PackedFloat32Array(0, 0.03125, 0.598214)
+offsets = PackedFloat32Array(0, 0.261438, 0.444444)
 colors = PackedColorArray(1, 1, 1, 1, 0.825893, 0.825893, 0.825893, 0.825893, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_ettut"]
 gradient = SubResource("Gradient_wovj2")
+width = 512
+height = 512
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 metadata/_snap_enabled = true
@@ -181,10 +199,14 @@ metadata/_snap_enabled = true
 shader = ExtResource("19_agu0g")
 shader_parameter/MIX = 0.0
 shader_parameter/amt = 0.0
-shader_parameter/direction = 1.0
+shader_parameter/direction = 0.6
 shader_parameter/ScreenOffset = Vector2(0, 0)
-shader_parameter/displace = SubResource("NoiseTexture2D_fmsta")
+shader_parameter/MixSubtract = 0.2
+shader_parameter/MixOverlay = 1.0
+shader_parameter/ColorOffset = Vector4(0, 0, 0, 0)
+shader_parameter/displace = ExtResource("20_x650g")
 shader_parameter/subtractdisplace = SubResource("GradientTexture2D_ettut")
+shader_parameter/Overlay = ExtResource("20_blgso")
 
 [sub_resource type="Gradient" id="Gradient_0jyce"]
 offsets = PackedFloat32Array(0.1875, 0.378906, 0.566406, 0.738281, 1)
@@ -212,6 +234,8 @@ PC = NodePath("PlayerController")
 ES = NodePath("EntityStatus")
 
 [node name="EntityStatus" parent="Mover" instance=ExtResource("5_04e6d")]
+MaxHits = 12
+CurrentHits = 12
 
 [node name="DeathCamera" type="Node" parent="Mover/EntityStatus" node_paths=PackedStringArray("Host")]
 script = ExtResource("3_vscif")
@@ -303,6 +327,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 visible = false

@@ -28,7 +28,7 @@ Host = NodePath("..")
 volume = -5.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = 6
+z_index = 4
 z_as_relative = false
 texture_filter = 1
 texture = SubResource("AtlasTexture_if115")
