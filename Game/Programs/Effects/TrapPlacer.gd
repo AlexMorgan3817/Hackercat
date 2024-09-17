@@ -7,7 +7,7 @@ func trigger(MM:MainframeMover):
 	var k:Trap = TrapScene.instantiate()
 	k.myMM.CurrentNode = MM.CurrentNode
 	MM.CurrentNode.get_parent().add_child(k)
-	k.myMM.MoveToNode(MM.CurrentNode)
+	k.myMM.ForceMoveToNode(MM.CurrentNode)
 	MM.CurrentNode.MovedIn.connect(k.trigger)
 
 func _on_program_program_used(MM:MainframeMover):

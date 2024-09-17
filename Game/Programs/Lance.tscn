@@ -21,9 +21,9 @@ texture_filter = 1
 scale = Vector2(2, 2)
 texture = SubResource("AtlasTexture_n6arh")
 
-[node name="Playsound" type="Node" parent="." index="2" node_paths=PackedStringArray("Host")]
+[node name="SuccessPlaysound" type="Node" parent="." index="2" node_paths=PackedStringArray("Host")]
 script = ExtResource("4_6uihu")
 sound = ExtResource("5_asbo0")
 Host = NodePath("..")
 
-[connection signal="ProgramUsed" from="." to="Playsound" method="_on_lance_program_used"]
+[connection signal="ProgramUsed" from="." to="SuccessPlaysound" method="_on_lance_program_used"]

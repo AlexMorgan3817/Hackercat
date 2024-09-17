@@ -14,3 +14,9 @@ func _ready():
 
 func _on_entity_status_took_damage(ES, currentHits):
 	play("TookDamage")
+
+func _on_mover_animate_pre_movement(MM:MainframeMover, n:MNode):
+	play("Premove")
+
+func _on_mover_animate_finish_movement(MM, N):
+	play("Moved")

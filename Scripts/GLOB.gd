@@ -12,6 +12,7 @@ static func addtimer(source:Node, proc, time, loop = false):
 		t.timeout.connect(func del(): t.queue_free())
 	source.add_child(t)
 	t.start()
+	return t
 
 static func get_global_node(node:Node):
 	var d = node

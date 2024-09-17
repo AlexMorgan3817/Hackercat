@@ -56,7 +56,7 @@ Links = [NodePath("../Fork"), null, NodePath("../MNode"), null]
 
 [node name="Player" parent="Mainframe" node_paths=PackedStringArray("StartingPrograms") instance=ExtResource("4_6yauk")]
 position = Vector2(192, 256)
-StartingPrograms = [NodePath("../../Lance"), NodePath("../../Trapper")]
+StartingPrograms = [NodePath("../../Lance"), NodePath("../../Trapper"), null, null]
 
 [node name="Fork" parent="Mainframe" node_paths=PackedStringArray("Links") instance=ExtResource("5_a0niy")]
 position = Vector2(256, 192)

@@ -7,9 +7,6 @@ modulate = Color(1, 0, 0, 1)
 z_index = 1
 texture_filter = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_8yytb")
-
 [node name="TextureButton" type="TextureButton" parent="."]
 offset_left = -16.0
 offset_top = -16.0

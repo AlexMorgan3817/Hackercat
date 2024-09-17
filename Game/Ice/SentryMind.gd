@@ -42,7 +42,8 @@ func _on_timer_timeout():
 		return
 	var target:MNode = select_next_move()
 	if target:
-		MM.MoveToNode(target)
+		MM.move(target)
+		#MM.ForceMoveToNode(target)
 
 func _on_attack_timeout_timeout():
 	ReadyToAttack = true

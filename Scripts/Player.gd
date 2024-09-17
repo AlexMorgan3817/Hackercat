@@ -3,9 +3,10 @@ extends NetAtom
 
 class_name Player
 
-@export var StartingPrograms:Array[Program]
+@export var StartingPrograms:Array[Program] = [null, null, null, null]
 @export var UI:CanvasLayer
 @export var DamageOverlay:CanvasLayer
+
 func _ready():
 	#$Mover.CurrentNode = StartingNode
 	super()
@@ -18,12 +19,14 @@ func _ready():
 		if i is Control and i.name == "Programs":
 			progholder = i
 			break
-	var count = 0
 	var l = len(StartingPrograms)
 	if l > 0:
+		var count = 0
 		for i in progholder.get_children():
 			if count > l-1:
 				break
+			if not StartingPrograms[count]:
+				continue
 			if i is ProgramFrame:
 				var prog:Program = StartingPrograms[count]
 				i.MyProgram = prog

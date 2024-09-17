@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://xwwpba04pbj4"]
+[gd_scene load_steps=43 format=3 uid="uid://xwwpba04pbj4"]
 
 [ext_resource type="Script" path="res://Game/MainframeMover.gd" id="1_jco4c"]
 [ext_resource type="Script" path="res://Game/Ice/Sentry.gd" id="1_s8n8a"]
@@ -13,6 +13,8 @@
 [ext_resource type="AudioStream" uid="uid://dd6arj43wrxsw" path="res://Sounds/SentryAttack.mp3" id="8_2yra7"]
 [ext_resource type="Texture2D" uid="uid://5wt6lnh6b41g" path="res://Textures/Skull_Attacks.png" id="9_ka2bt"]
 [ext_resource type="Script" path="res://Scripts/OnTrigger/PlayAnimation.gd" id="11_2w0im"]
+[ext_resource type="Script" path="res://Scripts/AnimationPlayer.gd" id="14_2604y"]
+[ext_resource type="Shader" path="res://Shaders/MovementGlitch.gdshader" id="15_jtxtx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l2htv"]
 atlas = ExtResource("5_lrfk4")
@@ -157,6 +159,88 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_l42c0"]
+domain_warp_enabled = true
+domain_warp_type = 2
+domain_warp_amplitude = 111.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_deh7u"]
+seamless_blend_skirt = 1.0
+noise = SubResource("FastNoiseLite_l42c0")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_08b11"]
+shader = ExtResource("15_jtxtx")
+shader_parameter/offset = 0.0
+shader_parameter/Arg = 3.25988e-09
+shader_parameter/Mix = 1.0
+shader_parameter/DisplaceTexture = SubResource("NoiseTexture2D_deh7u")
+
+[sub_resource type="Animation" id="Animation_ljtq2"]
+resource_name = "Premove"
+length = 0.7
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.35, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:material:shader_parameter/Arg")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.35, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [3.25988e-09, 0.05, 3.25988e-09]
+}
+
+[sub_resource type="Animation" id="Animation_ylphu"]
+resource_name = "Moved"
+
+[sub_resource type="Animation" id="Animation_c8004"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:material:shader_parameter/Arg")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.25988e-09]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y546u"]
+_data = {
+"Moved": SubResource("Animation_ylphu"),
+"Premove": SubResource("Animation_ljtq2"),
+"RESET": SubResource("Animation_c8004")
+}
+
 [node name="Sentry" type="Node2D"]
 z_index = 5
 z_as_relative = false
@@ -182,7 +266,7 @@ MM = NodePath("..")
 AttackTimeout = NodePath("AttackTimeout")
 
 [node name="ThinkingCycle" type="Timer" parent="Mover/SimpleMind"]
-wait_time = 0.5
+wait_time = 0.75
 autostart = true
 
 [node name="ScanSprite" type="Sprite2D" parent="Mover/SimpleMind"]
@@ -215,6 +299,28 @@ script = ExtResource("11_2w0im")
 animator = NodePath("..")
 animation = "attack"
 
+[node name="ColorRect" type="ColorRect" parent="AnimatedSprite2D"]
+material = SubResource("ShaderMaterial_08b11")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -16.0
+offset_top = -16.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D/ColorRect"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_y546u")
+}
+script = ExtResource("14_2604y")
+
+[connection signal="AnimateFinishMovement" from="Mover" to="AnimatedSprite2D/ColorRect/AnimationPlayer" method="_on_mover_animate_finish_movement"]
+[connection signal="AnimatePreMovement" from="Mover" to="AnimatedSprite2D/ColorRect/AnimationPlayer" method="_on_mover_animate_pre_movement"]
 [connection signal="Death" from="Mover/EntityStatus" to="Mover/EntityStatus/DeleteSelf" method="_on_entity_status_death"]
 [connection signal="Attack" from="Mover/SimpleMind" to="Mover/SimpleMind/AttackTimeout/DealDamage" method="_on_simple_mind_attack"]
 [connection signal="Attack" from="Mover/SimpleMind" to="Mover/SimpleMind/AttackTimeout/PlaySound" method="_on_simple_mind_attack"]

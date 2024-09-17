@@ -22,4 +22,4 @@ func _ready():
 	if !StartingNode:
 		findNode()
 	if StartingNode:
-		Mover.MoveToNode(StartingNode)
+		Mover.ForceMoveToNode(StartingNode)

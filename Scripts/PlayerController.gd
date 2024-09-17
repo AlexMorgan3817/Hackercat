@@ -10,12 +10,17 @@ class_name PlayerController
 var ProgramFrames:Array[ProgramFrame]
 
 @export var SelectedIdicator:Node2D
-@export var EpsilonForSelection:float = 0.3
+var EpsilonForSelection:float = 0.3
 var SelectedNode:MNode
 
-@export var MoveDelay:Timer
-@export var InteractionDelay:Timer
-@export var ProgramUseDelay:Timer
+
+@export var MoveDelayTime:float = 0.55
+@export var InteractionDelayTime:float = 0.5
+@export var ProgramUseDelayTime:float = 1
+var MoveDelay:Timer
+var InteractionDelay:Timer
+var ProgramUseDelay:Timer
+
 var CanMove       :bool = true
 var CanInteract   :bool = true
 var CanUsePrograms:bool = true
@@ -38,9 +43,12 @@ func create_default_timer(timeoutcallback, time:float = 0.5):
 	return t
 
 func _ready():
-	if !MoveDelay       : MoveDelay        = create_default_timer(_on_move_delay_timeout, 0.5)
-	if !InteractionDelay: InteractionDelay = create_default_timer(_on_interaction_delay_timeout, 0.5)
-	if !ProgramUseDelay : ProgramUseDelay  = create_default_timer(_on_program_use_delay_timeout, 0.5)
+	if !MoveDelay       :
+		MoveDelay        = create_default_timer(_on_move_delay_timeout, MoveDelayTime)
+	if !InteractionDelay:
+		InteractionDelay = create_default_timer(_on_interaction_delay_timeout, InteractionDelayTime)
+	if !ProgramUseDelay :
+		ProgramUseDelay  = create_default_timer(_on_program_use_delay_timeout, ProgramUseDelayTime)
 	var frames
 	for i in MM.Host.get_children():
 		if i.name == "UI" and i is CanvasLayer:
@@ -134,7 +142,7 @@ func _process(_delta):
 				MoveDelay.start()
 				if MM.CanMoveTo(nextNode):
 					Moved.emit(MM.CurrentNode, nextNode)
-					MM.MoveToNode(nextNode)
+					MM.move(nextNode)
 				else:
 					UnableToMove.emit()
 	
