@@ -16,7 +16,7 @@ var SelectedNode:MNode
 
 @export var MoveDelayTime:float = 0.55
 @export var InteractionDelayTime:float = 0.5
-@export var ProgramUseDelayTime:float = 1
+@export var ProgramUseDelayTime:float = .5
 var MoveDelay:Timer
 var InteractionDelay:Timer
 var ProgramUseDelay:Timer

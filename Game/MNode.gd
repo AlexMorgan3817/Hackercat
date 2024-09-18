@@ -1,7 +1,7 @@
 @icon("res://Textures/UI_Frame.png")
 extends Node2D
 
-class_name MNode#, "res://Textures/UI_Frame.png"
+class_name MNode
 
 @export var Links:Array[MNode] = [null,null,null,null]
 @export var Content:Array[MainframeMover]
@@ -23,6 +23,11 @@ func ArePassing(MM:MainframeMover):
 			i.Bumped.emit(MM)
 			MM.Bumped.emit(i)
 	return dot
+
+func _notification(what):
+	if what == NOTIFICATION_PREDELETE:
+		for i in Content:
+			i.CurrentNode = null
 
 func _ready():
 	assert(len(Links) == 4, "MNode should have all four directions.")

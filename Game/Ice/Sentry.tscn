@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://xwwpba04pbj4"]
+[gd_scene load_steps=44 format=3 uid="uid://xwwpba04pbj4"]
 
 [ext_resource type="Script" path="res://Game/MainframeMover.gd" id="1_jco4c"]
 [ext_resource type="Script" path="res://Game/Ice/Sentry.gd" id="1_s8n8a"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://Scripts/OnTrigger/PlayAnimation.gd" id="11_2w0im"]
 [ext_resource type="Script" path="res://Scripts/AnimationPlayer.gd" id="14_2604y"]
 [ext_resource type="Shader" path="res://Shaders/MovementGlitch.gdshader" id="15_jtxtx"]
+[ext_resource type="Script" path="res://Scripts/target_move_animation.gd" id="16_0oia1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l2htv"]
 atlas = ExtResource("5_lrfk4")
@@ -175,6 +176,9 @@ shader_parameter/Arg = 3.25988e-09
 shader_parameter/Mix = 1.0
 shader_parameter/DisplaceTexture = SubResource("NoiseTexture2D_deh7u")
 
+[sub_resource type="Animation" id="Animation_ylphu"]
+resource_name = "Moved"
+
 [sub_resource type="Animation" id="Animation_ljtq2"]
 resource_name = "Premove"
 length = 0.7
@@ -203,9 +207,6 @@ tracks/1/keys = {
 "update": 0,
 "values": [3.25988e-09, 0.05, 3.25988e-09]
 }
-
-[sub_resource type="Animation" id="Animation_ylphu"]
-resource_name = "Moved"
 
 [sub_resource type="Animation" id="Animation_c8004"]
 length = 0.001
@@ -318,6 +319,13 @@ libraries = {
 "": SubResource("AnimationLibrary_y546u")
 }
 script = ExtResource("14_2604y")
+
+[node name="TargetMoveAnimation" type="Node2D" parent="."]
+script = ExtResource("16_0oia1")
+
+[node name="Polygon2D" type="Polygon2D" parent="TargetMoveAnimation"]
+color = Color(1, 0, 0, 0.796078)
+polygon = PackedVector2Array(-16, 0, 0, -16, 16, 0, 0, 16)
 
 [connection signal="AnimateFinishMovement" from="Mover" to="AnimatedSprite2D/ColorRect/AnimationPlayer" method="_on_mover_animate_finish_movement"]
 [connection signal="AnimatePreMovement" from="Mover" to="AnimatedSprite2D/ColorRect/AnimationPlayer" method="_on_mover_animate_pre_movement"]

@@ -15,11 +15,19 @@ var PreMovetime:float = 0.7
 
 var current_move_timer:Timer = null
 
+var targetNode:MNode = null
+
 signal Moved(N:MNode)
 signal Bumped(MMCollided:MainframeMover)
 signal Interacted(MM:MainframeMover)
 signal AnimatePreMovement(MM:MainframeMover, N:MNode)
+signal AnimatePreMoveFailed(MM:MainframeMover, N:MNode)
 signal AnimateFinishMovement(MM:MainframeMover, N:MNode)
+
+func _notification(what):
+	if what == NOTIFICATION_PREDELETE:
+		if CurrentNode and !CurrentNode.is_queued_for_deletion():
+			CurrentNode.Content.erase(self)
 
 func _ready():
 	if !Host:
@@ -30,23 +38,33 @@ func _ready():
 func CanMoveTo(n:MNode):
 	return enabled && n.ArePassing(self)
 
-func MoveCleanup():
-	if current_move_timer:
-		var c = current_move_timer
-		current_move_timer = null
-		c.stop()
-		c.queue_free()
-
 func move(n:MNode):
-	MoveCleanup()
+	targetNode = n
 	AnimatePreMovement.emit(self, n)
-	current_move_timer = GLOB.addtimer(self, func(): ForceMoveToNode(n), PreMovetime)
+	if not current_move_timer:
+		current_move_timer = GLOB.newtimer(self, PreMovetime)
+		current_move_timer.timeout.connect(MoveToTargetNode)
+	current_move_timer.start()
+
+func MoveToTargetNode():
+	if not targetNode:
+		return
+	var canpass = true
+	if Dense:
+		for i in targetNode.Content:
+			if i.Dense:
+				canpass = false
+				break
+	if canpass:
+		ForceMoveToNode(targetNode)
+	else:
+		AnimatePreMoveFailed.emit(self, targetNode)
+	targetNode = null
 
 func ForceMoveToNode(n:MNode):
 	if not n:
 		return
 	assert(n is MNode)
-	MoveCleanup()
 	Host.set_global_position(n.get_global_position())
 	if CurrentNode:
 		CurrentNode.MovedOut.emit(self)
