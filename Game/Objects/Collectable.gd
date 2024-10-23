@@ -3,7 +3,7 @@ extends NetAtom
 
 class_name Collectable
 
-@export var ProgramInside:PackedScene
+@export var ProgramInside:Program
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

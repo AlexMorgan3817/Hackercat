@@ -1,20 +1,14 @@
-extends Node2D
-
-class_name Program
+class_name Program extends Resource
 
 @export var Name:String
 @export var Description:String
 @export var requiredPWR:int = 1
+@export var BaseIcon:Texture
+
+var ScreenObject:ProgramFrame
 
 signal ProgramFailedUse(MM:MainframeMover)
 signal ProgramUsed(MM:MainframeMover)
-
-func _notification(what):
-	if (what == NOTIFICATION_PREDELETE):
-		Destroy()
-
-func Destroy():
-	pass
 
 func IsUsable(MM:MainframeMover):
 	if MM.PC.PWR < requiredPWR:

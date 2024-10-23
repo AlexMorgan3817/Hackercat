@@ -1,4 +1,4 @@
-extends Program
+class_name Lance extends Program
 
 func IsUsable(MM:MainframeMover):
 	if not super(MM):

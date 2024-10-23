@@ -9,6 +9,5 @@ func _on_button_button_down():
 			+ pf.MyProgram.Description + "\n" +\
 			"Use Cost: " + str(pf.MyProgram.requiredPWR) + "."
 
-
 func _on_button_button_up():
 	visible = false

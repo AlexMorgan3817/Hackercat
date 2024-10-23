@@ -1,4 +1,4 @@
-extends Program
+class_name Trapper extends Program
 
 @export var TrapScene:PackedScene
 

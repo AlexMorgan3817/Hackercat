@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Program" load_steps=4 format=3 uid="uid://dcdg1g6e86oxe"]
+
+[ext_resource type="Texture2D" uid="uid://clg34lje236ie" path="res://Textures/ProgramIcons.png" id="1_6yh4q"]
+[ext_resource type="Script" path="res://Game/Programs/Program.gd" id="1_ycxyc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uikn5"]
+atlas = ExtResource("1_6yh4q")
+region = Rect2(0, 64, 64, 64)
+
+[resource]
+script = ExtResource("1_ycxyc")
+Name = "Raw Data"
+Description = "Something interesting found in some net"
+requiredPWR = 0
+BaseIcon = SubResource("AtlasTexture_uikn5")

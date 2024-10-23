@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Trapper" load_steps=5 format=3 uid="uid://cwuw4jnmlmwnd"]
+
+[ext_resource type="Script" path="res://Game/Programs/Trapper.gd" id="1_20jl6"]
+[ext_resource type="Texture2D" uid="uid://clg34lje236ie" path="res://Textures/ProgramIcons.png" id="1_308b5"]
+[ext_resource type="PackedScene" uid="uid://c70anyi2sx7t5" path="res://Game/Objects/Trap.tscn" id="1_to6ub"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2s2vk"]
+atlas = ExtResource("1_308b5")
+region = Rect2(64, 0, 64, 64)
+
+[resource]
+script = ExtResource("1_20jl6")
+TrapScene = ExtResource("1_to6ub")
+Name = "Trapper"
+Description = "Do you ever catch a mouse in a trap?"
+requiredPWR = 3
+BaseIcon = SubResource("AtlasTexture_2s2vk")

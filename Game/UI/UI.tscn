@@ -13,86 +13,29 @@ bg_color = Color(0, 0.709804, 1, 0.501961)
 [node name="UI" type="CanvasLayer"]
 layer = 10
 
-[node name="Programs" type="Control" parent="."]
-texture_filter = 1
-layout_mode = 3
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-grow_horizontal = 0
-grow_vertical = 2
-
-[node name="Frame 1" parent="Programs" instance=ExtResource("1_3v4p6")]
-position = Vector2(-128, 156)
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Programs/Frame 1"]
-offset_left = -61.0
-offset_top = -58.0
-offset_right = 63.0
-offset_bottom = 68.0
-theme = ExtResource("2_f7g5a")
-theme_override_colors/default_color = Color(1, 1, 1, 0.266667)
-theme_override_font_sizes/normal_font_size = 96
-bbcode_enabled = true
-text = "[center]1"
-
-[node name="Frame 2" parent="Programs" instance=ExtResource("1_3v4p6")]
-position = Vector2(-128, 28)
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Programs/Frame 2"]
-offset_left = -61.0
-offset_top = -58.0
-offset_right = 63.0
-offset_bottom = 68.0
-theme = ExtResource("2_f7g5a")
-theme_override_colors/default_color = Color(1, 1, 1, 0.266667)
-theme_override_font_sizes/normal_font_size = 96
-bbcode_enabled = true
-text = "[center]2"
-
-[node name="Frame 3" parent="Programs" instance=ExtResource("1_3v4p6")]
-position = Vector2(-128, -100)
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Programs/Frame 3"]
-offset_left = -61.0
-offset_top = -58.0
-offset_right = 63.0
-offset_bottom = 68.0
-theme = ExtResource("2_f7g5a")
-theme_override_colors/default_color = Color(1, 1, 1, 0.266667)
-theme_override_font_sizes/normal_font_size = 96
-bbcode_enabled = true
-text = "[center]3"
-
-[node name="Frame 4" parent="Programs" instance=ExtResource("1_3v4p6")]
-position = Vector2(-128, -228)
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Programs/Frame 4"]
-offset_left = -61.0
-offset_top = -58.0
-offset_right = 63.0
-offset_bottom = 68.0
-theme = ExtResource("2_f7g5a")
-theme_override_colors/default_color = Color(1, 1, 1, 0.266667)
-theme_override_font_sizes/normal_font_size = 96
-bbcode_enabled = true
-text = "[center]4
-"
+[node name="Frame" parent="." instance=ExtResource("1_3v4p6")]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_top = -104.0
+offset_bottom = -104.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [node name="HP" type="ProgressBar" parent="." node_paths=PackedStringArray("label")]
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -224.0
-offset_top = 220.0
-offset_right = -32.0
-offset_bottom = 252.0
-grow_horizontal = 0
-grow_vertical = 2
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -72.0
+offset_right = -96.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
 theme = ExtResource("2_f7g5a")
 theme_override_styles/background = SubResource("StyleBoxFlat_7f6xe")
 max_value = 4.0
@@ -134,17 +77,17 @@ bbcode_enabled = true
 text = "[center]4/4"
 
 [node name="PWR" type="ProgressBar" parent="." node_paths=PackedStringArray("label")]
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -224.0
-offset_top = 252.0
-offset_right = -32.0
-offset_bottom = 284.0
-grow_horizontal = 0
-grow_vertical = 2
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 96.0
+offset_top = -72.0
+offset_right = 320.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
 theme = ExtResource("2_f7g5a")
 theme_override_styles/background = SubResource("StyleBoxFlat_ulkkx")
 max_value = 20.0
@@ -186,13 +129,3 @@ theme = ExtResource("2_f7g5a")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[center]20/20"
-
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2

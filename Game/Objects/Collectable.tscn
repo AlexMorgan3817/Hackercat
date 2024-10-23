@@ -32,4 +32,4 @@ texture_filter = 1
 texture = SubResource("AtlasTexture_gvlwu")
 
 [connection signal="Interacted" from="Mover" to="CopyOnInteract" method="_on_mainframe_mover_interacted"]
-[connection signal="Interacted" from="Mover" to="Playsound" method="_on_mainframe_mover_interacted"]
+[connection signal="PickedUp" from="CopyOnInteract" to="Playsound" method="_on_copy_on_interact_picked_up"]

@@ -1,6 +1,6 @@
 extends Node
 
-@export var Prog:PackedScene
+@export var Prog:Program
 
 signal PickedUp
 

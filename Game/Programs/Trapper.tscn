@@ -35,7 +35,5 @@ script = ExtResource("6_8ge4h")
 sound = ExtResource("7_as3yf")
 Host = NodePath("../..")
 
-[node name="Fail" type="Node" parent="." index="3"]
-
 [connection signal="ProgramUsed" from="." to="Success/Trapper" method="_on_program_program_used"]
 [connection signal="ProgramUsed" from="." to="Success/Playsound" method="_on_trapper_program_used"]
