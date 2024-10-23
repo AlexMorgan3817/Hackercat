@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://ydl0vw3rio2e"]
+[gd_scene load_steps=55 format=3 uid="uid://ydl0vw3rio2e"]
 
 [ext_resource type="Script" path="res://Game/MainframeMover.gd" id="1_01thn"]
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_4s5h1"]
@@ -209,7 +209,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y546u"]
@@ -352,6 +352,41 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(1, 0.5)
 metadata/_snap_enabled = true
 
+[sub_resource type="Shader" id="Shader_5g7lj"]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform float MIX       : hint_range(0.0, 1.0, 0.1);
+uniform float amt       : hint_range(0.0, 1.0, 0.1);
+uniform float direction : hint_range(0.0, 1.0, 0.1);
+uniform vec2 ScreenOffset = vec2(0, 0);
+uniform sampler2D displace : hint_anisotropy;
+uniform float MixSubtract       : hint_range(0.0, 1.0, 0.1);
+uniform sampler2D subtractdisplace : hint_anisotropy;
+uniform float MixOverlay        : hint_range(0.0, 1.0, 0.1);
+uniform sampler2D Overlay : hint_anisotropy;
+uniform vec4 ColorOffset = vec4(0, 0, 0, 0);
+
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
+uniform sampler2D mask_texture : hint_normal;
+void fragment()
+{
+	vec4 norm = texture(mask_texture, UV);
+	float _mix = MIX * norm.a;
+	vec4 disp = texture(displace, SCREEN_UV);
+	vec4 subt = texture(subtractdisplace, SCREEN_UV);
+	float d = disp.y * direction + disp.x * (direction-1.0);
+	vec2 newUV = SCREEN_UV + ScreenOffset + d * amt;
+	COLOR = texture(SCREEN_TEXTURE, SCREEN_UV) * (1.0-_mix);
+	COLOR += (texture(SCREEN_TEXTURE, newUV) - subt * MixSubtract) * _mix;
+	vec4 col = texture(Overlay,SCREEN_UV);
+	if (col.r==0.0 && col.g==0.0 && col.b==0.0) {
+	    col.a=0.0;
+	}
+	COLOR += (col) * _mix * MixOverlay;
+	COLOR += ColorOffset * norm.a;
+}"
+
 [sub_resource type="Gradient" id="Gradient_lqc2j"]
 offsets = PackedFloat32Array(0.751634, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
@@ -364,14 +399,14 @@ fill_to = Vector2(1, 0.5)
 metadata/_snap_enabled = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8dlm1"]
-shader = ExtResource("19_agu0g")
+shader = SubResource("Shader_5g7lj")
 shader_parameter/MIX = 1.0
 shader_parameter/amt = 0.2
 shader_parameter/direction = 0.8
 shader_parameter/ScreenOffset = Vector2(-0.09, -0.08)
-shader_parameter/MixSubtract = null
-shader_parameter/MixOverlay = null
-shader_parameter/ColorOffset = Vector4(0, 0, 0.485, 0)
+shader_parameter/MixSubtract = 0.0
+shader_parameter/MixOverlay = 0.0
+shader_parameter/ColorOffset = Vector4(0, 0, 0.485, -0.845)
 shader_parameter/displace = ExtResource("20_x650g")
 shader_parameter/subtractdisplace = ExtResource("20_blgso")
 shader_parameter/Overlay = ExtResource("20_blgso")
@@ -446,6 +481,7 @@ libraries = {
 script = ExtResource("10_j3mcr")
 
 [node name="ColorRect" type="Sprite2D" parent="Sprite2D"]
+modulate = Color(1, 1, 1, 0)
 self_modulate = Color(1, 1, 0.541176, 1)
 material = SubResource("ShaderMaterial_tkej3")
 texture = SubResource("GradientTexture2D_u4j1w")
@@ -514,14 +550,35 @@ texture = SubResource("GradientTexture2D_iy1w3")
 [node name="TargetMoveAnimation" type="Node2D" parent="."]
 script = ExtResource("23_iokp4")
 
-[node name="Polygon2D" type="Polygon2D" parent="TargetMoveAnimation"]
+[node name="Node2D" type="Node2D" parent="TargetMoveAnimation"]
+
+[node name="Polygon2D2" type="Polygon2D" parent="TargetMoveAnimation/Node2D"]
+visible = false
+polygon = PackedVector2Array(-16, 16, -48, 32, -32, 32, -32, 48)
+
+[node name="Polygon2D3" type="Polygon2D" parent="TargetMoveAnimation/Node2D"]
+visible = false
+rotation = 1.5708
+polygon = PackedVector2Array(-16, 16, -48, 32, -32, 32, -32, 48)
+
+[node name="Polygon2D4" type="Polygon2D" parent="TargetMoveAnimation/Node2D"]
+visible = false
+rotation = -3.14159
+polygon = PackedVector2Array(-16, 16, -48, 32, -32, 32, -32, 48)
+
+[node name="Polygon2D5" type="Polygon2D" parent="TargetMoveAnimation/Node2D"]
+visible = false
+rotation = -1.5708
+polygon = PackedVector2Array(-16, 16, -48, 32, -32, 32, -32, 48)
+
+[node name="shader" type="Polygon2D" parent="TargetMoveAnimation"]
 self_modulate = Color(0, 0.65098, 0.65098, 1)
 z_index = 1000
 z_as_relative = false
 material = SubResource("ShaderMaterial_8dlm1")
 position = Vector2(-32, -32)
 texture = SubResource("GradientTexture2D_lrxn0")
-polygon = PackedVector2Array(32, 80, -16, 32, 32, -16, 80, 32)
+polygon = PackedVector2Array(-16, 80, -16, -16, 80, -16, 80, 80)
 
 [connection signal="AnimatePreMovement" from="Mover" to="Sprite2D/ColorRect/AnimationPlayer" method="_on_mover_animate_pre_movement"]
 [connection signal="Death" from="Mover/EntityStatus" to="Mover/EntityStatus/DeathCamera" method="_on_entity_status_death"]
