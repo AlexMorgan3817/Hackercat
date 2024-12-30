@@ -10,8 +10,8 @@ class_name MainframeMover
 @export var ES:EntityStatus = null
 
 @export var enabled:bool = true
-
-var PreMovetime:float = 0.7
+@export
+var PreMovetime:float = 0.5
 
 var current_move_timer:Timer = null
 
@@ -20,7 +20,7 @@ var targetNode:MNode = null
 signal Moved(N:MNode)
 signal Bumped(MMCollided:MainframeMover)
 signal Interacted(MM:MainframeMover)
-signal AnimatePreMovement(MM:MainframeMover, N:MNode)
+signal AnimatePreMovement(MM:MainframeMover, N:MNode, duration:float)
 signal AnimatePreMoveFailed(MM:MainframeMover, N:MNode)
 signal AnimateFinishMovement(MM:MainframeMover, N:MNode)
 
@@ -40,7 +40,7 @@ func CanMoveTo(n:MNode):
 
 func move(n:MNode):
 	targetNode = n
-	AnimatePreMovement.emit(self, n)
+	AnimatePreMovement.emit(self, n, PreMovetime)
 	if not current_move_timer:
 		current_move_timer = GLOB.newtimer(self, PreMovetime)
 		current_move_timer.timeout.connect(MoveToTargetNode)

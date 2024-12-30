@@ -45,6 +45,8 @@ func create_default_timer(timeoutcallback, time:float = 0.5):
 	return t
 
 func _ready():
+	if !MM: MM = get_parent()
+	MM.PreMovetime = MoveDelayTime - 0.05
 	if !MoveDelay       :
 		MoveDelay        = create_default_timer(_on_move_delay_timeout, MoveDelayTime)
 	if !InteractionDelay:

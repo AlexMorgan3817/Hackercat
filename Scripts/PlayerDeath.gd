@@ -6,7 +6,7 @@ extends Node
 func _ready():
 	ES.Death.connect(_death)
 
-func _death(ES:EntityStatus):
+func _death(es:EntityStatus):
 	player.Mover.enabled = false
 	player.remove_child(player.UI)
 	player.get_parent().add_child.call_deferred(player.UI)

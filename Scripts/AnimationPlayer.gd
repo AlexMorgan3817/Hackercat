@@ -15,7 +15,9 @@ func _ready():
 func _on_entity_status_took_damage(ES, currentHits):
 	play("TookDamage")
 
-func _on_mover_animate_pre_movement(MM:MainframeMover, n:MNode):
+func _on_mover_animate_pre_movement(MM:MainframeMover, n:MNode, time:float):
+	speed_scale = 1/time
+	print(speed_scale)
 	play("Premove")
 
 func _on_mover_animate_finish_movement(MM, N):

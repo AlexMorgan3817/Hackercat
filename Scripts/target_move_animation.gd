@@ -17,12 +17,12 @@ func _ready():
 	MM.AnimatePreMoveFailed.connect(_failed)
 	MM.AnimateFinishMovement.connect(_finish)
 
-func _finish(MM:MainframeMover, N:MNode):
+func _finish(mover:MainframeMover, N:MNode):
 	set_visible(false)
 	
-func _failed(MM:MainframeMover, N:MNode):
+func _failed(mover:MainframeMover, N:MNode):
 	set_visible(false)
 
-func _premove(MM:MainframeMover, N:MNode):
+func _premove(mover:MainframeMover, N:MNode, duration:float):
 	set_visible(true)
 	set_global_position(N.get_global_position())
