@@ -1,23 +1,17 @@
 class_name PlayerController extends Node
-@export var MM:MainframeMover
-@export var Enabled = true
 
-@export var MaxPWR:int = 20
-@export var PWR:int = 20
-#var ProgramFrames:Array[ProgramFrame]
-var Programs:Array[Program]
-var ProgramLimit:int = 4
-var Program_idx:int = 0
-var Frame:ProgramFrame
+@export var MM:MainframeMover
+@export var MyDeck:Deck
+@export var Enabled = true
 
 @export var SelectedIdicator:Node2D
 var EpsilonForSelection:float = 0.3
 var SelectedNode:MNode
 
-
 @export var MoveDelayTime:float = 0.55
 @export var InteractionDelayTime:float = 0.5
 @export var ProgramUseDelayTime:float = .5
+
 var MoveDelay:Timer
 var InteractionDelay:Timer
 var ProgramUseDelay:Timer
@@ -26,66 +20,33 @@ var CanMove       :bool = true
 var CanInteract   :bool = true
 var CanUsePrograms:bool = true
 
-signal PWRChanged(PC:PlayerController, PWR:int)
-
-signal ProgramPreUse(PF:ProgramFrame)
-signal ProgramUsed(PF:ProgramFrame)
-
 func _ready():
+	MoveDelay        = GLOB.create_timer_if_need(self, MoveDelay       , func(): CanMove        = true, MoveDelayTime)
+	InteractionDelay = GLOB.create_timer_if_need(self, InteractionDelay, func(): CanInteract    = true, InteractionDelayTime)
+	ProgramUseDelay  = GLOB.create_timer_if_need(self, ProgramUseDelay , func(): CanUsePrograms = true, ProgramUseDelayTime)
 	if !MM: MM = get_parent()
 	MM.PreMovetime = MoveDelayTime - 0.05
-	MoveDelay        = create_timer_if_need(MoveDelay       , func(): CanMove        = true, MoveDelayTime)
-	InteractionDelay = create_timer_if_need(InteractionDelay, func(): CanInteract    = true, InteractionDelayTime)
-	ProgramUseDelay  = create_timer_if_need(ProgramUseDelay , func(): CanUsePrograms = true, ProgramUseDelayTime)
-	for i in MM.Host.get_children():
-		if i.name == "UI" and i is CanvasLayer:
-			for j in i.get_children():
-				if j is ProgramFrame:
-					Frame = j
-					break
-			break
-	PWRChanged.emit(self, PWR)
-
-func CostPWR(i:int):
-	if PWR < i: return false
-	PWR -= i
-	PWRChanged.emit(self, PWR)
-	return true
-
-func DeleteProgram(index:int):
-	var j = 0
-	for i in Programs:
-		if j == index:
-			i.RemoveProgram()
-			return true
-		j += 1
-	return false
-
-func AddProgram(p:Program):
-	if len(Programs) >= ProgramLimit:
-		return false
-	Programs.append(p)
-	return true
-
-func GetPrograms():
-	var dot = []
-	for i in Programs:
-		if i:
-			dot.append(i)
-	return dot
-
-func UseProgram():
-	CanUsePrograms = false
-	ProgramPreUse.emit(self)
-	Programs[Program_idx].UseProgram(MM)
-	ProgramUsed.emit(self)
-	ProgramUseDelay.start()
+	if !MyDeck:
+		for i in get_children():
+			if i is Deck:
+				MyDeck = i
+				break
+	MyDeck.Ready(self)
+	MyDeck.ProgramPreUse.connect(func(deck:Deck): CanUsePrograms = false)
+	MyDeck.ProgramUsed.connect(func(deck:Deck): ProgramUseDelay.start())
+	# for i in MM.Host.get_children():
+	# 	if i.name == "UI" and i is CanvasLayer:
+	# 		for j in i.get_children():
+	# 			if j is ProgramFrame:
+	# 				Frame = j
+	# 				break
+	# 		break
 
 func _process(_delta):
 	if !MM.CurrentNode:
 		return
 	if CanUsePrograms and Input.is_action_just_pressed("ActivateProgram"):
-		return UseProgram()
+		return MyDeck.UseProgram()
 	if CanMove:
 		var X = sign(Input.get_axis("Left", "Right"))
 		var Y = sign(Input.get_axis("Down", "Up"))
@@ -113,8 +74,8 @@ func _process(_delta):
 			MM.Interact(SelectedNode)
 			# SelectedNode.Interacted.emit(MM)
 			return
-	if Frame and Input.is_action_just_pressed("DescProgram"):
-		return Frame.examine()
+	# if Frame and Input.is_action_just_pressed("DescProgram"):
+	# 	return Frame.examine()
 
 	var d:Vector2i = get_discret_direction()
 	SelectedNode = null
@@ -132,19 +93,6 @@ func _process(_delta):
 func cooldown_interaction():
 	InteractionDelay.start()
 	CanInteract = false
-
-func create_default_timer(timeoutcallback, time:float = 0.5):
-	var t = Timer.new()
-	t.one_shot = true
-	t.wait_time =time
-	t.timeout.connect(timeoutcallback)
-	add_child(t)
-	return t
-
-func create_timer_if_need(t:Timer, timeoutcallback, time:float = 0.5):
-	if t: return t
-	return create_default_timer(timeoutcallback, time)
-
 
 func get_discret_direction(epsilon:float = EpsilonForSelection):
 	var m:Vector2 = GLOB.get_global_node(MM.Host).get_global_mouse_position()

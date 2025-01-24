@@ -2,12 +2,12 @@ class_name Trapper extends Program
 
 @export var TrapScene:PackedScene
 
-func IsUsable(MM:MainframeMover):
-	if not super(MM):
+func IsUsable(deck:Deck):
+	if not super(deck):
 		return false
-	if len(MM.CurrentNode.Content) == 1:
+	if len(deck.PC.MM.CurrentNode.Content) == 1:
 		return true
-	for i in MM.CurrentNode.Content:
+	for i in deck.PC.MM.CurrentNode.Content:
 		if is_instance_valid(i) and i.Host is Trap:
 			return false
 	return true

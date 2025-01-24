@@ -1,15 +1,26 @@
-[gd_scene load_steps=3 format=3 uid="uid://bfiy8buyjrdlb"]
+[gd_scene load_steps=3 format=3 uid="uid://cop8xn63wq1sf"]
 
 [ext_resource type="Script" path="res://Game/Programs/Program.gd" id="1_2vihv"]
-[ext_resource type="Script" path="res://Game/Programs/Effects/DrainRequiredPower.gd" id="2_ct4qc"]
+
+[sub_resource type="GDScript" id="GDScript_g0fgd"]
+script/source = "extends Node
+
+@export var Prog:Program
+
+
+func _on_program_program_used(MM:MainframeMover):
+	MM.PC.CostPWR(Prog.requiredPWR)
+	print(MM.PC.PWR)
+"
 
 [node name="Program" type="Node2D"]
 script = ExtResource("1_2vihv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
-[node name="DrainRequiredPower" type="Node" parent="." node_paths=PackedStringArray("Prog")]
-script = ExtResource("2_ct4qc")
-Prog = NodePath("..")
+[node name="DrainRequiredPower" type="Node" parent="."]
+script = SubResource("GDScript_g0fgd")
+Prog = Object(Node2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"script":ExtResource("1_2vihv"),"Name":"","Description":"","requiredPWR":1,"BaseIcon":null)
+
 
 [connection signal="ProgramUsed" from="." to="DrainRequiredPower" method="_on_program_program_used"]

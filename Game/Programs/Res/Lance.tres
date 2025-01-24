@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Lance" load_steps=4 format=3 uid="uid://bjd43buf1nst2"]
 
 [ext_resource type="Texture2D" uid="uid://clg34lje236ie" path="res://Textures/ProgramIcons.png" id="1_218g6"]
-[ext_resource type="Script" path="res://Game/Programs/Lance.gd" id="1_v71gy"]
+[ext_resource type="Script" path="res://Game/Programs/Res/Lance.gd" id="1_v71gy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n6arh"]
 atlas = ExtResource("1_218g6")

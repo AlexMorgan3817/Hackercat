@@ -1,7 +1,7 @@
 @icon("res://Textures/Ico/EnterPoint_ico.png")
 extends NetAtom
 
-@export var RequiredAmountOfProgs:int = 0
+@export var RequiredAmountOfProgs:int = 0 # REWORK TO Array[Objective]; Objective extends Resource
 @export var scene:PackedScene
 
 func _ready():

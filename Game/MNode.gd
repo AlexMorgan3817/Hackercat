@@ -35,7 +35,15 @@ func _ready():
 		UndirrectedLinks.append(i)
 	Interacted.connect(_on_interacted)
 
-func _on_interacted(MM):
+func _on_interacted(mm:MainframeMover):
 	for i in Content:
 		if is_instance_valid(i):
-			i.Interacted.emit(MM)
+			i.Interacted.emit(mm)
+
+func Left(mm:MainframeMover):
+	MovedOut.emit(mm)
+	Content.erase(mm)
+
+func Join(mm:MainframeMover):
+	Content.append(mm)
+	MovedIn.emit(mm)

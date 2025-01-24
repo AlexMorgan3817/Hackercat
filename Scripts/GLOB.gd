@@ -28,3 +28,15 @@ static func get_global_node(node:Node):
 static func switch_scene(src:Node, scene:PackedScene):
 	glob_node = null
 	src.get_tree().change_scene_to_packed(scene)
+
+static func create_timer_if_need(src:Node, t:Timer, timeoutcallback, time:float = 0.5):
+	if t: return t
+	return create_default_timer(src, timeoutcallback, time)
+
+static func create_default_timer(src:Node, timeoutcallback, time:float = 0.5):
+	var t = Timer.new()
+	t.one_shot  = true
+	t.wait_time = time
+	t.timeout.connect(timeoutcallback)
+	src.add_child(t)
+	return t

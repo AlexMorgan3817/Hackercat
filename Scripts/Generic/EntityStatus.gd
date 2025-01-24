@@ -20,6 +20,14 @@ func AmIAlive():
 		return false
 	return true
 
+func InitHealth(val:int):
+	if val <= 0:
+		push_error("Кто-то решил инициализировать (InitHealth) EntityStatus c отрицательными HP.")
+	if val > MaxHits:
+		MaxHits = val
+	CurrentHits = val
+	HealthChanged.emit(self, CurrentHits)
+
 func _setHealth(value:int):
 	if CurrentHits - value < 0:
 		Healed.emit(self, value)
@@ -38,7 +46,7 @@ func TakeDamage(value:int):
 	if value <= 0 or CurrentHits == 0:
 		return 0
 	var result = CurrentHits - max(0, value - Armor)
-	if result < 0:
+	if result <= 0:
 		return
 	_setHealth(result)
 

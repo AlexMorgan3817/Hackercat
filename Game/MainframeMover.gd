@@ -65,12 +65,9 @@ func ForceMoveToNode(n:MNode, silent:bool = false):
 	assert(n is MNode)
 	Host.set_global_position(n.get_global_position())
 	if CurrentNode:
-		CurrentNode.MovedOut.emit(self)
-		CurrentNode.Content.erase(self)
-
+		CurrentNode.Left(self)
+	n.Join(self)
 	CurrentNode = n
-	n.Content.append(self)
-	n.MovedIn.emit(self)
 	Moved.emit(n, silent)
 	FinishMovement.emit(self, n)
 

@@ -422,6 +422,7 @@ gradient = SubResource("Gradient_pryqa")
 z_index = 5
 z_as_relative = false
 script = ExtResource("1_4s5h1")
+InitialHP = 6
 
 [node name="Mover" type="Node" parent="." node_paths=PackedStringArray("Host", "PC", "ES")]
 script = ExtResource("1_01thn")
@@ -431,8 +432,6 @@ PC = NodePath("PlayerController")
 ES = NodePath("EntityStatus")
 
 [node name="EntityStatus" parent="Mover" instance=ExtResource("5_04e6d")]
-MaxHits = 12
-CurrentHits = 12
 
 [node name="DeathCamera" type="Node" parent="Mover/EntityStatus" node_paths=PackedStringArray("Host")]
 script = ExtResource("3_vscif")
@@ -456,14 +455,17 @@ Host = NodePath("../../..")
 
 [node name="PlayerController" type="Node" parent="Mover" node_paths=PackedStringArray("SelectedIdicator")]
 script = ExtResource("2_vceko")
+Enabled = null
 SelectedIdicator = NodePath("Selected")
 MoveDelayTime = 0.35
+InteractionDelayTime = null
+ProgramUseDelayTime = null
+
+[node name="Deck" type="Node" parent="Mover/PlayerController"]
+script = ExtResource("12_dfy3n")
 
 [node name="Selected" parent="Mover/PlayerController" instance=ExtResource("9_46t8f")]
 visible = false
-
-[node name="Deck" type="Node" parent="Mover"]
-script = ExtResource("12_dfy3n")
 
 [node name="Moved" type="AudioStreamPlayer2D" parent="Mover"]
 volume_db = -4.245

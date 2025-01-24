@@ -5,18 +5,18 @@ class_name Program extends Resource
 @export var requiredPWR:int = 1
 @export var BaseIcon:Texture
 
-var ScreenObject:ProgramFrame
+signal ProgramFailedUse(deck:Deck)
+signal ProgramUsed(deck:Deck)
 
-signal ProgramFailedUse(MM:MainframeMover)
-signal ProgramUsed(MM:MainframeMover)
-
-func IsUsable(MM:MainframeMover):
-	if MM.PC.PWR < requiredPWR:
+func IsUsable(deck:Deck):
+	if deck.PWR < requiredPWR:
 		return false
 	return true
 
-func Inusable(MM:MainframeMover):
-	ProgramFailedUse.emit(MM)
+func Inusable(deck:Deck):
+	ProgramFailedUse.emit(deck)
 
-func UseProgram(MM:MainframeMover):
-	ProgramUsed.emit(MM)
+func UseProgram(deck:Deck):
+	if not IsUsable(deck):
+		return Inusable(deck)
+	ProgramUsed.emit(deck)

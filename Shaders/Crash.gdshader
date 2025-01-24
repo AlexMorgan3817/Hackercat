@@ -15,7 +15,7 @@ uniform vec4 ColorOffset = vec4(0, 0, 0, 0);
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
 uniform sampler2D mask_texture : hint_normal;
 void fragment()
-{	
+{
 	vec4 norm = texture(mask_texture, UV);
 	float _mix = MIX * norm.a;
 	vec4 disp = texture(displace, SCREEN_UV);

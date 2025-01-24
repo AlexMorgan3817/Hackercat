@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Trapper" load_steps=5 format=3 uid="uid://cwuw4jnmlmwnd"]
 
-[ext_resource type="Script" path="res://Game/Programs/Trapper.gd" id="1_20jl6"]
+[ext_resource type="Script" path="res://Game/Programs/Res/Trapper.gd" id="1_20jl6"]
 [ext_resource type="Texture2D" uid="uid://clg34lje236ie" path="res://Textures/ProgramIcons.png" id="1_308b5"]
 [ext_resource type="PackedScene" uid="uid://c70anyi2sx7t5" path="res://Game/Objects/Trap.tscn" id="1_to6ub"]
 
