@@ -29,30 +29,17 @@ var CanMove       :bool = true
 var CanInteract   :bool = true
 var CanUsePrograms:bool = true
 
-signal UnableToMove
-signal Moved
 signal PWRChanged(PC:PlayerController, PWR:int)
 
 signal ProgramPreuse(PF:ProgramFrame)
 signal ProgramUsed(PF:ProgramFrame)
 
-func create_default_timer(timeoutcallback, time:float = 0.5):
-	var t = Timer.new()
-	t.one_shot = true
-	t.wait_time =time
-	t.timeout.connect(timeoutcallback)
-	add_child(t)
-	return t
-
 func _ready():
 	if !MM: MM = get_parent()
 	MM.PreMovetime = MoveDelayTime - 0.05
-	if !MoveDelay       :
-		MoveDelay        = create_default_timer(_on_move_delay_timeout, MoveDelayTime)
-	if !InteractionDelay:
-		InteractionDelay = create_default_timer(_on_interaction_delay_timeout, InteractionDelayTime)
-	if !ProgramUseDelay :
-		ProgramUseDelay  = create_default_timer(_on_program_use_delay_timeout, ProgramUseDelayTime)
+	MoveDelay        = create_timer_if_need(MoveDelay       , func(): CanMove        = true, MoveDelayTime)
+	InteractionDelay = create_timer_if_need(InteractionDelay, func(): CanInteract    = true, InteractionDelayTime)
+	ProgramUseDelay  = create_timer_if_need(ProgramUseDelay , func(): CanUsePrograms = true, ProgramUseDelayTime)
 	for i in MM.Host.get_children():
 		if i.name == "UI" and i is CanvasLayer:
 			for j in i.get_children():
@@ -63,8 +50,7 @@ func _ready():
 	PWRChanged.emit(self, PWR)
 
 func CostPWR(i:int):
-	if PWR < i:
-		return false
+	if PWR < i: return false
 	PWR -= i
 	PWRChanged.emit(self, PWR)
 	return true
@@ -117,18 +103,18 @@ func _process(_delta):
 				CanMove = false
 				MoveDelay.start()
 				if MM.CanMoveTo(nextNode):
-					Moved.emit(MM.CurrentNode, nextNode)
+					# Moved.emit(MM.CurrentNode, nextNode)
 					MM.move(nextNode)
-				else:
-					UnableToMove.emit()
 	if CanInteract:
 		if Input.is_action_just_pressed("Interact"):
 			cooldown_interaction()
-			MM.CurrentNode.Interacted.emit(MM)
+			MM.Interact(MM.CurrentNode)
+			# MM.CurrentNode.Interacted.emit(MM)
 			return
 		if SelectedNode and Input.is_action_just_pressed("InteractRemote"):
 			cooldown_interaction()
-			SelectedNode.Interacted.emit(MM)
+			MM.Interact(SelectedNode)
+			# SelectedNode.Interacted.emit(MM)
 			return
 	if Frame and Input.is_action_just_pressed("DescProgram"):
 		return Frame.examine()
@@ -150,9 +136,18 @@ func cooldown_interaction():
 	InteractionDelay.start()
 	CanInteract = false
 
-func _on_program_use_delay_timeout(): CanUsePrograms = true
-func        _on_move_delay_timeout(): CanMove        = true
-func _on_interaction_delay_timeout(): CanInteract    = true
+func create_default_timer(timeoutcallback, time:float = 0.5):
+	var t = Timer.new()
+	t.one_shot = true
+	t.wait_time =time
+	t.timeout.connect(timeoutcallback)
+	add_child(t)
+	return t
+
+func create_timer_if_need(t:Timer, timeoutcallback, time:float = 0.5):
+	if t: return t
+	return create_default_timer(timeoutcallback, time)
+
 
 func get_discret_direction(epsilon:float = EpsilonForSelection):
 	var m:Vector2 = GLOB.get_global_node(MM.Host).get_global_mouse_position()

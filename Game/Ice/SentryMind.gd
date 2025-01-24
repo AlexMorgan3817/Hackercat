@@ -4,7 +4,7 @@ class_name SimpleMind
 
 @export var MM:MainframeMover
 @export var Enabled = true
-#@export var AttackPreventsMove:bool = true
+@export var StunsAfterAttack:bool = true
 @export var ThinkingInterval:float = 0.75
 @export var AttackInterval:float = 2
 var ReadyToAttack:bool = true
@@ -48,6 +48,8 @@ func life():
 					Attack.emit(MM, j)
 					attack_timer.start()
 					return
+	elif StunsAfterAttack:
+		return
 	if len(MM.CurrentNode.UndirrectedLinks) == 0:
 		return
 	var target:MNode = select_next_move()

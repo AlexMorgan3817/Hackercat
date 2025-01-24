@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://ydl0vw3rio2e"]
+[gd_scene load_steps=56 format=3 uid="uid://ydl0vw3rio2e"]
 
 [ext_resource type="Script" path="res://Game/MainframeMover.gd" id="1_01thn"]
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_4s5h1"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://bb0je45hl3d2v" path="res://Game/UI/PlayersNodeSelector.tscn" id="9_46t8f"]
 [ext_resource type="TileSet" uid="uid://bt4xt8h2f55yp" path="res://Textures/Tilemaps/floor2.tres" id="9_hsqwn"]
 [ext_resource type="Script" path="res://Scripts/AnimationPlayer.gd" id="10_j3mcr"]
+[ext_resource type="AudioStream" uid="uid://5ep8m0usx684" path="res://Sounds/Player PreMove.mp3" id="13_2kfhk"]
 [ext_resource type="Shader" path="res://Shaders/MovementGlitch.gdshader" id="17_4a8yp"]
 [ext_resource type="Shader" path="res://Shaders/Crash.gdshader" id="19_agu0g"]
 [ext_resource type="Texture2D" uid="uid://1vseclfqtktx" path="res://Textures/TookDamageDisplay2.png" id="20_blgso"]
@@ -457,12 +458,20 @@ script = ExtResource("2_vceko")
 SelectedIdicator = NodePath("Selected")
 MoveDelayTime = 0.35
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Mover/PlayerController"]
-stream = ExtResource("3_2kcce")
-script = ExtResource("4_omcvj")
-
 [node name="Selected" parent="Mover/PlayerController" instance=ExtResource("9_46t8f")]
 visible = false
+
+[node name="Moved" type="AudioStreamPlayer2D" parent="Mover"]
+volume_db = -4.245
+script = ExtResource("4_omcvj")
+
+[node name="PreMove" type="AudioStreamPlayer2D" parent="Mover/Moved"]
+stream = ExtResource("13_2kfhk")
+script = ExtResource("4_omcvj")
+
+[node name="Bumped" type="AudioStreamPlayer2D" parent="Mover/Moved"]
+stream = ExtResource("3_2kcce")
+script = ExtResource("4_omcvj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0, 1, 1, 1)
@@ -579,10 +588,12 @@ position = Vector2(-32, -32)
 texture = SubResource("GradientTexture2D_lrxn0")
 polygon = PackedVector2Array(-16, 80, -16, -16, 80, -16, 80, 80)
 
-[connection signal="AnimatePreMovement" from="Mover" to="Sprite2D/ColorRect/AnimationPlayer" method="_on_mover_animate_pre_movement"]
+[connection signal="Bumped" from="Mover" to="Mover/Moved/Bumped" method="_on_mover_bumped"]
+[connection signal="Moved" from="Mover" to="Mover/Moved" method="_on_mover_moved"]
+[connection signal="PreMovement" from="Mover" to="Sprite2D/ColorRect/AnimationPlayer" method="_on_mover_animate_pre_movement"]
+[connection signal="PreMovement" from="Mover" to="Mover/Moved/PreMove" method="_on_mover_pre_movement"]
 [connection signal="Death" from="Mover/EntityStatus" to="Mover/EntityStatus/DeathCamera" method="_on_entity_status_death"]
 [connection signal="Death" from="Mover/EntityStatus" to="Mover/EntityStatus/DeathCamera/Playsound" method="_on_entity_status_death"]
 [connection signal="TookDamage" from="Mover/EntityStatus" to="Mover/EntityStatus/PlaysoundOnDamage" method="_on_entity_status_took_damage"]
 [connection signal="TookDamage" from="Mover/EntityStatus" to="Sprite2D/AnimationPlayer" method="_on_entity_status_took_damage"]
 [connection signal="TookDamage" from="Mover/EntityStatus" to="DamageOverlay/AnimationPlayer" method="_on_entity_status_took_damage"]
-[connection signal="UnableToMove" from="Mover/PlayerController" to="Mover/PlayerController/AudioStreamPlayer2D" method="_on_player_controller_unable_to_move"]

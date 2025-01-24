@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://Game/Programs/Trapper.gd" id="2_jl4dx"]
 [ext_resource type="PackedScene" uid="uid://c70anyi2sx7t5" path="res://Game/Objects/Trap.tscn" id="3_3s0kw"]
 [ext_resource type="Script" path="res://Scripts/OnTrigger/PlaysoundOnTrigger.gd" id="6_8ge4h"]
-[ext_resource type="AudioStream" uid="uid://c4vfn0r41ew3b" path="res://Sounds/Trapper.mp3" id="7_as3yf"]
+[ext_resource type="AudioStream" uid="uid://c4vfn0r41ew3b" path="res://Sounds/Programs/Trapper.mp3" id="7_as3yf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2s2vk"]
 atlas = ExtResource("1_tbx8n")

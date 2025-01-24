@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://5ep8m0usx684"
+path="res://.godot/imported/Player PreMove.mp3-0a8c81e9e60185c58f7217df4883f0d8.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Player PreMove.mp3"
+dest_files=["res://.godot/imported/Player PreMove.mp3-0a8c81e9e60185c58f7217df4883f0d8.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
