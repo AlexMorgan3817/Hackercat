@@ -1,15 +1,15 @@
-[gd_scene load_steps=56 format=3 uid="uid://ydl0vw3rio2e"]
+[gd_scene load_steps=57 format=3 uid="uid://ydl0vw3rio2e"]
 
 [ext_resource type="Script" path="res://Game/MainframeMover.gd" id="1_01thn"]
-[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_4s5h1"]
+[ext_resource type="Script" path="res://Game/Player.gd" id="1_4s5h1"]
 [ext_resource type="Texture2D" uid="uid://cww12h8bl2yxn" path="res://Textures/player.png" id="2_t7sil"]
-[ext_resource type="Script" path="res://Scripts/PlayerController.gd" id="2_vceko"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerController.gd" id="2_vceko"]
 [ext_resource type="AudioStream" uid="uid://btk08wrjernp" path="res://Sounds/Denied.mp3" id="3_2kcce"]
 [ext_resource type="Script" path="res://Scripts/OnTrigger/DeathCamera.gd" id="3_vscif"]
 [ext_resource type="Script" path="res://Scripts/OnTrigger/PlaysoundOnTrigger.gd" id="4_84emm"]
-[ext_resource type="Script" path="res://Scripts/AudioStreamPlayer2D.gd" id="4_omcvj"]
+[ext_resource type="Script" path="res://Scripts/Generic/AudioStreamPlayer2D.gd" id="4_omcvj"]
 [ext_resource type="PackedScene" uid="uid://ckbium6b60knt" path="res://Game/UI/GameOver.tscn" id="4_q13fx"]
-[ext_resource type="PackedScene" uid="uid://dfqylyvtdl3do" path="res://GenericPrefabs/EntityStatus.tscn" id="5_04e6d"]
+[ext_resource type="PackedScene" uid="uid://dfqylyvtdl3do" path="res://Scripts/Generic/EntityStatus.tscn" id="5_04e6d"]
 [ext_resource type="AudioStream" uid="uid://83edsse3qbpn" path="res://Sounds/TookDamage.mp3" id="5_o4v8h"]
 [ext_resource type="AudioStream" uid="uid://bqg2rysk6copf" path="res://Sounds/Mortis.wav" id="7_qm4xg"]
 [ext_resource type="Script" path="res://Scripts/PlayerDeath.gd" id="8_3fpi5"]
@@ -17,7 +17,8 @@
 [ext_resource type="PackedScene" uid="uid://ufmp4ffewdl1" path="res://Game/UI/UI.tscn" id="9_5p52i"]
 [ext_resource type="PackedScene" uid="uid://bb0je45hl3d2v" path="res://Game/UI/PlayersNodeSelector.tscn" id="9_46t8f"]
 [ext_resource type="TileSet" uid="uid://bt4xt8h2f55yp" path="res://Textures/Tilemaps/floor2.tres" id="9_hsqwn"]
-[ext_resource type="Script" path="res://Scripts/AnimationPlayer.gd" id="10_j3mcr"]
+[ext_resource type="Script" path="res://Scripts/Generic/AnimationPlayer.gd" id="10_j3mcr"]
+[ext_resource type="Script" path="res://Scripts/Player/Deck.gd" id="12_dfy3n"]
 [ext_resource type="AudioStream" uid="uid://5ep8m0usx684" path="res://Sounds/Player PreMove.mp3" id="13_2kfhk"]
 [ext_resource type="Shader" path="res://Shaders/MovementGlitch.gdshader" id="17_4a8yp"]
 [ext_resource type="Shader" path="res://Shaders/Crash.gdshader" id="19_agu0g"]
@@ -461,6 +462,9 @@ MoveDelayTime = 0.35
 [node name="Selected" parent="Mover/PlayerController" instance=ExtResource("9_46t8f")]
 visible = false
 
+[node name="Deck" type="Node" parent="Mover"]
+script = ExtResource("12_dfy3n")
+
 [node name="Moved" type="AudioStreamPlayer2D" parent="Mover"]
 volume_db = -4.245
 script = ExtResource("4_omcvj")
@@ -590,8 +594,8 @@ polygon = PackedVector2Array(-16, 80, -16, -16, 80, -16, 80, 80)
 
 [connection signal="Bumped" from="Mover" to="Mover/Moved/Bumped" method="_on_mover_bumped"]
 [connection signal="Moved" from="Mover" to="Mover/Moved" method="_on_mover_moved"]
-[connection signal="PreMovement" from="Mover" to="Sprite2D/ColorRect/AnimationPlayer" method="_on_mover_animate_pre_movement"]
 [connection signal="PreMovement" from="Mover" to="Mover/Moved/PreMove" method="_on_mover_pre_movement"]
+[connection signal="PreMovement" from="Mover" to="Sprite2D/ColorRect/AnimationPlayer" method="_on_mover_animate_pre_movement"]
 [connection signal="Death" from="Mover/EntityStatus" to="Mover/EntityStatus/DeathCamera" method="_on_entity_status_death"]
 [connection signal="Death" from="Mover/EntityStatus" to="Mover/EntityStatus/DeathCamera/Playsound" method="_on_entity_status_death"]
 [connection signal="TookDamage" from="Mover/EntityStatus" to="Mover/EntityStatus/PlaysoundOnDamage" method="_on_entity_status_took_damage"]

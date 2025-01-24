@@ -1,7 +1,5 @@
 @icon("res://Textures/UI_Frame.png")
-extends Node2D
-
-class_name MNode
+class_name MNode extends Node2D
 
 @export var Links:Array[MNode] = [null,null,null,null]
 @export var Content:Array[MainframeMover]

@@ -31,7 +31,7 @@ var CanUsePrograms:bool = true
 
 signal PWRChanged(PC:PlayerController, PWR:int)
 
-signal ProgramPreuse(PF:ProgramFrame)
+signal ProgramPreUse(PF:ProgramFrame)
 signal ProgramUsed(PF:ProgramFrame)
 
 func _ready():
@@ -79,7 +79,7 @@ func GetPrograms():
 
 func UseProgram():
 	CanUsePrograms = false
-	ProgramPreuse.emit(self)
+	ProgramPreUse.emit(self)
 	Programs[Program_idx].UseProgram(MM)
 	ProgramUsed.emit(self)
 	ProgramUseDelay.start()

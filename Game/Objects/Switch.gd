@@ -1,4 +1,4 @@
-@icon("res://Ico/Switch.png")
+@icon("res://Textures/Ico/Switch.png")
 extends NetAtom
 
 class_name Switch

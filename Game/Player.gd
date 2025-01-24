@@ -1,7 +1,5 @@
-@icon("res://Ico/floppa.png")
-extends NetAtom
-
-class_name Player
+@icon("res://Textures/Ico/floppa.png")
+class_name Player extends NetAtom
 
 @export var StartingPrograms:Array[Program] = [null, null, null, null]
 @export var ProgramsLimit:int = 4

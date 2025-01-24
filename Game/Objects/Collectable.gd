@@ -1,4 +1,4 @@
-@icon("res://Ico/Cube_ico.png")
+@icon("res://Textures/Ico/Cube_ico.png")
 extends NetAtom
 
 class_name Collectable

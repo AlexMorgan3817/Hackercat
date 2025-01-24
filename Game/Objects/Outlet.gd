@@ -1,4 +1,4 @@
-@icon("res://Ico/EnterPoint_ico.png")
+@icon("res://Textures/Ico/EnterPoint_ico.png")
 extends NetAtom
 
 @export var RequiredAmountOfProgs:int = 0

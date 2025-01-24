@@ -1,4 +1,4 @@
-@icon("res://Ico/door.png")
+@icon("res://Textures/Ico/door.png")
 extends NetAtom
 
 class_name DoorEntity

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d207fsdii77og"
-path="res://.godot/imported/skull_ico.png-9acb1a0d88af8a648356b7c42221ad2d.ctex"
+uid="uid://cymr8vedwvbaw"
+path="res://.godot/imported/floppa.png-355ab706d302813ed18e9f796b834e36.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Ico/skull_ico.png"
-dest_files=["res://.godot/imported/skull_ico.png-9acb1a0d88af8a648356b7c42221ad2d.ctex"]
+source_file="res://Textures/Ico/floppa.png"
+dest_files=["res://.godot/imported/floppa.png-355ab706d302813ed18e9f796b834e36.ctex"]
 
 [params]
 

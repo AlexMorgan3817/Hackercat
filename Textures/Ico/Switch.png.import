@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chdccrcijsybi"
-path="res://.godot/imported/EnterPoint_ico.png-ed43df152170598d9bc8f8da8ff106a4.ctex"
+uid="uid://djoygnwccvydw"
+path="res://.godot/imported/Switch.png-91a0204f7b0e92bb2d99f46eb15b90e3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Ico/EnterPoint_ico.png"
-dest_files=["res://.godot/imported/EnterPoint_ico.png-ed43df152170598d9bc8f8da8ff106a4.ctex"]
+source_file="res://Textures/Ico/Switch.png"
+dest_files=["res://.godot/imported/Switch.png-91a0204f7b0e92bb2d99f46eb15b90e3.ctex"]
 
 [params]
 

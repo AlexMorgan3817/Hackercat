@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ctq4hvjegcvgm"
-path="res://.godot/imported/Cube_ico.png-1c5d22f419d9a141c6a7c1cf7f2b0b61.ctex"
+path="res://.godot/imported/Cube_ico.png-b6a46a7efe527cb86286646a51d6d8d1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Ico/Cube_ico.png"
-dest_files=["res://.godot/imported/Cube_ico.png-1c5d22f419d9a141c6a7c1cf7f2b0b61.ctex"]
+source_file="res://Textures/Ico/Cube_ico.png"
+dest_files=["res://.godot/imported/Cube_ico.png-b6a46a7efe527cb86286646a51d6d8d1.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cymr8vedwvbaw"
-path="res://.godot/imported/floppa.png-a02f6ac3464004797888dbd69ebd5106.ctex"
+uid="uid://4tfuya55mp6e"
+path="res://.godot/imported/door.png-9d6bb6873f127098bf4c1815705cf842.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Ico/floppa.png"
-dest_files=["res://.godot/imported/floppa.png-a02f6ac3464004797888dbd69ebd5106.ctex"]
+source_file="res://Textures/Ico/door.png"
+dest_files=["res://.godot/imported/door.png-9d6bb6873f127098bf4c1815705cf842.ctex"]
 
 [params]
 

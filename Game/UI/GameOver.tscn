@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Scripts/OnTrigger/RestartSceneOnDeath.gd" id="2_ejbwx"]
 [ext_resource type="Texture2D" uid="uid://bhfye6357236s" path="res://Textures/Shade.png" id="2_j7dga"]
 [ext_resource type="TileSet" uid="uid://bt4xt8h2f55yp" path="res://Textures/Tilemaps/floor2.tres" id="2_wkccy"]
-[ext_resource type="Script" path="res://Scripts/AnimationPlayer.gd" id="3_jj7c6"]
+[ext_resource type="Script" path="res://Scripts/Generic/AnimationPlayer.gd" id="3_jj7c6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hropl"]
 shader = ExtResource("1_8bgix")

@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://yqn0u225ls76" path="res://Game/MNode.tscn" id="3_ukpx1"]
 [ext_resource type="Script" path="res://Scripts/MainframeMap.gd" id="4_656qg"]
 [ext_resource type="PackedScene" uid="uid://d2vq8ry3bdi4v" path="res://Game/Objects/SwitchMM.tscn" id="5_qf6ln"]
-[ext_resource type="PackedScene" uid="uid://c3jj6ge1rgqai" path="res://GenericPrefabs/LoopingAudioPlayer.tscn" id="6_1y1i8"]
+[ext_resource type="PackedScene" uid="uid://c3jj6ge1rgqai" path="res://Scripts/Generic/LoopingAudioPlayer.tscn" id="6_1y1i8"]
 [ext_resource type="PackedScene" uid="uid://xwwpba04pbj4" path="res://Game/Ice/Sentry.tscn" id="7_2d1gq"]
 [ext_resource type="PackedScene" uid="uid://py24vj81mf1n" path="res://Game/Objects/Door.tscn" id="7_lpj1f"]
 [ext_resource type="PackedScene" uid="uid://b6mnny4h5lmn2" path="res://Game/Objects/Collectable.tscn" id="9_8exj0"]
