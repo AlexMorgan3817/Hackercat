@@ -1,7 +1,4 @@
-extends Node2D
-
-class_name Mainframe
-
+class_name Mainframe extends Node2D
 @export var circuit:TileMap
 @export var tilesize:int = 32
 @export var tileoffset:Vector2 = -Vector2(16, 16)

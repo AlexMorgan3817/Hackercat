@@ -1,7 +1,4 @@
-extends Node
-
-class_name EntityStatus
-
+class_name EntityStatus extends Node
 @export var MaxHits:int = 4
 @export var CurrentHits:int = 4
 @export var Armor:int = 0

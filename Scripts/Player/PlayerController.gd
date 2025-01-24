@@ -1,7 +1,4 @@
-extends Node
-
-class_name PlayerController
-
+class_name PlayerController extends Node
 @export var MM:MainframeMover
 @export var Enabled = true
 

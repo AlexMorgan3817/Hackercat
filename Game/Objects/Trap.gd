@@ -1,7 +1,4 @@
-extends NetAtom
-
-class_name Trap
-
+class_name Trap extends NetAtom
 @export var myMM:MainframeMover
 var enabled:bool = true
 

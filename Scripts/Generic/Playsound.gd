@@ -1,6 +1,4 @@
-extends Node2D
-class_name PlaySound
-
+class_name PlaySound extends Node2D
 var player:AudioStreamPlayer2D
 var DeathTimer:Timer
 

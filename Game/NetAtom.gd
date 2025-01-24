@@ -1,7 +1,4 @@
-extends Node2D
-
-class_name NetAtom
-
+class_name NetAtom extends Node2D
 @export var StartingNode:MNode
 @export var Mover:MainframeMover
 

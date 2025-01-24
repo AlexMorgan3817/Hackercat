@@ -1,6 +1,4 @@
-extends AudioStreamPlayer2D
-class_name ASP
-
+class_name ASP extends AudioStreamPlayer2D
 func _on_player_controller_unable_to_move():
 	playing = true
 

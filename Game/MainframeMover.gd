@@ -1,7 +1,4 @@
-extends Node
-
-class_name MainframeMover
-
+class_name MainframeMover extends Node
 @export var Host:Node2D
 @export var CurrentNode:MNode
 @export var Dense:bool

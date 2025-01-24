@@ -1,7 +1,4 @@
-extends Control
-
-class_name ProgramFrame
-
+class_name ProgramFrame extends Control
 @export var MM:MainframeMover
 @export var MyProgram:Program
 

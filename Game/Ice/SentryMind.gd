@@ -1,7 +1,4 @@
-extends Node
-
-class_name SimpleMind
-
+class_name SimpleMind extends Node
 @export var MM:MainframeMover
 @export var Enabled = true
 @export var StunsAfterAttack:bool = true

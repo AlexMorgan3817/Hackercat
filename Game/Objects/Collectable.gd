@@ -1,8 +1,5 @@
 @icon("res://Textures/Ico/Cube_ico.png")
-extends NetAtom
-
-class_name Collectable
-
+class_name Collectable extends NetAtom
 @export var ProgramInside:Program
 
 # Called when the node enters the scene tree for the first time.

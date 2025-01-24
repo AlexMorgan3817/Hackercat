@@ -1,7 +1,4 @@
-extends Node2D
-
-class_name TargetMoveAnimation
-
+class_name TargetMoveAnimation extends Node2D
 @export var MM:MainframeMover
 
 # Called when the node enters the scene tree for the first time.

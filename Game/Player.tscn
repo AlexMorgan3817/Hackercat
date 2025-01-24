@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dfqylyvtdl3do" path="res://Scripts/Generic/EntityStatus.tscn" id="5_04e6d"]
 [ext_resource type="AudioStream" uid="uid://83edsse3qbpn" path="res://Sounds/TookDamage.mp3" id="5_o4v8h"]
 [ext_resource type="AudioStream" uid="uid://bqg2rysk6copf" path="res://Sounds/Mortis.wav" id="7_qm4xg"]
-[ext_resource type="Script" path="res://Scripts/PlayerDeath.gd" id="8_3fpi5"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerDeath.gd" id="8_3fpi5"]
 [ext_resource type="Shader" path="res://Shaders/Glitch.gdshader" id="8_8uemn"]
 [ext_resource type="PackedScene" uid="uid://ufmp4ffewdl1" path="res://Game/UI/UI.tscn" id="9_5p52i"]
 [ext_resource type="PackedScene" uid="uid://bb0je45hl3d2v" path="res://Game/UI/PlayersNodeSelector.tscn" id="9_46t8f"]
