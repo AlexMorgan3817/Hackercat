@@ -1,7 +1,5 @@
 @icon("res://Textures/UI_Frame.png")
-extends Node2D
-
-class_name MNode
+class_name MNode extends Node2D
 
 @export var Links:Array[MNode] = [null,null,null,null]
 @export var Content:Array[MainframeMover]
@@ -37,7 +35,15 @@ func _ready():
 		UndirrectedLinks.append(i)
 	Interacted.connect(_on_interacted)
 
-func _on_interacted(MM):
+func _on_interacted(mm:MainframeMover):
 	for i in Content:
 		if is_instance_valid(i):
-			i.Interacted.emit(MM)
+			i.Interacted.emit(mm)
+
+func Left(mm:MainframeMover):
+	MovedOut.emit(mm)
+	Content.erase(mm)
+
+func Join(mm:MainframeMover):
+	Content.append(mm)
+	MovedIn.emit(mm)

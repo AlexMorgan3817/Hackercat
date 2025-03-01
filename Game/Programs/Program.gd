@@ -1,28 +1,22 @@
-extends Node2D
-
-class_name Program
+class_name Program extends Resource
 
 @export var Name:String
 @export var Description:String
 @export var requiredPWR:int = 1
+@export var BaseIcon:Texture
 
-signal ProgramFailedUse(MM:MainframeMover)
-signal ProgramUsed(MM:MainframeMover)
+signal ProgramFailedUse(deck:Deck)
+signal ProgramUsed(deck:Deck)
 
-func _notification(what):
-	if (what == NOTIFICATION_PREDELETE):
-		Destroy()
-
-func Destroy():
-	pass
-
-func IsUsable(MM:MainframeMover):
-	if MM.PC.PWR < requiredPWR:
+func IsUsable(deck:Deck):
+	if deck.PWR < requiredPWR:
 		return false
 	return true
 
-func Inusable(MM:MainframeMover):
-	ProgramFailedUse.emit(MM)
+func Inusable(deck:Deck):
+	ProgramFailedUse.emit(deck)
 
-func UseProgram(MM:MainframeMover):
-	ProgramUsed.emit(MM)
+func UseProgram(deck:Deck):
+	if not IsUsable(deck):
+		return Inusable(deck)
+	ProgramUsed.emit(deck)

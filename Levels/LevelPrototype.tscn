@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://d3c7dkq8468ca"]
+[gd_scene load_steps=21 format=3 uid="uid://d3c7dkq8468ca"]
 
 [ext_resource type="Script" path="res://Scripts/SceneSystem/Level.gd" id="1_2rn07"]
 [ext_resource type="TileSet" uid="uid://bt4xt8h2f55yp" path="res://Textures/Tilemaps/floor2.tres" id="1_gvh1x"]
@@ -8,17 +8,18 @@
 [ext_resource type="PackedScene" uid="uid://ydl0vw3rio2e" path="res://Game/Player.tscn" id="4_6yauk"]
 [ext_resource type="PackedScene" uid="uid://yqn0u225ls76" path="res://Game/MNode.tscn" id="5_a0niy"]
 [ext_resource type="PackedScene" uid="uid://bif3eu86jmjmx" path="res://Levels/TheEndOfDemo.tscn" id="5_uhmya"]
-[ext_resource type="PackedScene" uid="uid://dl67f2m5y88in" path="res://Game/Programs/Lance.tscn" id="8_q18t1"]
 [ext_resource type="PackedScene" uid="uid://b6mnny4h5lmn2" path="res://Game/Objects/Collectable.tscn" id="8_vc7v3"]
 [ext_resource type="PackedScene" uid="uid://py24vj81mf1n" path="res://Game/Objects/Door.tscn" id="8_wj5rw"]
 [ext_resource type="PackedScene" uid="uid://d2vq8ry3bdi4v" path="res://Game/Objects/SwitchMM.tscn" id="9_7mjwn"]
-[ext_resource type="PackedScene" uid="uid://dwp2xenq0pl5c" path="res://Game/Programs/Trapper.tscn" id="9_ekter"]
-[ext_resource type="PackedScene" uid="uid://c3jj6ge1rgqai" path="res://GenericPrefabs/LoopingAudioPlayer.tscn" id="10_ga0pm"]
+[ext_resource type="PackedScene" uid="uid://c3jj6ge1rgqai" path="res://Scripts/Generic/LoopingAudioPlayer.tscn" id="10_ga0pm"]
 [ext_resource type="AudioStream" uid="uid://ceeeshjqibyim" path="res://Sounds/music/Mainframe.mp3" id="10_gqjl4"]
-[ext_resource type="PackedScene" uid="uid://cmyvivj502j4w" path="res://GenericPrefabs/DebugPolygon.tscn" id="11_8nx2c"]
+[ext_resource type="Script" path="res://Game/Programs/Program.gd" id="10_t8x14"]
+[ext_resource type="Resource" uid="uid://bjd43buf1nst2" path="res://Game/Programs/Res/Lance.tres" id="11_1cgfu"]
+[ext_resource type="PackedScene" uid="uid://cmyvivj502j4w" path="res://Scripts/Generic/DebugPolygon.tscn" id="11_8nx2c"]
+[ext_resource type="Resource" uid="uid://cwuw4jnmlmwnd" path="res://Game/Programs/Res/Trapper.tres" id="12_dpccv"]
 [ext_resource type="FontFile" uid="uid://bpbokby2oerfj" path="res://Textures/FSEX300.ttf" id="14_qjchp"]
-[ext_resource type="PackedScene" uid="uid://bqsk8vwk6ggf3" path="res://Game/Programs/Floppa.tscn" id="16_lpb0f"]
-[ext_resource type="PackedScene" uid="uid://d2qeutpdl6hjr" path="res://Game/Programs/RawData.tscn" id="16_xrrmx"]
+[ext_resource type="Resource" uid="uid://dcdg1g6e86oxe" path="res://Game/Programs/Res/RawData.tres" id="16_w544m"]
+[ext_resource type="Resource" uid="uid://c7vlxo6818dsd" path="res://Game/Programs/Res/Floppa.tres" id="17_iaxq0"]
 
 [node name="LevelPrototype" type="Node2D"]
 script = ExtResource("1_2rn07")
@@ -54,9 +55,9 @@ scene = ExtResource("5_uhmya")
 position = Vector2(192, 256)
 Links = [NodePath("../Fork"), null, NodePath("../MNode"), null]
 
-[node name="Player" parent="Mainframe" node_paths=PackedStringArray("StartingPrograms") instance=ExtResource("4_6yauk")]
+[node name="Player" parent="Mainframe" instance=ExtResource("4_6yauk")]
 position = Vector2(192, 256)
-StartingPrograms = [NodePath("../../Lance"), NodePath("../../Trapper"), null, null]
+StartingPrograms = Array[ExtResource("10_t8x14")]([ExtResource("11_1cgfu"), ExtResource("12_dpccv")])
 
 [node name="Fork" parent="Mainframe" node_paths=PackedStringArray("Links") instance=ExtResource("5_a0niy")]
 position = Vector2(256, 192)
@@ -180,7 +181,7 @@ Links = [null, null, NodePath("../LeftLockedBranch"), null]
 
 [node name="Collectable2" parent="Mainframe/Right/Left2" instance=ExtResource("8_vc7v3")]
 position = Vector2(352, 416)
-ProgramInside = ExtResource("16_xrrmx")
+ProgramInside = ExtResource("16_w544m")
 
 [node name="Right2" type="Node" parent="Mainframe/Right"]
 
@@ -202,7 +203,7 @@ Links = [NodePath("../MNode6"), null, null, null]
 
 [node name="Collectable" parent="Mainframe/Right/Right2" instance=ExtResource("8_vc7v3")]
 position = Vector2(416, 384)
-ProgramInside = ExtResource("16_lpb0f")
+ProgramInside = ExtResource("17_iaxq0")
 
 [node name="MNode7" parent="Mainframe/Right/Right2" node_paths=PackedStringArray("Links") instance=ExtResource("5_a0niy")]
 position = Vector2(416, 416)
@@ -218,9 +219,5 @@ theme_override_fonts/normal_font = ExtResource("14_qjchp")
 bbcode_enabled = true
 text = "Do not lose your starting programs and acquire 1 more
 (3 programs required)"
-
-[node name="Lance" parent="." instance=ExtResource("8_q18t1")]
-
-[node name="Trapper" parent="." instance=ExtResource("9_ekter")]
 
 [connection signal="ready" from="." to="Mainframe" method="_on_level_prototype_ready"]

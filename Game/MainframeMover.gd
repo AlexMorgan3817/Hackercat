@@ -1,7 +1,4 @@
-extends Node
-
-class_name MainframeMover
-
+class_name MainframeMover extends Node
 @export var Host:Node2D
 @export var CurrentNode:MNode
 @export var Dense:bool
@@ -10,19 +7,19 @@ class_name MainframeMover
 @export var ES:EntityStatus = null
 
 @export var enabled:bool = true
-
-var PreMovetime:float = 0.7
+@export
+var PreMovetime:float = 0.5
 
 var current_move_timer:Timer = null
 
 var targetNode:MNode = null
 
-signal Moved(N:MNode)
+signal Moved(N:MNode, silent:bool)
 signal Bumped(MMCollided:MainframeMover)
 signal Interacted(MM:MainframeMover)
-signal AnimatePreMovement(MM:MainframeMover, N:MNode)
-signal AnimatePreMoveFailed(MM:MainframeMover, N:MNode)
-signal AnimateFinishMovement(MM:MainframeMover, N:MNode)
+signal PreMovement(MM:MainframeMover, N:MNode, duration:float, silent:bool)
+signal PreMoveFailed(MM:MainframeMover, N:MNode)
+signal FinishMovement(MM:MainframeMover, N:MNode)
 
 func _notification(what):
 	if what == NOTIFICATION_PREDELETE:
@@ -38,9 +35,9 @@ func _ready():
 func CanMoveTo(n:MNode):
 	return enabled && n.ArePassing(self)
 
-func move(n:MNode):
+func move(n:MNode, silent:bool = false):
 	targetNode = n
-	AnimatePreMovement.emit(self, n)
+	PreMovement.emit(self, n, PreMovetime, silent)
 	if not current_move_timer:
 		current_move_timer = GLOB.newtimer(self, PreMovetime)
 		current_move_timer.timeout.connect(MoveToTargetNode)
@@ -53,25 +50,27 @@ func MoveToTargetNode():
 	if Dense:
 		for i in targetNode.Content:
 			if i.Dense:
+				Bumped.emit(i)
 				canpass = false
 				break
 	if canpass:
 		ForceMoveToNode(targetNode)
 	else:
-		AnimatePreMoveFailed.emit(self, targetNode)
+		PreMoveFailed.emit(self, targetNode)
 	targetNode = null
 
-func ForceMoveToNode(n:MNode):
+func ForceMoveToNode(n:MNode, silent:bool = false):
 	if not n:
 		return
 	assert(n is MNode)
 	Host.set_global_position(n.get_global_position())
 	if CurrentNode:
-		CurrentNode.MovedOut.emit(self)
-		CurrentNode.Content.erase(self)
-
+		CurrentNode.Left(self)
+	n.Join(self)
 	CurrentNode = n
-	n.Content.append(self)
-	n.MovedIn.emit(self)
-	Moved.emit(n)
-	AnimateFinishMovement.emit(self, n)
+	Moved.emit(n, silent)
+	FinishMovement.emit(self, n)
+
+func Interact(node:MNode):
+	Interacted.emit(self, node)
+	node.Interacted.emit(self)

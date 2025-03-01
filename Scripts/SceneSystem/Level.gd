@@ -1,3 +1,1 @@
-extends Scene
-
-class_name Level
+class_name Level extends Scene

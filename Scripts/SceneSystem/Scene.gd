@@ -1,3 +1,1 @@
-extends Node2D
-
-class_name Scene
+class_name Scene extends Node2D

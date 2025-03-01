@@ -7,15 +7,15 @@
 [ext_resource type="PackedScene" uid="uid://yqn0u225ls76" path="res://Game/MNode.tscn" id="3_ukpx1"]
 [ext_resource type="Script" path="res://Scripts/MainframeMap.gd" id="4_656qg"]
 [ext_resource type="PackedScene" uid="uid://d2vq8ry3bdi4v" path="res://Game/Objects/SwitchMM.tscn" id="5_qf6ln"]
-[ext_resource type="PackedScene" uid="uid://c3jj6ge1rgqai" path="res://GenericPrefabs/LoopingAudioPlayer.tscn" id="6_1y1i8"]
+[ext_resource type="PackedScene" uid="uid://c3jj6ge1rgqai" path="res://Scripts/Generic/LoopingAudioPlayer.tscn" id="6_1y1i8"]
 [ext_resource type="PackedScene" uid="uid://xwwpba04pbj4" path="res://Game/Ice/Sentry.tscn" id="7_2d1gq"]
 [ext_resource type="PackedScene" uid="uid://py24vj81mf1n" path="res://Game/Objects/Door.tscn" id="7_lpj1f"]
 [ext_resource type="PackedScene" uid="uid://b6mnny4h5lmn2" path="res://Game/Objects/Collectable.tscn" id="9_8exj0"]
 [ext_resource type="FontFile" uid="uid://bpbokby2oerfj" path="res://Textures/FSEX300.ttf" id="9_fcnlw"]
-[ext_resource type="PackedScene" uid="uid://dwp2xenq0pl5c" path="res://Game/Programs/Trapper.tscn" id="10_hmr12"]
 [ext_resource type="PackedScene" uid="uid://bb0je45hl3d2v" path="res://Game/UI/PlayersNodeSelector.tscn" id="10_s4clc"]
+[ext_resource type="Resource" uid="uid://bjd43buf1nst2" path="res://Game/Programs/Res/Lance.tres" id="11_2jioq"]
 [ext_resource type="PackedScene" uid="uid://dq7tkqffimn35" path="res://Game/Objects/Outlet.tscn" id="11_aggyy"]
-[ext_resource type="PackedScene" uid="uid://dl67f2m5y88in" path="res://Game/Programs/Lance.tscn" id="11_ap7iq"]
+[ext_resource type="Resource" uid="uid://cwuw4jnmlmwnd" path="res://Game/Programs/Res/Trapper.tres" id="12_5ob8m"]
 [ext_resource type="PackedScene" uid="uid://d3c7dkq8468ca" path="res://Levels/LevelPrototype.tscn" id="16_7ypnn"]
 
 [node name="1level" type="Node2D"]
@@ -92,7 +92,7 @@ Links = [null, null, NodePath("../MNode"), NodePath("../MNode2")]
 
 [node name="Collectable" parent="KeysAndSentry/Center" instance=ExtResource("9_8exj0")]
 position = Vector2(-128, -33)
-ProgramInside = ExtResource("11_ap7iq")
+ProgramInside = ExtResource("11_2jioq")
 
 [node name="MNode" parent="KeysAndSentry/Center" node_paths=PackedStringArray("Links") instance=ExtResource("3_ukpx1")]
 position = Vector2(-192, 0)
@@ -100,7 +100,7 @@ Links = [null, null, null, NodePath("../MNode3")]
 
 [node name="Collectable2" parent="KeysAndSentry/Center" instance=ExtResource("9_8exj0")]
 position = Vector2(-192, 0)
-ProgramInside = ExtResource("10_hmr12")
+ProgramInside = ExtResource("12_5ob8m")
 
 [node name="END" parent="KeysAndSentry/Center" node_paths=PackedStringArray("Links") instance=ExtResource("3_ukpx1")]
 position = Vector2(-64, 64)

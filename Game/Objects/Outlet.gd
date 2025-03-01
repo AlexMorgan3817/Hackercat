@@ -1,7 +1,7 @@
-@icon("res://Ico/EnterPoint_ico.png")
+@icon("res://Textures/Ico/EnterPoint_ico.png")
 extends NetAtom
 
-@export var RequiredAmountOfProgs:int = 0
+@export var RequiredAmountOfProgs:int = 0 # REWORK TO Array[Objective]; Objective extends Resource
 @export var scene:PackedScene
 
 func _ready():
@@ -9,5 +9,5 @@ func _ready():
 	$Mover.Interacted.connect(_interacted)
 
 func _interacted(MM:MainframeMover):
-	if MM.PC and len(MM.PC.GetPrograms()) >= RequiredAmountOfProgs:
+	if MM.PC and len(MM.PC.MyDeck.GetPrograms()) >= RequiredAmountOfProgs:
 		GLOB.switch_scene(self, scene)

@@ -1,8 +1,6 @@
-extends NetAtom
+class_name Trap extends NetAtom
 
-class_name Trap
-
-@export var myMM:MainframeMover
+@export var damage:int = 1
 var enabled:bool = true
 
 signal Triggered(Target:MainframeMover)
@@ -12,3 +10,9 @@ func trigger(MM:MainframeMover):
 		return
 	enabled = false
 	Triggered.emit(MM)
+	MM.ES.TakeDamage(damage)
+
+func place_on(n:MNode):
+	GLOB.get_global_node(n).add_child(self)
+	Mover.ForceMoveToNode(n, true)
+	n.MovedIn.connect(trigger)

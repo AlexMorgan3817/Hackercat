@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Program" load_steps=4 format=3 uid="uid://c7vlxo6818dsd"]
+
+[ext_resource type="Texture2D" uid="uid://cww12h8bl2yxn" path="res://Textures/player.png" id="1_lkw61"]
+[ext_resource type="Script" path="res://Game/Programs/Program.gd" id="1_mngrk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6on4h"]
+atlas = ExtResource("1_lkw61")
+region = Rect2(0, 0, 32, 32)
+
+[resource]
+script = ExtResource("1_mngrk")
+Name = "Floppa"
+Description = "What???"
+requiredPWR = 0
+BaseIcon = SubResource("AtlasTexture_6on4h")

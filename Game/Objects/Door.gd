@@ -1,7 +1,4 @@
-extends Node
-
-class_name Door
-
+class_name Door extends Node
 @export var MM:MainframeMover
 @export var sprite:Sprite2D
 @export var colorOpen:Color = Color.GREEN

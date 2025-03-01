@@ -1,14 +1,14 @@
 extends Node
 
-@export var Prog:PackedScene
+@export var Prog:Program
 
 signal PickedUp
 
 func trigger(MM:MainframeMover):
 	var player:PlayerController = MM.PC
-	if not player:
+	if not player or not player.MyDeck:
 		return
-	if player.AddProgram(Prog):
+	if player.MyDeck.AddProgram(Prog):
 		PickedUp.emit()
 		#emit_signal("PickedUp")
 

@@ -1,8 +1,5 @@
-@icon("res://Ico/door.png")
-extends NetAtom
-
-class_name DoorEntity
-
+@icon("res://Textures/Ico/door.png")
+class_name DoorEntity extends NetAtom
 @export var MyDoor:Door
 @export var InitialState:bool = false
 

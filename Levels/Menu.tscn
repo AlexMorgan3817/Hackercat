@@ -1,10 +1,10 @@
 [gd_scene load_steps=12 format=3 uid="uid://5cedf0n7tbl4"]
 
 [ext_resource type="Script" path="res://Scripts/SceneSystem/Scene.gd" id="1_7xrby"]
-[ext_resource type="PackedScene" uid="uid://c3jj6ge1rgqai" path="res://GenericPrefabs/LoopingAudioPlayer.tscn" id="2_4w3hu"]
+[ext_resource type="PackedScene" uid="uid://c3jj6ge1rgqai" path="res://Scripts/Generic/LoopingAudioPlayer.tscn" id="2_4w3hu"]
 [ext_resource type="AudioStream" uid="uid://ckmk2ypgww7g2" path="res://Sounds/music/Menu.mp3" id="3_t33wa"]
 [ext_resource type="Texture2D" uid="uid://1smr58nq6src" path="res://Textures/background.png" id="4_axuwc"]
-[ext_resource type="Theme" uid="uid://d2owybboqt1c3" path="res://Game/UI/GenericTheme.tres" id="5_w1qbn"]
+[ext_resource type="Theme" uid="uid://d2owybboqt1c3" path="res://GenericTheme.tres" id="5_w1qbn"]
 [ext_resource type="FontFile" uid="uid://bpbokby2oerfj" path="res://Textures/FSEX300.ttf" id="6_sp5ef"]
 [ext_resource type="Texture2D" uid="uid://cww12h8bl2yxn" path="res://Textures/player.png" id="7_0t6iv"]
 [ext_resource type="Script" path="res://Game/UI/StartButton.gd" id="8_er5bv"]
