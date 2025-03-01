@@ -1,28 +1,59 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://d2owybboqt1c3"]
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://d2owybboqt1c3"]
 
 [ext_resource type="FontFile" uid="uid://bpbokby2oerfj" path="res://Textures/FSEX300.ttf" id="1_eq8aj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0gs88"]
 bg_color = Color(0.196078, 0, 0.0588235, 1)
-corner_radius_top_left = 10
-corner_radius_bottom_right = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7y8wy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dri7d"]
+bg_color = Color(0, 0.380392, 0.345098, 0.631373)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.00397411, 0.522201, 0.482005, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3rdjh"]
+bg_color = Color(0, 0.380392, 0.345098, 0.631373)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.00397411, 0.522201, 0.482005, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yv3ai"]
-bg_color = Color(0, 0.694118, 0.635294, 0.662745)
-draw_center = false
+bg_color = Color(1.05888e-06, 0.267103, 0.240541, 0.301961)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.00200749, 0.362346, 0.333286, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_44ks4"]
-bg_color = Color(0, 0.592157, 0.592157, 1)
-corner_radius_top_left = 10
-corner_radius_bottom_right = 10
+bg_color = Color(1.3236e-07, 0.243591, 0.243591, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0.932477, 0.757307, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0fn4m"]
+bg_color = Color(0, 0.65378, 0.596054, 1)
 
 [resource]
 default_font_size = 44
 /font_sizes/Title = 16
 Button/fonts/font = ExtResource("1_eq8aj")
 Button/styles/disabled = SubResource("StyleBoxFlat_0gs88")
+Button/styles/focus = SubResource("StyleBoxEmpty_7y8wy")
+Button/styles/hover = SubResource("StyleBoxFlat_dri7d")
+Button/styles/hover_pressed = SubResource("StyleBoxFlat_3rdjh")
 Button/styles/normal = SubResource("StyleBoxFlat_yv3ai")
 Button/styles/pressed = SubResource("StyleBoxFlat_44ks4")
+CheckButton/styles/hover_mirrored = null
+CheckButton/styles/pressed = SubResource("StyleBoxFlat_0fn4m")
 LinkButton/fonts/font = ExtResource("1_eq8aj")
 ProgressBar/fonts/font = ExtResource("1_eq8aj")
 RichTextLabel/fonts/bold_font = ExtResource("1_eq8aj")

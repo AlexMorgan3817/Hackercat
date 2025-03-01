@@ -18,5 +18,4 @@ func _on_mainframe_mover_interacted(MM):         trigger()
 func _on_entity_status_death(ES):                trigger()
 
 
-func _on_copy_on_interact_picked_up():
-	pass # Replace with function body.
+func _on_copy_on_interact_picked_up(): trigger()

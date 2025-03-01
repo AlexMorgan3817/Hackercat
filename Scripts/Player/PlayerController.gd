@@ -11,19 +11,25 @@ var SelectedNode:MNode
 @export var MoveDelayTime:float = 0.55
 @export var InteractionDelayTime:float = 0.5
 @export var ProgramUseDelayTime:float = .5
+@export var ProgramSwitchDelayTime:float = .1
 
-var MoveDelay:Timer
-var InteractionDelay:Timer
-var ProgramUseDelay:Timer
+var MoveDelay         :Timer
+var InteractionDelay  :Timer
+var ProgramUseDelay   :Timer
+var ProgramSwitchDelay:Timer
 
 var CanMove       :bool = true
 var CanInteract   :bool = true
 var CanUsePrograms:bool = true
+var CanSwitch     :bool = true
+
+signal DescProg(pc:PlayerController, p:Program)
 
 func _ready():
-	MoveDelay        = GLOB.create_timer_if_need(self, MoveDelay       , func(): CanMove        = true, MoveDelayTime)
-	InteractionDelay = GLOB.create_timer_if_need(self, InteractionDelay, func(): CanInteract    = true, InteractionDelayTime)
-	ProgramUseDelay  = GLOB.create_timer_if_need(self, ProgramUseDelay , func(): CanUsePrograms = true, ProgramUseDelayTime)
+	MoveDelay           = GLOB.create_timer_if_need(self, MoveDelay                 , func(): CanMove        = true, MoveDelayTime)
+	InteractionDelay    = GLOB.create_timer_if_need(self, InteractionDelay          , func(): CanInteract    = true, InteractionDelayTime)
+	ProgramUseDelay     = GLOB.create_timer_if_need(self, ProgramUseDelay           , func(): CanUsePrograms = true, ProgramUseDelayTime)
+	ProgramSwitchDelay  = GLOB.create_timer_if_need(self, ProgramSwitchDelay , func(): CanSwitch = true, ProgramSwitchDelayTime)
 	if !MM: MM = get_parent()
 	MM.PreMovetime = MoveDelayTime - 0.05
 	if !MyDeck:
@@ -31,16 +37,16 @@ func _ready():
 			if i is Deck:
 				MyDeck = i
 				break
-	MyDeck.Ready(self)
-	MyDeck.ProgramPreUse.connect(func(deck:Deck): CanUsePrograms = false)
-	MyDeck.ProgramUsed.connect(func(deck:Deck): ProgramUseDelay.start())
-	# for i in MM.Host.get_children():
-	# 	if i.name == "UI" and i is CanvasLayer:
-	# 		for j in i.get_children():
-	# 			if j is ProgramFrame:
-	# 				Frame = j
-	# 				break
-	# 		break
+	if !MyDeck:
+		MyDeck = Deck.new()
+		add_child(MyDeck)
+	MyDeck.PC = self
+	MyDeck.ProgramPreUse.connect(  func(deck:Deck):
+		CanUsePrograms = false
+	)
+	MyDeck.ProgramUsed.connect(    func(deck:Deck):
+		ProgramUseDelay.start()
+	)
 
 func _process(_delta):
 	if !MM.CurrentNode:
@@ -74,8 +80,17 @@ func _process(_delta):
 			MM.Interact(SelectedNode)
 			# SelectedNode.Interacted.emit(MM)
 			return
-	# if Frame and Input.is_action_just_pressed("DescProgram"):
-	# 	return Frame.examine()
+	if CanSwitch:
+		if Input.is_action_just_pressed("SwitchLeft"):
+			MyDeck.PrevProgram()
+			switch_interaction()
+			return
+		if Input.is_action_just_pressed("SwitchRight"):
+			MyDeck.NextProgram()
+			switch_interaction()
+			return
+	if Input.is_action_just_pressed("DescProgram"):
+		DescProg.emit(self, MyDeck.GetCurrentProgram())
 
 	var d:Vector2i = get_discret_direction()
 	SelectedNode = null
@@ -90,6 +105,9 @@ func _process(_delta):
 	else:
 		SelectedIdicator.visible = false
 
+func switch_interaction():
+	ProgramSwitchDelay.start()
+	CanSwitch = false
 func cooldown_interaction():
 	InteractionDelay.start()
 	CanInteract = false

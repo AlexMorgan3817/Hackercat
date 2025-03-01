@@ -21,10 +21,10 @@ Host = NodePath("..")
 [node name="CopyOnInteract" type="Node" parent="."]
 script = ExtResource("3_bf2h6")
 
-[node name="Playsound" type="Node" parent="." node_paths=PackedStringArray("Host")]
+[node name="Playsound" type="Node" parent="CopyOnInteract" node_paths=PackedStringArray("Host")]
 script = ExtResource("4_88ack")
 sound = ExtResource("5_sgqid")
-Host = NodePath("..")
+Host = NodePath("../..")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0, 1, 1, 1)
@@ -32,4 +32,4 @@ texture_filter = 1
 texture = SubResource("AtlasTexture_gvlwu")
 
 [connection signal="Interacted" from="Mover" to="CopyOnInteract" method="_on_mainframe_mover_interacted"]
-[connection signal="PickedUp" from="CopyOnInteract" to="Playsound" method="_on_copy_on_interact_picked_up"]
+[connection signal="PickedUp" from="CopyOnInteract" to="CopyOnInteract/Playsound" method="_on_copy_on_interact_picked_up"]

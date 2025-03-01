@@ -1,7 +1,7 @@
 class_name Trapper extends Program
 
 @export var TrapScene:PackedScene
-
+@export var place_sound:AudioStream
 func IsUsable(deck:Deck):
 	if not super(deck):
 		return false
@@ -11,3 +11,9 @@ func IsUsable(deck:Deck):
 		if is_instance_valid(i) and i.Host is Trap:
 			return false
 	return true
+
+func UseProgram(deck:Deck):
+	assert(TrapScene)
+	var k:Trap = TrapScene.instantiate()
+	k.place_on(deck.PC.MM.CurrentNode)
+	PlaySound.playsound(deck.PC.MM.Host, place_sound)

@@ -1,5 +1,7 @@
 class_name Lance extends Program
 
+@export var LanceSound:AudioStream
+
 func IsUsable(deck:Deck):
 	if not super(deck):
 		return false
@@ -16,4 +18,5 @@ func UseProgram(deck:Deck):
 				break
 	if target and not target.open:
 		target.set_open(true)
+		PlaySound.playsound(deck.PC.SelectedNode, LanceSound)
 		super(deck)

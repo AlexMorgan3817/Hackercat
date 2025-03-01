@@ -9,5 +9,5 @@ func _ready():
 	$Mover.Interacted.connect(_interacted)
 
 func _interacted(MM:MainframeMover):
-	if MM.PC and len(MM.PC.GetPrograms()) >= RequiredAmountOfProgs:
+	if MM.PC and len(MM.PC.MyDeck.GetPrograms()) >= RequiredAmountOfProgs:
 		GLOB.switch_scene(self, scene)
