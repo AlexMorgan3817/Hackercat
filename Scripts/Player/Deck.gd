@@ -49,6 +49,8 @@ func AddProgram(p:Program) -> bool:
 	if len(Programs) >= ProgramLimit:
 		return false
 	Programs.append(p)
+	if len(Programs) == 1:
+		SetCurrent(0, 1)
 	return true
 
 func GetCurrentProgram() -> Program:
@@ -68,11 +70,11 @@ func UseProgram():
 	GetCurrentProgram().UseProgram(self)
 	ProgramUsed.emit(self)
 
-func SetCurrent(v):
+func SetCurrent(v, silent = false):
 	if v > len(Programs):
 		return false
 	Program_idx = v
-	ProgramSwitched.emit(self, Programs[v], false)
+	ProgramSwitched.emit(self, Programs[v], silent)
 	return Programs[v]
 
 func AdjustProgram(v):
