@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Game/MainframeMover.gd" id="1_01thn"]
 [ext_resource type="Script" path="res://Game/Player.gd" id="1_4s5h1"]
-[ext_resource type="Script" path="res://Game/Programs/Program.gd" id="2_shs8w"]
+[ext_resource type="Script" path="res://Game/Res/Programs/Program.gd" id="2_shs8w"]
 [ext_resource type="Texture2D" uid="uid://cww12h8bl2yxn" path="res://Textures/player.png" id="2_t7sil"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerController.gd" id="2_vceko"]
 [ext_resource type="AudioStream" uid="uid://btk08wrjernp" path="res://Sounds/Denied.mp3" id="3_2kcce"]

@@ -13,9 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://b6mnny4h5lmn2" path="res://Game/Objects/Collectable.tscn" id="9_8exj0"]
 [ext_resource type="FontFile" uid="uid://bpbokby2oerfj" path="res://Textures/FSEX300.ttf" id="9_fcnlw"]
 [ext_resource type="PackedScene" uid="uid://bb0je45hl3d2v" path="res://Game/UI/PlayersNodeSelector.tscn" id="10_s4clc"]
-[ext_resource type="Resource" uid="uid://bjd43buf1nst2" path="res://Game/Programs/Res/Lance.tres" id="11_2jioq"]
+[ext_resource type="Resource" uid="uid://bjd43buf1nst2" path="res://Game/Res/Programs/Lance.tres" id="11_2jioq"]
 [ext_resource type="PackedScene" uid="uid://dq7tkqffimn35" path="res://Game/Objects/Outlet.tscn" id="11_aggyy"]
-[ext_resource type="Resource" uid="uid://cwuw4jnmlmwnd" path="res://Game/Programs/Res/Trapper.tres" id="12_5ob8m"]
+[ext_resource type="Resource" uid="uid://cwuw4jnmlmwnd" path="res://Game/Res/Programs/Trapper.tres" id="12_5ob8m"]
 [ext_resource type="PackedScene" uid="uid://d3c7dkq8468ca" path="res://Levels/LevelPrototype.tscn" id="16_7ypnn"]
 
 [node name="1level" type="Node2D"]
