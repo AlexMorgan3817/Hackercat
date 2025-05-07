@@ -2,3 +2,5 @@
 .godot/
 bin/
 *.tmp
+addons/
+.vscode/

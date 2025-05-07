@@ -4,12 +4,13 @@ var DeathTimer:Timer
 
 signal stream_exhausted(ps:PlaySound)
 
-static func playsound(loc:Node2D, v:AudioStream, volume:float = 1):
+static func playsound(loc:Node2D, v:AudioStream, volume:float = 1, reversed_range:float = 10):
 	var p = PlaySound.new()
 	GLOB.get_global_node(loc).add_child(p)
 	p.set_global_position(loc.get_global_position())
 	p.setup(v)
 	p.player.volume_db = volume
+	p.player.attenuation = reversed_range
 	p.startPlaying()
 	return p
 

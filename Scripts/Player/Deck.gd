@@ -13,14 +13,14 @@ signal PWRChanged(PC:PlayerController, PWR:int)
 signal ProgramPreUse(deck:Deck)
 signal ProgramUsed(deck:Deck)
 
-signal ProgramSwitched(deck:Deck, prog:Program)
+signal ProgramSwitched(deck:Deck, prog:Program, silent:bool)
 
 func _ready():
 	if !PC: PC = get_parent()
 
 func Ready(NA:NetAtom):
 	PWRChanged.emit(self, PWR)
-	ProgramSwitched.emit(self, GetCurrentProgram())
+	ProgramSwitched.emit(self, GetCurrentProgram(), true)
 
 func InitPWR(val:int):
 	if val <= 0:
@@ -72,7 +72,7 @@ func SetCurrent(v):
 	if v > len(Programs):
 		return false
 	Program_idx = v
-	ProgramSwitched.emit(self, Programs[v])
+	ProgramSwitched.emit(self, Programs[v], false)
 	return Programs[v]
 
 func AdjustProgram(v):

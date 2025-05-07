@@ -440,6 +440,20 @@ InitialHP = 6
 StartingPrograms = Array[ExtResource("2_shs8w")]([])
 SwitchingSounds = Array[AudioStream]([ExtResource("3_obtwm"), ExtResource("4_8b252"), ExtResource("5_cj8al"), ExtResource("6_3dgvk")])
 
+[node name="Moved" type="AudioStreamPlayer2D" parent="."]
+volume_db = -4.245
+script = ExtResource("4_omcvj")
+
+[node name="PreMove" type="AudioStreamPlayer2D" parent="Moved"]
+stream = ExtResource("13_2kfhk")
+script = ExtResource("4_omcvj")
+
+[node name="Bumped" type="AudioStreamPlayer2D" parent="Moved"]
+stream = ExtResource("3_2kcce")
+script = ExtResource("4_omcvj")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+
 [node name="Mover" type="Node" parent="." node_paths=PackedStringArray("Host", "PC", "ES")]
 script = ExtResource("1_01thn")
 Host = NodePath("..")
@@ -479,18 +493,6 @@ script = ExtResource("12_dfy3n")
 
 [node name="Selected" parent="Mover/PlayerController" instance=ExtResource("9_46t8f")]
 visible = false
-
-[node name="Moved" type="AudioStreamPlayer2D" parent="Mover"]
-volume_db = -4.245
-script = ExtResource("4_omcvj")
-
-[node name="PreMove" type="AudioStreamPlayer2D" parent="Mover/Moved"]
-stream = ExtResource("13_2kfhk")
-script = ExtResource("4_omcvj")
-
-[node name="Bumped" type="AudioStreamPlayer2D" parent="Mover/Moved"]
-stream = ExtResource("3_2kcce")
-script = ExtResource("4_omcvj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0, 1, 1, 1)
@@ -718,7 +720,6 @@ grow_horizontal = 2
 
 [node name="DamageOverlay" type="CanvasLayer" parent="."]
 layer = 20
-visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="DamageOverlay"]
 libraries = {
@@ -776,9 +777,9 @@ position = Vector2(-32, -32)
 texture = SubResource("GradientTexture2D_lrxn0")
 polygon = PackedVector2Array(-16, 80, -16, -16, 80, -16, 80, 80)
 
-[connection signal="Bumped" from="Mover" to="Mover/Moved/Bumped" method="_on_mover_bumped"]
-[connection signal="Moved" from="Mover" to="Mover/Moved" method="_on_mover_moved"]
-[connection signal="PreMovement" from="Mover" to="Mover/Moved/PreMove" method="_on_mover_pre_movement"]
+[connection signal="Bumped" from="Mover" to="Moved/Bumped" method="_on_mover_bumped"]
+[connection signal="Moved" from="Mover" to="Moved" method="_on_mover_moved"]
+[connection signal="PreMovement" from="Mover" to="Moved/PreMove" method="_on_mover_pre_movement"]
 [connection signal="PreMovement" from="Mover" to="Sprite2D/ColorRect/AnimationPlayer" method="_on_mover_animate_pre_movement"]
 [connection signal="Death" from="Mover/EntityStatus" to="Mover/EntityStatus/DeathCamera" method="_on_entity_status_death"]
 [connection signal="Death" from="Mover/EntityStatus" to="Mover/EntityStatus/DeathCamera/Playsound" method="_on_entity_status_death"]

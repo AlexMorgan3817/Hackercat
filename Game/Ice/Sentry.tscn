@@ -321,6 +321,18 @@ z_as_relative = false
 material = SubResource("ShaderMaterial_46tww")
 script = ExtResource("1_s8n8a")
 
+[node name="Moved" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_4h768")
+volume_db = -15.0
+attenuation = 16.0
+script = ExtResource("12_bf8g8")
+
+[node name="PreMove" type="AudioStreamPlayer2D" parent="Moved"]
+stream = ExtResource("13_5ew7f")
+volume_db = -8.0
+attenuation = 16.0
+script = ExtResource("12_bf8g8")
+
 [node name="Mover" type="Node" parent="." node_paths=PackedStringArray("Host", "ES")]
 script = ExtResource("1_jco4c")
 Host = NodePath("..")
@@ -360,16 +372,6 @@ libraries = {
 [node name="ScanSprite" type="Sprite2D" parent="Mover/SimpleMind"]
 visible = false
 texture = SubResource("AtlasTexture_l2htv")
-
-[node name="Moved" type="AudioStreamPlayer2D" parent="Mover"]
-stream = ExtResource("11_4h768")
-volume_db = -15.0
-script = ExtResource("12_bf8g8")
-
-[node name="PreMove" type="AudioStreamPlayer2D" parent="Mover/Moved"]
-stream = ExtResource("13_5ew7f")
-volume_db = -8.0
-script = ExtResource("12_bf8g8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 2
@@ -413,8 +415,8 @@ color = Color(1, 0, 0, 0.796078)
 polygon = PackedVector2Array(-16, 0, 0, -16, 16, 0, 0, 16)
 
 [connection signal="FinishMovement" from="Mover" to="AnimatedSprite2D/ColorRect/AnimationPlayer" method="_on_mover_animate_finish_movement"]
-[connection signal="Moved" from="Mover" to="Mover/Moved" method="_on_mover_moved"]
-[connection signal="PreMovement" from="Mover" to="Mover/Moved/PreMove" method="_on_mover_pre_movement"]
+[connection signal="Moved" from="Mover" to="Moved" method="_on_mover_moved"]
+[connection signal="PreMovement" from="Mover" to="Moved/PreMove" method="_on_mover_pre_movement"]
 [connection signal="PreMovement" from="Mover" to="AnimatedSprite2D/ColorRect/AnimationPlayer" method="_on_mover_animate_pre_movement"]
 [connection signal="Death" from="Mover/EntityStatus" to="Mover/EntityStatus/DeleteSelf" method="_on_entity_status_death"]
 [connection signal="Attack" from="Mover/SimpleMind" to="Mover/SimpleMind/DealDamage" method="_on_simple_mind_attack"]

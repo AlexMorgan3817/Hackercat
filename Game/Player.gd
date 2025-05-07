@@ -34,13 +34,14 @@ func _ready():
 	$Mover/PlayerController.MyDeck.PWRChanged.connect($UI/PWR._on_player_controller_pwr_changed)
 	if InitialPWR != -1: $Mover/PlayerController.MyDeck.InitPWR(InitialPWR)
 
-	$Mover/PlayerController.MyDeck.ProgramSwitched.connect(func(deck:Deck, prog:Program):
+	$Mover/PlayerController.MyDeck.ProgramSwitched.connect(func(deck:Deck, prog:Program, silent:bool):
 		if prog:
 			$UI/CurrentProgram/Icon.texture = prog.BaseIcon
 		else:
 			$UI/CurrentProgram/Icon.texture = null
 		update_desc(prog)
-		PlaySound.playsound(self, SwitchingSounds.pick_random(), 0.5)
+		if not silent:
+			PlaySound.playsound(self, SwitchingSounds.pick_random(), 0.5)
 	)
 	$Mover/PlayerController.DescProg.connect(func(pc:PlayerController, p:Program):
 		update_desc(p)
@@ -49,3 +50,4 @@ func _ready():
 	for i in StartingPrograms:
 		$Mover/PlayerController.MyDeck.AddProgram(i)
 	$Mover/PlayerController.MyDeck.Ready(self)
+	$AudioListener2D.make_current()
