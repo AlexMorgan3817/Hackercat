@@ -67,7 +67,9 @@ func GetPrograms() -> Array:
 
 func UseProgram():
 	ProgramPreUse.emit(self)
-	GetCurrentProgram().UseProgram(self)
+	var p:Program = GetCurrentProgram()
+	if p:
+		p.UseProgram(self)
 	ProgramUsed.emit(self)
 
 func SetCurrent(v, silent = false):
