@@ -1,38 +1,38 @@
 [gd_scene load_steps=67 format=3 uid="uid://ydl0vw3rio2e"]
 
-[ext_resource type="Script" path="res://Game/MainframeMover.gd" id="1_01thn"]
-[ext_resource type="Script" path="res://Game/Player.gd" id="1_4s5h1"]
-[ext_resource type="Script" path="res://Game/Res/Programs/Program.gd" id="2_shs8w"]
+[ext_resource type="Script" uid="uid://cffj5we6v12by" path="res://Game/MainframeMover.gd" id="1_01thn"]
+[ext_resource type="Script" uid="uid://bbppdpsgo4ig4" path="res://Game/Player.gd" id="1_4s5h1"]
+[ext_resource type="Script" uid="uid://0j07wck1klu5" path="res://Game/Res/Programs/Program.gd" id="2_shs8w"]
 [ext_resource type="Texture2D" uid="uid://cww12h8bl2yxn" path="res://Textures/player.png" id="2_t7sil"]
-[ext_resource type="Script" path="res://Scripts/Player/PlayerController.gd" id="2_vceko"]
+[ext_resource type="Script" uid="uid://coep7hki2uawm" path="res://Scripts/Player/PlayerController.gd" id="2_vceko"]
 [ext_resource type="AudioStream" uid="uid://btk08wrjernp" path="res://Sounds/Denied.mp3" id="3_2kcce"]
 [ext_resource type="AudioStream" uid="uid://cju87bf8otlwf" path="res://Sounds/SwitchProgram/SwitchProg1.mp3" id="3_obtwm"]
-[ext_resource type="Script" path="res://Scripts/OnTrigger/DeathCamera.gd" id="3_vscif"]
+[ext_resource type="Script" uid="uid://c5rydaf8howr5" path="res://Scripts/OnTrigger/DeathCamera.gd" id="3_vscif"]
 [ext_resource type="AudioStream" uid="uid://b4qey8rbn882a" path="res://Sounds/SwitchProgram/SwitchProg2.mp3" id="4_8b252"]
-[ext_resource type="Script" path="res://Scripts/OnTrigger/PlaysoundOnTrigger.gd" id="4_84emm"]
-[ext_resource type="Script" path="res://Scripts/Generic/AudioStreamPlayer2D.gd" id="4_omcvj"]
+[ext_resource type="Script" uid="uid://runhja4im2bv" path="res://Scripts/OnTrigger/PlaysoundOnTrigger.gd" id="4_84emm"]
+[ext_resource type="Script" uid="uid://dwvmtb3mhhcok" path="res://Scripts/Generic/AudioStreamPlayer2D.gd" id="4_omcvj"]
 [ext_resource type="PackedScene" uid="uid://ckbium6b60knt" path="res://Game/UI/GameOver.tscn" id="4_q13fx"]
 [ext_resource type="PackedScene" uid="uid://dfqylyvtdl3do" path="res://Scripts/Generic/EntityStatus.tscn" id="5_04e6d"]
 [ext_resource type="AudioStream" uid="uid://bh5guieyybvt6" path="res://Sounds/SwitchProgram/SwitchProg3.mp3" id="5_cj8al"]
 [ext_resource type="AudioStream" uid="uid://83edsse3qbpn" path="res://Sounds/TookDamage.mp3" id="5_o4v8h"]
 [ext_resource type="AudioStream" uid="uid://bdji6rr7gojts" path="res://Sounds/SwitchProgram/SwitchProg4.mp3" id="6_3dgvk"]
 [ext_resource type="AudioStream" uid="uid://bqg2rysk6copf" path="res://Sounds/Mortis.wav" id="7_qm4xg"]
-[ext_resource type="Script" path="res://Scripts/Player/PlayerDeath.gd" id="8_3fpi5"]
-[ext_resource type="Shader" path="res://Shaders/Glitch.gdshader" id="8_8uemn"]
+[ext_resource type="Script" uid="uid://dhsrhyrta2lwk" path="res://Scripts/Player/PlayerDeath.gd" id="8_3fpi5"]
+[ext_resource type="Shader" uid="uid://dmnyvoo1h2bpv" path="res://Shaders/Glitch.gdshader" id="8_8uemn"]
 [ext_resource type="PackedScene" uid="uid://bb0je45hl3d2v" path="res://Game/UI/PlayersNodeSelector.tscn" id="9_46t8f"]
 [ext_resource type="TileSet" uid="uid://bt4xt8h2f55yp" path="res://Textures/Tilemaps/floor2.tres" id="9_hsqwn"]
-[ext_resource type="Script" path="res://Scripts/Generic/AnimationPlayer.gd" id="10_j3mcr"]
-[ext_resource type="Script" path="res://Scripts/Player/Deck.gd" id="12_dfy3n"]
+[ext_resource type="Script" uid="uid://cblhqsi2gabna" path="res://Scripts/Generic/AnimationPlayer.gd" id="10_j3mcr"]
+[ext_resource type="Script" uid="uid://bhklocyvvc6ef" path="res://Scripts/Player/Deck.gd" id="12_dfy3n"]
 [ext_resource type="AudioStream" uid="uid://5ep8m0usx684" path="res://Sounds/Player PreMove.mp3" id="13_2kfhk"]
-[ext_resource type="Shader" path="res://Shaders/MovementGlitch.gdshader" id="17_4a8yp"]
-[ext_resource type="Shader" path="res://Shaders/Crash.gdshader" id="19_agu0g"]
+[ext_resource type="Shader" uid="uid://bc875nudfp5gv" path="res://Shaders/MovementGlitch.gdshader" id="17_4a8yp"]
+[ext_resource type="Shader" uid="uid://c78tforut7obq" path="res://Shaders/Crash.gdshader" id="19_agu0g"]
 [ext_resource type="Texture2D" uid="uid://1vseclfqtktx" path="res://Textures/TookDamageDisplay2.png" id="20_blgso"]
 [ext_resource type="Texture2D" uid="uid://b4810la5lo62n" path="res://Textures/TookDamageDisplay.png" id="20_x650g"]
 [ext_resource type="Theme" uid="uid://d2owybboqt1c3" path="res://GenericTheme.tres" id="21_gnkv6"]
-[ext_resource type="Script" path="res://Game/UI/ProgBar.gd" id="22_51sto"]
-[ext_resource type="Script" path="res://Scripts/target_move_animation.gd" id="23_iokp4"]
+[ext_resource type="Script" uid="uid://cme7i7q2b356h" path="res://Game/UI/ProgBar.gd" id="22_51sto"]
+[ext_resource type="Script" uid="uid://co13jx7dvirud" path="res://Scripts/target_move_animation.gd" id="23_iokp4"]
 [ext_resource type="Texture2D" uid="uid://vkraj5ihpgqn" path="res://Textures/UI_Frame.png" id="23_opeoo"]
-[ext_resource type="Script" path="res://Game/UI/Info.gd" id="25_0n6ab"]
+[ext_resource type="Script" uid="uid://bncg37fkhrhtb" path="res://Game/UI/Info.gd" id="25_0n6ab"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0rm4v"]
 width = 32
@@ -41,11 +41,11 @@ height = 32
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a35fg"]
 shader = ExtResource("8_8uemn")
 shader_parameter/MIX = 0.0
+shader_parameter/displace = SubResource("NoiseTexture2D_0rm4v")
 shader_parameter/displaysmentAmount = 1.0
 shader_parameter/colorChange = Vector4(0, -1, -1, 0)
-shader_parameter/AbberationMix = null
-shader_parameter/AbbreationAmt = null
-shader_parameter/displace = SubResource("NoiseTexture2D_0rm4v")
+shader_parameter/AbberationMix = 0.0
+shader_parameter/AbbreationAmt = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_85uxc"]
 atlas = ExtResource("2_t7sil")
@@ -108,8 +108,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tk2mg"]
 _data = {
-"RESET": SubResource("Animation_tddq0"),
-"TookDamage": SubResource("Animation_upyae")
+&"RESET": SubResource("Animation_tddq0"),
+&"TookDamage": SubResource("Animation_upyae")
 }
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_s361j"]
@@ -223,9 +223,9 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y546u"]
 _data = {
-"Moved": SubResource("Animation_ylphu"),
-"Premove": SubResource("Animation_ljtq2"),
-"RESET": SubResource("Animation_c8004")
+&"Moved": SubResource("Animation_ylphu"),
+&"Premove": SubResource("Animation_ljtq2"),
+&"RESET": SubResource("Animation_c8004")
 }
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7f6xe"]
@@ -313,8 +313,8 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wwfet"]
 _data = {
-"RESET": SubResource("Animation_brs72"),
-"TookDamage": SubResource("Animation_3c8h1")
+&"RESET": SubResource("Animation_brs72"),
+&"TookDamage": SubResource("Animation_3c8h1")
 }
 
 [sub_resource type="Gradient" id="Gradient_kgeps"]
@@ -346,12 +346,12 @@ shader_parameter/MIX = 0.0
 shader_parameter/amt = 0.0
 shader_parameter/direction = 0.6
 shader_parameter/ScreenOffset = Vector2(0, 0)
-shader_parameter/MixSubtract = 0.2
-shader_parameter/MixOverlay = 1.0
-shader_parameter/ColorOffset = Vector4(0, 0, 0, 0)
 shader_parameter/displace = ExtResource("20_x650g")
+shader_parameter/MixSubtract = 0.2
 shader_parameter/subtractdisplace = SubResource("GradientTexture2D_ettut")
+shader_parameter/MixOverlay = 1.0
 shader_parameter/Overlay = ExtResource("20_blgso")
+shader_parameter/ColorOffset = Vector4(0, 0, 0, 0)
 shader_parameter/mask_texture = SubResource("GradientTexture2D_riekv")
 
 [sub_resource type="Gradient" id="Gradient_0jyce"]
@@ -419,12 +419,12 @@ shader_parameter/MIX = 1.0
 shader_parameter/amt = 0.2
 shader_parameter/direction = 0.8
 shader_parameter/ScreenOffset = Vector2(-0.09, -0.08)
-shader_parameter/MixSubtract = 0.0
-shader_parameter/MixOverlay = 0.0
-shader_parameter/ColorOffset = Vector4(0, 0, 0.485, -0.845)
 shader_parameter/displace = ExtResource("20_x650g")
+shader_parameter/MixSubtract = 0.0
 shader_parameter/subtractdisplace = ExtResource("20_blgso")
+shader_parameter/MixOverlay = 0.0
 shader_parameter/Overlay = ExtResource("20_blgso")
+shader_parameter/ColorOffset = Vector4(0, 0, 0.485, -0.845)
 shader_parameter/mask_texture = SubResource("GradientTexture2D_ionvo")
 
 [sub_resource type="Gradient" id="Gradient_pryqa"]
@@ -504,7 +504,7 @@ texture = SubResource("AtlasTexture_85uxc")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
-"": SubResource("AnimationLibrary_tk2mg")
+&"": SubResource("AnimationLibrary_tk2mg")
 }
 script = ExtResource("10_j3mcr")
 
@@ -517,7 +517,7 @@ texture = SubResource("GradientTexture2D_u4j1w")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D/ColorRect"]
 root_node = NodePath("../..")
 libraries = {
-"": SubResource("AnimationLibrary_y546u")
+&"": SubResource("AnimationLibrary_y546u")
 }
 speed_scale = 2.0
 script = ExtResource("10_j3mcr")
@@ -723,7 +723,7 @@ layer = 20
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="DamageOverlay"]
 libraries = {
-"": SubResource("AnimationLibrary_wwfet")
+&"": SubResource("AnimationLibrary_wwfet")
 }
 script = ExtResource("10_j3mcr")
 

@@ -1,26 +1,26 @@
 [gd_scene load_steps=54 format=3 uid="uid://xwwpba04pbj4"]
 
-[ext_resource type="Shader" path="res://Shaders/ColMatrix.gdshader" id="1_0l4gv"]
-[ext_resource type="Script" path="res://Game/MainframeMover.gd" id="1_jco4c"]
-[ext_resource type="Script" path="res://Game/Ice/Sentry.gd" id="1_s8n8a"]
+[ext_resource type="Shader" uid="uid://bec01q5auxcos" path="res://Shaders/ColMatrix.gdshader" id="1_0l4gv"]
+[ext_resource type="Script" uid="uid://cffj5we6v12by" path="res://Game/MainframeMover.gd" id="1_jco4c"]
+[ext_resource type="Script" uid="uid://bhu52n7f5rfao" path="res://Game/Ice/Sentry.gd" id="1_s8n8a"]
 [ext_resource type="PackedScene" uid="uid://dfqylyvtdl3do" path="res://Scripts/Generic/EntityStatus.tscn" id="2_2r0uj"]
-[ext_resource type="Script" path="res://Game/Ice/SentryMind.gd" id="2_cc7e5"]
+[ext_resource type="Script" uid="uid://cdfqaw7ou5oxc" path="res://Game/Ice/SentryMind.gd" id="2_cc7e5"]
 [ext_resource type="Texture2D" uid="uid://cywifay0lfcmq" path="res://Textures/Skull.png" id="3_eo0qx"]
-[ext_resource type="Script" path="res://Scripts/OnTrigger/DeleteSelf.gd" id="3_rp1x0"]
-[ext_resource type="Script" path="res://Scripts/Generic/AnimatedSprite2D.gd" id="4_8b5v4"]
+[ext_resource type="Script" uid="uid://ccchpskciv2fq" path="res://Scripts/OnTrigger/DeleteSelf.gd" id="3_rp1x0"]
+[ext_resource type="Script" uid="uid://bx1ttspxnv1xp" path="res://Scripts/Generic/AnimatedSprite2D.gd" id="4_8b5v4"]
 [ext_resource type="Texture2D" uid="uid://bocm4ao03u5b6" path="res://Textures/MainframeObj.png" id="5_lrfk4"]
-[ext_resource type="Script" path="res://Scripts/OnTrigger/DealDamage.gd" id="6_tvfqk"]
-[ext_resource type="Script" path="res://Scripts/OnTrigger/PlaysoundOnTrigger.gd" id="7_ptjub"]
+[ext_resource type="Script" uid="uid://cp8g557016amu" path="res://Scripts/OnTrigger/DealDamage.gd" id="6_tvfqk"]
+[ext_resource type="Script" uid="uid://runhja4im2bv" path="res://Scripts/OnTrigger/PlaysoundOnTrigger.gd" id="7_ptjub"]
 [ext_resource type="AudioStream" uid="uid://dd6arj43wrxsw" path="res://Sounds/Skull/SentryAttack.mp3" id="8_2yra7"]
-[ext_resource type="Script" path="res://Game/Ice/SkeletonAttackFX.gd" id="9_1gva1"]
+[ext_resource type="Script" uid="uid://ps4w2lfvgbxd" path="res://Game/Ice/SkeletonAttackFX.gd" id="9_1gva1"]
 [ext_resource type="Texture2D" uid="uid://5wt6lnh6b41g" path="res://Textures/Skull_Attacks.png" id="9_ka2bt"]
-[ext_resource type="Script" path="res://Scripts/OnTrigger/PlayAnimation.gd" id="11_2w0im"]
+[ext_resource type="Script" uid="uid://w4d3qvae64fj" path="res://Scripts/OnTrigger/PlayAnimation.gd" id="11_2w0im"]
 [ext_resource type="AudioStream" uid="uid://cwcv03x2xqdua" path="res://Sounds/Skull/SentryMoved.mp3" id="11_4h768"]
-[ext_resource type="Script" path="res://Scripts/Generic/AudioStreamPlayer2D.gd" id="12_bf8g8"]
+[ext_resource type="Script" uid="uid://dwvmtb3mhhcok" path="res://Scripts/Generic/AudioStreamPlayer2D.gd" id="12_bf8g8"]
 [ext_resource type="AudioStream" uid="uid://cox3bxhxxkpus" path="res://Sounds/Skull/SentryPreMove.mp3" id="13_5ew7f"]
-[ext_resource type="Script" path="res://Scripts/Generic/AnimationPlayer.gd" id="14_2604y"]
-[ext_resource type="Shader" path="res://Shaders/MovementGlitch.gdshader" id="15_jtxtx"]
-[ext_resource type="Script" path="res://Scripts/target_move_animation.gd" id="16_0oia1"]
+[ext_resource type="Script" uid="uid://cblhqsi2gabna" path="res://Scripts/Generic/AnimationPlayer.gd" id="14_2604y"]
+[ext_resource type="Shader" uid="uid://bc875nudfp5gv" path="res://Shaders/MovementGlitch.gdshader" id="15_jtxtx"]
+[ext_resource type="Script" uid="uid://co13jx7dvirud" path="res://Scripts/target_move_animation.gd" id="16_0oia1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_46tww"]
 
@@ -78,8 +78,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n82un"]
 _data = {
-"RESET": SubResource("Animation_1qeei"),
-"reload": SubResource("Animation_rs5ew")
+&"RESET": SubResource("Animation_1qeei"),
+&"reload": SubResource("Animation_rs5ew")
 }
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l2htv"]
@@ -310,9 +310,9 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y546u"]
 _data = {
-"Moved": SubResource("Animation_ylphu"),
-"Premove": SubResource("Animation_ljtq2"),
-"RESET": SubResource("Animation_c8004")
+&"Moved": SubResource("Animation_ylphu"),
+&"Premove": SubResource("Animation_ljtq2"),
+&"RESET": SubResource("Animation_c8004")
 }
 
 [node name="Sentry" type="Node2D"]
@@ -366,7 +366,7 @@ script = ExtResource("9_1gva1")
 
 [node name="ReloadAnimation" type="AnimationPlayer" parent="Mover/SimpleMind/AtckFX"]
 libraries = {
-"": SubResource("AnimationLibrary_n82un")
+&"": SubResource("AnimationLibrary_n82un")
 }
 
 [node name="ScanSprite" type="Sprite2D" parent="Mover/SimpleMind"]
@@ -403,7 +403,7 @@ color = Color(1, 1, 1, 0)
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D/ColorRect"]
 root_node = NodePath("../..")
 libraries = {
-"": SubResource("AnimationLibrary_y546u")
+&"": SubResource("AnimationLibrary_y546u")
 }
 script = ExtResource("14_2604y")
 

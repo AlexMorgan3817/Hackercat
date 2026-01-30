@@ -1,14 +1,14 @@
 [gd_scene load_steps=14 format=3 uid="uid://c70anyi2sx7t5"]
 
-[ext_resource type="Script" path="res://Game/Objects/Trap.gd" id="1_7gjvn"]
-[ext_resource type="Script" path="res://Game/MainframeMover.gd" id="2_exyee"]
+[ext_resource type="Script" uid="uid://d1lxu6tjuf0gf" path="res://Game/Objects/Trap.gd" id="1_7gjvn"]
+[ext_resource type="Script" uid="uid://cffj5we6v12by" path="res://Game/MainframeMover.gd" id="2_exyee"]
 [ext_resource type="Texture2D" uid="uid://bht2r2u1bkmrn" path="res://Textures/Spikes.png" id="3_0a0ab"]
-[ext_resource type="Script" path="res://Scripts/OnTrigger/DeleteSelf.gd" id="4_7es8u"]
-[ext_resource type="Script" path="res://Scripts/OnTrigger/PlaysoundOnTrigger.gd" id="5_2ftcj"]
-[ext_resource type="Script" path="res://Scripts/OnTrigger/StartTimer.gd" id="5_6yjde"]
+[ext_resource type="Script" uid="uid://ccchpskciv2fq" path="res://Scripts/OnTrigger/DeleteSelf.gd" id="4_7es8u"]
+[ext_resource type="Script" uid="uid://runhja4im2bv" path="res://Scripts/OnTrigger/PlaysoundOnTrigger.gd" id="5_2ftcj"]
+[ext_resource type="Script" uid="uid://mru2cqn8u46i" path="res://Scripts/OnTrigger/StartTimer.gd" id="5_6yjde"]
 [ext_resource type="AudioStream" uid="uid://c6qg3a2owkeme" path="res://Sounds/Switch 2.mp3" id="6_p7ch4"]
-[ext_resource type="Script" path="res://Scripts/OnTrigger/DealDamage.gd" id="7_hqsmc"]
-[ext_resource type="Script" path="res://Scripts/OnTrigger/PlayAnimatedSpriteOnTrigger.gd" id="8_crklt"]
+[ext_resource type="Script" uid="uid://cp8g557016amu" path="res://Scripts/OnTrigger/DealDamage.gd" id="7_hqsmc"]
+[ext_resource type="Script" uid="uid://dnebx3h2senj" path="res://Scripts/OnTrigger/PlayAnimatedSpriteOnTrigger.gd" id="8_crklt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gs1op"]
 atlas = ExtResource("3_0a0ab")

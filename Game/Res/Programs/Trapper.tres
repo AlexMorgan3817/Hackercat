@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Trapper" load_steps=6 format=3 uid="uid://cwuw4jnmlmwnd"]
 
-[ext_resource type="Script" path="res://Game/Res/Programs/Trapper.gd" id="1_20jl6"]
+[ext_resource type="Script" uid="uid://bc4cooj8cm8ra" path="res://Game/Res/Programs/Trapper.gd" id="1_20jl6"]
 [ext_resource type="Texture2D" uid="uid://clg34lje236ie" path="res://Textures/ProgramIcons.png" id="1_308b5"]
 [ext_resource type="PackedScene" uid="uid://c70anyi2sx7t5" path="res://Game/Objects/Trap.tscn" id="1_to6ub"]
 [ext_resource type="AudioStream" uid="uid://c4vfn0r41ew3b" path="res://Sounds/Programs/Trapper.mp3" id="3_uy2pn"]

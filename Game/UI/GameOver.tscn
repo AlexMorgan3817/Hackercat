@@ -1,11 +1,11 @@
 [gd_scene load_steps=14 format=3 uid="uid://ckbium6b60knt"]
 
-[ext_resource type="Shader" path="res://Shaders/Glitch.gdshader" id="1_8bgix"]
+[ext_resource type="Shader" uid="uid://dmnyvoo1h2bpv" path="res://Shaders/Glitch.gdshader" id="1_8bgix"]
 [ext_resource type="Theme" uid="uid://d2owybboqt1c3" path="res://GenericTheme.tres" id="1_fbb7f"]
-[ext_resource type="Script" path="res://Scripts/OnTrigger/RestartSceneOnDeath.gd" id="2_ejbwx"]
+[ext_resource type="Script" uid="uid://xbs0svq218ml" path="res://Scripts/OnTrigger/RestartSceneOnDeath.gd" id="2_ejbwx"]
 [ext_resource type="Texture2D" uid="uid://bhfye6357236s" path="res://Textures/Shade.png" id="2_j7dga"]
 [ext_resource type="TileSet" uid="uid://bt4xt8h2f55yp" path="res://Textures/Tilemaps/floor2.tres" id="2_wkccy"]
-[ext_resource type="Script" path="res://Scripts/Generic/AnimationPlayer.gd" id="3_jj7c6"]
+[ext_resource type="Script" uid="uid://cblhqsi2gabna" path="res://Scripts/Generic/AnimationPlayer.gd" id="3_jj7c6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hropl"]
 shader = ExtResource("1_8bgix")
@@ -50,8 +50,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_emdh3"]
 _data = {
-"RESET": SubResource("Animation_axiss"),
-"default": SubResource("Animation_1d08t")
+&"RESET": SubResource("Animation_axiss"),
+&"default": SubResource("Animation_1d08t")
 }
 
 [sub_resource type="Animation" id="Animation_fxcwo"]
@@ -183,8 +183,8 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3st7j"]
 _data = {
-"RESET": SubResource("Animation_fxcwo"),
-"default": SubResource("Animation_d5c7c")
+&"RESET": SubResource("Animation_fxcwo"),
+&"default": SubResource("Animation_d5c7c")
 }
 
 [node name="GameOver" type="Node2D"]

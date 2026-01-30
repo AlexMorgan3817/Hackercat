@@ -1,20 +1,20 @@
 [gd_scene load_steps=22 format=3 uid="uid://d3c7dkq8468ca"]
 
-[ext_resource type="Script" path="res://Scripts/SceneSystem/Level.gd" id="1_2rn07"]
+[ext_resource type="Script" uid="uid://b8615kv6lfeyw" path="res://Scripts/SceneSystem/Level.gd" id="1_2rn07"]
 [ext_resource type="TileSet" uid="uid://bt4xt8h2f55yp" path="res://Textures/Tilemaps/floor2.tres" id="1_gvh1x"]
-[ext_resource type="Script" path="res://Scripts/MainframeMap.gd" id="2_1onhu"]
+[ext_resource type="Script" uid="uid://c6aokhjlsjy1p" path="res://Scripts/MainframeMap.gd" id="2_1onhu"]
 [ext_resource type="PackedScene" uid="uid://xwwpba04pbj4" path="res://Game/Ice/Sentry.tscn" id="2_mb5kn"]
 [ext_resource type="PackedScene" uid="uid://dq7tkqffimn35" path="res://Game/Objects/Outlet.tscn" id="3_kmrep"]
 [ext_resource type="PackedScene" uid="uid://ydl0vw3rio2e" path="res://Game/Player.tscn" id="4_6yauk"]
 [ext_resource type="PackedScene" uid="uid://yqn0u225ls76" path="res://Game/MNode.tscn" id="5_a0niy"]
 [ext_resource type="PackedScene" uid="uid://bif3eu86jmjmx" path="res://Levels/TheEndOfDemo.tscn" id="5_uhmya"]
-[ext_resource type="Script" path="res://Game/Circuit.gd" id="6_wyqar"]
+[ext_resource type="Script" uid="uid://vcv0rpd5wcis" path="res://Game/Circuit.gd" id="6_wyqar"]
 [ext_resource type="PackedScene" uid="uid://b6mnny4h5lmn2" path="res://Game/Objects/Collectable.tscn" id="8_vc7v3"]
 [ext_resource type="PackedScene" uid="uid://py24vj81mf1n" path="res://Game/Objects/Door.tscn" id="8_wj5rw"]
 [ext_resource type="PackedScene" uid="uid://d2vq8ry3bdi4v" path="res://Game/Objects/SwitchMM.tscn" id="9_7mjwn"]
 [ext_resource type="PackedScene" uid="uid://c3jj6ge1rgqai" path="res://Scripts/Generic/LoopingAudioPlayer.tscn" id="10_ga0pm"]
 [ext_resource type="AudioStream" uid="uid://ceeeshjqibyim" path="res://Sounds/music/Mainframe.mp3" id="10_gqjl4"]
-[ext_resource type="Script" path="res://Game/Res/Programs/Program.gd" id="10_t8x14"]
+[ext_resource type="Script" uid="uid://0j07wck1klu5" path="res://Game/Res/Programs/Program.gd" id="10_t8x14"]
 [ext_resource type="Resource" uid="uid://bjd43buf1nst2" path="res://Game/Res/Programs/Lance.tres" id="11_1cgfu"]
 [ext_resource type="PackedScene" uid="uid://cmyvivj502j4w" path="res://Scripts/Generic/DebugPolygon.tscn" id="11_8nx2c"]
 [ext_resource type="Resource" uid="uid://cwuw4jnmlmwnd" path="res://Game/Res/Programs/Trapper.tres" id="12_dpccv"]
@@ -247,10 +247,10 @@ script = ExtResource("6_wyqar")
 
 [node name="RichTextLabel4" type="RichTextLabel" parent="."]
 texture_filter = 1
-offset_left = -48.0
-offset_top = 272.0
-offset_right = 176.0
-offset_bottom = 336.0
+offset_left = -160.0
+offset_top = 320.0
+offset_right = 64.0
+offset_bottom = 384.0
 theme_override_fonts/normal_font = ExtResource("14_qjchp")
 bbcode_enabled = true
 text = "Do not lose your starting programs and acquire 1 more

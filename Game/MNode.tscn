@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://yqn0u225ls76"]
 
-[ext_resource type="Script" path="res://Game/MNode.gd" id="1_stv3e"]
+[ext_resource type="Script" uid="uid://do250ut2tptwr" path="res://Game/MNode.gd" id="1_stv3e"]
 [ext_resource type="Texture2D" uid="uid://bocm4ao03u5b6" path="res://Textures/MainframeObj.png" id="2_4moox"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4m4f0"]

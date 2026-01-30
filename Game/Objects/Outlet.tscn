@@ -1,9 +1,9 @@
 [gd_scene load_steps=12 format=3 uid="uid://dq7tkqffimn35"]
 
 [ext_resource type="Texture2D" uid="uid://b4kf6laypme35" path="res://Textures/EnterPoint.png" id="1_2pt4l"]
-[ext_resource type="Script" path="res://Scripts/Generic/AnimatedSprite2D.gd" id="1_78qia"]
-[ext_resource type="Script" path="res://Game/Objects/Outlet.gd" id="1_eo6em"]
-[ext_resource type="Script" path="res://Game/MainframeMover.gd" id="1_xdb5q"]
+[ext_resource type="Script" uid="uid://bx1ttspxnv1xp" path="res://Scripts/Generic/AnimatedSprite2D.gd" id="1_78qia"]
+[ext_resource type="Script" uid="uid://btxaqga04dyyf" path="res://Game/Objects/Outlet.gd" id="1_eo6em"]
+[ext_resource type="Script" uid="uid://cffj5we6v12by" path="res://Game/MainframeMover.gd" id="1_xdb5q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kj3xb"]
 atlas = ExtResource("1_2pt4l")

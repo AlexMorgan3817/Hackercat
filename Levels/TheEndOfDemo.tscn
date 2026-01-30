@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bif3eu86jmjmx"]
 
 [ext_resource type="Theme" uid="uid://d2owybboqt1c3" path="res://GenericTheme.tres" id="1_37rve"]
-[ext_resource type="Script" path="res://Scripts/OnTrigger/UnloadScene.gd" id="2_y5oxw"]
+[ext_resource type="Script" uid="uid://bevv5x20l7yue" path="res://Scripts/OnTrigger/UnloadScene.gd" id="2_y5oxw"]
 [ext_resource type="PackedScene" uid="uid://c3jj6ge1rgqai" path="res://Scripts/Generic/LoopingAudioPlayer.tscn" id="3_mrixp"]
 [ext_resource type="AudioStream" uid="uid://ckmk2ypgww7g2" path="res://Sounds/music/Menu.mp3" id="4_ja15a"]
 

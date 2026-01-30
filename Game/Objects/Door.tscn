@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://py24vj81mf1n"]
 
-[ext_resource type="Script" path="res://Scripts/DoorEntity.gd" id="1_4ohx3"]
-[ext_resource type="Script" path="res://Game/MainframeMover.gd" id="1_tpovo"]
+[ext_resource type="Script" uid="uid://caul78dhmqmnm" path="res://Scripts/DoorEntity.gd" id="1_4ohx3"]
+[ext_resource type="Script" uid="uid://cffj5we6v12by" path="res://Game/MainframeMover.gd" id="1_tpovo"]
 [ext_resource type="Texture2D" uid="uid://bocm4ao03u5b6" path="res://Textures/MainframeObj.png" id="2_ub7ai"]
-[ext_resource type="Script" path="res://Game/Objects/Door.gd" id="3_djv5f"]
+[ext_resource type="Script" uid="uid://ci8fbyj0av864" path="res://Game/Objects/Door.gd" id="3_djv5f"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nrwfi"]
 atlas = ExtResource("2_ub7ai")

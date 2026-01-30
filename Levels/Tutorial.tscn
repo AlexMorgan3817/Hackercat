@@ -1,11 +1,11 @@
 [gd_scene load_steps=18 format=3 uid="uid://dv7u3ocmhicp1"]
 
 [ext_resource type="PackedScene" uid="uid://ydl0vw3rio2e" path="res://Game/Player.tscn" id="1_2ib3b"]
-[ext_resource type="Script" path="res://Scripts/SceneSystem/Level.gd" id="1_3tr42"]
+[ext_resource type="Script" uid="uid://b8615kv6lfeyw" path="res://Scripts/SceneSystem/Level.gd" id="1_3tr42"]
 [ext_resource type="AudioStream" uid="uid://bn5xy04ewh1a5" path="res://Sounds/music/Tutorial.mp3" id="2_mbsm2"]
 [ext_resource type="TileSet" uid="uid://bt4xt8h2f55yp" path="res://Textures/Tilemaps/floor2.tres" id="3_e0jby"]
 [ext_resource type="PackedScene" uid="uid://yqn0u225ls76" path="res://Game/MNode.tscn" id="3_ukpx1"]
-[ext_resource type="Script" path="res://Scripts/MainframeMap.gd" id="4_656qg"]
+[ext_resource type="Script" uid="uid://c6aokhjlsjy1p" path="res://Scripts/MainframeMap.gd" id="4_656qg"]
 [ext_resource type="PackedScene" uid="uid://d2vq8ry3bdi4v" path="res://Game/Objects/SwitchMM.tscn" id="5_qf6ln"]
 [ext_resource type="PackedScene" uid="uid://c3jj6ge1rgqai" path="res://Scripts/Generic/LoopingAudioPlayer.tscn" id="6_1y1i8"]
 [ext_resource type="PackedScene" uid="uid://xwwpba04pbj4" path="res://Game/Ice/Sentry.tscn" id="7_2d1gq"]

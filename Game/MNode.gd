@@ -2,6 +2,7 @@
 class_name MNode extends Node2D
 
 @export var Links:Array[MNode] = [null,null,null,null]
+@export var ManualyLinked:bool = false
 @export var Content:Array[MainframeMover]
 var UndirrectedLinks:Array[MNode]
 

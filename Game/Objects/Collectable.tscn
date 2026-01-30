@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://b6mnny4h5lmn2"]
 
-[ext_resource type="Script" path="res://Game/MainframeMover.gd" id="1_lmdtj"]
-[ext_resource type="Script" path="res://Game/Objects/Collectable.gd" id="2_bt8xk"]
+[ext_resource type="Script" uid="uid://cffj5we6v12by" path="res://Game/MainframeMover.gd" id="1_lmdtj"]
+[ext_resource type="Script" uid="uid://c678h88w3n0m4" path="res://Game/Objects/Collectable.gd" id="2_bt8xk"]
 [ext_resource type="Texture2D" uid="uid://bocm4ao03u5b6" path="res://Textures/MainframeObj.png" id="3_ay6xb"]
-[ext_resource type="Script" path="res://Game/Objects/CopyOnInteract.gd" id="3_bf2h6"]
-[ext_resource type="Script" path="res://Scripts/OnTrigger/PlaysoundOnTrigger.gd" id="4_88ack"]
+[ext_resource type="Script" uid="uid://qidurxermkll" path="res://Game/Objects/CopyOnInteract.gd" id="3_bf2h6"]
+[ext_resource type="Script" uid="uid://runhja4im2bv" path="res://Scripts/OnTrigger/PlaysoundOnTrigger.gd" id="4_88ack"]
 [ext_resource type="AudioStream" uid="uid://b6riawobx2355" path="res://Sounds/Pickup.mp3" id="5_sgqid"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gvlwu"]
